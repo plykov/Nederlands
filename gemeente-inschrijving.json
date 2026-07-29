@@ -1,0 +1,72 @@
+{
+  "slug": "gemeente-inschrijving",
+  "domain": "bureaucratie",
+  "cefr_level": "A1",
+  "order": 1,
+  "provenance": "authored; scenario language informed by rijksoverheid.nl BRP pages (cleared)",
+  "title_ru": "Регистрация в гемеенте (BRP)",
+  "brief_ru": "Вас вызовут по фамилии. Попросят паспорт и договор аренды. Спросят, живёте ли вы по этому адресу. Ваша задача — зарегистрироваться и понять, что делать дальше и когда придёт BSN. Разговор короткий, но чиновник говорит быстро и не замедляется сам.",
+  "opener_context": "loket",
+
+  "lines": [
+    {
+      "seq": 1,
+      "nl_text": "Goedemiddag, ik heb een afspraak om me in te schrijven.",
+      "ru_gloss": "Добрый день, у меня запись на регистрацию.",
+      "note_ru": "«inschrijven» — отделяемый глагол. В придаточном с «om ... te» частица уходит внутрь: om me in te schrijven."
+    },
+    {
+      "seq": 2,
+      "nl_text": "Hier is mijn paspoort en mijn huurcontract.",
+      "ru_gloss": "Вот мой паспорт и договор аренды.",
+      "note_ru": "Инверсия: обстоятельство впереди — глагол вторым. «Hier IS mijn paspoort», не «Hier mijn paspoort is»."
+    },
+    {
+      "seq": 3,
+      "nl_text": "Ja, ik woon op dit adres. Ik heb toestemming van de hoofdbewoner.",
+      "ru_gloss": "Да, я живу по этому адресу. У меня есть разрешение основного жильца.",
+      "note_ru": "het adres, de hoofdbewoner, de toestemming — учите с артиклем."
+    },
+    {
+      "seq": 4,
+      "nl_text": "Sorry, dat ging te snel. Kunt u dat langzamer herhalen?",
+      "ru_gloss": "Извините, это было слишком быстро. Можете повторить медленнее?",
+      "note_ru": "Ключевая фраза. Произносите её быстро и уверенно — иначе перейдут на английский."
+    },
+    {
+      "seq": 5,
+      "nl_text": "Dus ik moet nog een document opsturen. Klopt dat?",
+      "ru_gloss": "То есть мне нужно ещё отправить документ. Верно?",
+      "note_ru": "Проверка понимания вслух. «opsturen» — снова отделяемый глагол."
+    },
+    {
+      "seq": 6,
+      "nl_text": "Wanneer krijg ik mijn BSN?",
+      "ru_gloss": "Когда я получу BSN?",
+      "note_ru": "Вопрос — глагол на первом месте."
+    }
+  ],
+
+  "reply_bank": [
+    { "nl_text": "Heeft u een afspraak?", "ru_gloss": "У вас есть запись?", "register": "neutraal", "frequency_rank": 1 },
+    { "nl_text": "Mag ik uw identiteitsbewijs zien?", "ru_gloss": "Можно ваш документ, удостоверяющий личность?", "register": "formeel", "frequency_rank": 2 },
+    { "nl_text": "Neemt u plaats in de wachtruimte, u wordt zo geroepen.", "ru_gloss": "Присядьте в зале ожидания, вас скоро вызовут.", "register": "formeel", "frequency_rank": 3 },
+    { "nl_text": "Woont u op dit adres? Heeft u toestemming van de hoofdbewoner?", "ru_gloss": "Вы живёте по этому адресу? Есть разрешение основного жильца?", "register": "neutraal", "frequency_rank": 4 },
+    { "nl_text": "Dit document moet vertaald en gelegaliseerd zijn.", "ru_gloss": "Этот документ должен быть переведён и легализован.", "register": "formeel", "frequency_rank": 5 },
+    { "nl_text": "U krijgt uw BSN binnen twee weken per post.", "ru_gloss": "Вы получите BSN в течение двух недель по почте.", "register": "neutraal", "frequency_rank": 6 },
+    { "nl_text": "Dat kan ik hier niet regelen, daarvoor moet u bij de IND zijn.", "ru_gloss": "Это я здесь не решаю, для этого вам нужно в IND.", "register": "neutraal", "frequency_rank": 7 },
+    { "nl_text": "Kunt u dat even spellen?", "ru_gloss": "Продиктуйте по буквам?", "register": "informeel", "frequency_rank": 8 },
+    { "nl_text": "Shall I speak English?", "ru_gloss": "Мне говорить по-английски?", "register": "switch", "frequency_rank": 9 }
+  ],
+
+  "gate_items": [
+    { "nl_text": "inschrijven", "target_feature": "diphthong", "ipa_hint": "ˈɪnsxrɛi̯və(n)", "note_ru": "sch = s + харде G. Не «ш»." },
+    { "nl_text": "huurcontract", "target_feature": "front_rounded", "ipa_hint": "ˈhyːrkɔntrɑkt", "note_ru": "uu = /yː/. Губы как для «у», язык как для «и». В русском такого звука нет." },
+    { "nl_text": "identiteitsbewijs", "target_feature": "diphthong", "ipa_hint": "idɛntiˈtɛi̯tsbəʋɛi̯s", "note_ru": "ei и ij — один и тот же дифтонг." },
+    { "nl_text": "gemeente", "target_feature": "harde_g", "ipa_hint": "ɣəˈmeːntə", "note_ru": "Начальный G — не «г». Долгий ee. Конечное -e — шва." }
+  ],
+
+  "traps": ["separable", "v2", "de_het", "front_rounded", "harde_g", "er"],
+
+  "can_do_code": "A1.BUR.01"
+}
