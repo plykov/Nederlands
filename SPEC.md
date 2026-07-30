@@ -36,7 +36,7 @@ The highest-value module.
 **Implemented with a known limit:** onset detection is an RMS loudness threshold, not speech recognition — a cough registers as onset. The hesitation count from ASR word timings is **§P2**; it needs a transcriber. The trade bought by the simpler approach is that no audio leaves the device.
 
 ### 2.2 de/het trainer — §P1, built
-Nouns are stored, rendered, and drilled **only with their article**. There is no rule view. The drill presents two whole forms — `de huurcontract` vs `het huurcontract` — so the noun never appears bare, and the answer is a phrase rather than a principle. Errors feed a dedicated `article` card source in the review deck. 63 nouns, all harvested from scenario content.
+Nouns are stored, rendered, and drilled **only with their article**. There is no rule view. The drill presents two whole forms — `de huurcontract` vs `het huurcontract` — so the noun never appears bare, and the answer is a phrase rather than a principle. Errors feed a dedicated `article` card source in the review deck. 104 nouns, all harvested from scenario content.
 
 ### 2.3 Word-order builder — §P2, not built
 Drag-and-drop constructor for the four structures that break Russian speakers:

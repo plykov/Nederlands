@@ -5,8 +5,10 @@ touching `CLAUDE.md`/`SPEC.md`/`BUILD_PLAN.md` — those describe a *different,
 bigger* architecture than what is actually built (see "Architecture decision"
 below). This file is the source of truth for what actually exists.
 
-**Status: the v1 build is complete, pushed and open as PR #1.** The sections
-below record what was decided, what shipped, and what is deliberately left.
+**Status: shipped and live at https://plykov.github.io/Nederlands/.** PRs #1
+(the build), #2 (this doc reconciliation) and #3 (scenarios 13–24) are merged.
+The sections below record what was decided, what shipped, and what is
+deliberately left.
 
 ## Where this came from
 
@@ -66,9 +68,10 @@ src/views/         16 views (14 ported + ArticleTrainer + Opener)
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
 
-Content volume: **12 scenarios** (2 per domain, each with exactly one
-`register: "switch"` reply), 63 nouns, 8 repair moves, 7 openers/recovery
-moves, 12 grammar notes, 8 course lessons, 16 CEFR can-do statements.
+Content volume: **24 scenarios** (4 per domain — A1 10, A2 8, B1 6 — each with
+exactly one `register: "switch"` reply), 104 nouns, 8 repair moves, 7
+openers/recovery moves, 12 grammar notes, 8 course lessons, 27 CEFR can-do
+statements. The second batch of twelve landed in PR #3.
 
 Three modules have no Italiano equivalent and were written from the spec:
 
@@ -110,9 +113,10 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 Ordered by value, and none of it is blocking:
 
-1. **More scenarios.** Twelve is a working minimum, not the target.
-   `BUILD_PLAN.md` M12 wants 30–40. This list should grow from what testers
-   bring back from real conversations, not from invented situations.
+1. **More scenarios.** Twenty-four covers each domain four ways; `BUILD_PLAN.md`
+   M12 wants 30–40. The remaining gap should be filled from what testers bring
+   back from real conversations, not from invented situations — that is the
+   whole point of the debrief and the Phase 0 survey.
 2. **Word-order builder** (SPEC §2.3) — drag-and-drop for V2, inversion,
    verb-final and the sentence bracket. Currently covered by course lessons and
    grammar notes only, with no constructor.
