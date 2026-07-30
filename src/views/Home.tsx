@@ -3,6 +3,7 @@ import { DOMAINS, SCENARIOS, scenarioById, domainById } from "../data/scenarios"
 import { LOANWORDS } from "../data/loanwords";
 import { storage, uid } from "../lib/storage";
 import { dueCards } from "../lib/srs";
+import { tappable } from "../lib/a11y";
 import type { Appointment } from "../types";
 
 /** Три случайных слова для первого впечатления — не всегда одни и те же. */
@@ -83,7 +84,7 @@ export default function Home() {
       </p>
 
       {!onboarded && (
-        <div className="card tappable" onClick={() => (location.hash = "#/loanwords")}>
+        <div className="card tappable" {...tappable(() => (location.hash = "#/loanwords"))}>
           <span className="pill amber">сюрприз</span>
           <p className="lead">Вы уже говорите по-нидерландски</p>
           <p className="ru">
@@ -208,8 +209,9 @@ export default function Home() {
 
       {adding ? (
         <div className="card">
-          <h3>Что вам предстоит?</h3>
+          <h3 id="appt-what">Что вам предстоит?</h3>
           <select
+            aria-labelledby="appt-what"
             value={newScenario}
             onChange={(e) => setNewScenario(e.target.value)}
           >
@@ -225,11 +227,13 @@ export default function Home() {
           </select>
           <input
             type="datetime-local"
+            aria-label="Дата и время"
             value={newDate}
             onChange={(e) => setNewDate(e.target.value)}
           />
           <input
             type="text"
+            aria-label="Заметка (необязательно)"
             placeholder="Заметка (необязательно): напр. «продление, Stadskantoor»"
             value={newNote}
             onChange={(e) => setNewNote(e.target.value)}
@@ -246,14 +250,14 @@ export default function Home() {
       )}
 
       {due > 0 && (
-        <div className="card tappable" onClick={() => (location.hash = "#/review")}>
+        <div className="card tappable" {...tappable(() => (location.hash = "#/review"))}>
           <span className="pill red">повторение</span>
           <p className="lead">Карточек к повторению: {due}</p>
           <p className="ru">То, что вы не поняли вчера, — ваша колода сегодня.</p>
         </div>
       )}
 
-      <div className="card tappable" onClick={() => (location.hash = "#/opener")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/opener"))}>
         <span className="pill red">главное</span>
         <p className="lead">Первая фраза — на скорость</p>
         <p className="ru">
@@ -262,7 +266,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/articles")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/articles"))}>
         <span className="pill amber">de / het</span>
         <p className="lead">Тренажёр артиклей</p>
         <p className="ru">
@@ -271,7 +275,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/wordorder")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/wordorder"))}>
         <span className="pill amber">конструктор</span>
         <p className="lead">Порядок слов</p>
         <p className="ru">
@@ -280,7 +284,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/listening")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/listening"))}>
         <span className="pill red">тренажёр</span>
         <p className="lead">Слушание под давлением</p>
         <p className="ru">
@@ -289,7 +293,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/grammar")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/grammar"))}>
         <span className="pill amber">по требованию</span>
         <p className="lead">Разбор: почему по-нидерландски именно так</p>
         <p className="ru">
@@ -298,7 +302,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/repair")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/repair"))}>
         <span className="pill">ядро A1</span>
         <p className="lead">Приёмы ремонта разговора</p>
         <p className="ru">
@@ -307,7 +311,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/loanwords")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/loanwords"))}>
         <span className="pill amber">сюрприз</span>
         <p className="lead">Вы уже знаете кусочек нидерландского</p>
         <p className="ru">

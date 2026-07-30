@@ -94,7 +94,7 @@ function Brief({ s }: { s: S }) {
           const m = repairById(id);
           return m ? (
             <p key={id}>
-              <span className="nl">{m.nl}</span>
+              <span className="nl" lang="nl">{m.nl}</span>
               <br />
               <span className="ru">{m.ru}</span>
             </p>
@@ -114,7 +114,7 @@ function Lines({ s }: { s: S }) {
       </p>
       {s.lines.map((l, i) => (
         <div className="card" key={i}>
-          <p className="nl">{l.nl}</p>
+          <p className="nl" lang="nl">{l.nl}</p>
           <p className="ru">{l.ru}</p>
           {l.note && <p className="small muted">{l.note}</p>}
           {canSpeak() && (
@@ -147,7 +147,7 @@ function ReplyBankCard({ reply }: { reply: Reply }) {
       )}
       {revealed ? (
         <>
-          <p className="nl">{reply.nl}</p>
+          <p className="nl" lang="nl">{reply.nl}</p>
           <p className="ru">{reply.ru}</p>
           {reply.key && (
             <p className="small">
@@ -207,9 +207,9 @@ function Traps({ s }: { s: S }) {
       {s.traps.map((t, i) => (
         <div className="card" key={i}>
           <p>
-            <span className="trap-wrong">{t.wrong}</span>
+            <span className="trap-wrong" lang="nl">{t.wrong}</span>
             <br />
-            <span className="trap-right">{t.right}</span>
+            <span className="trap-right" lang="nl">{t.right}</span>
           </p>
           <p className="small muted">{t.why}</p>
         </div>
@@ -253,7 +253,7 @@ function GateCard({ word, focus, tip }: { word: string; focus: string; tip: stri
 
   return (
     <div className="card">
-      <p className="nl">{word}</p>
+      <p className="nl" lang="nl">{word}</p>
       <p className="small">
         <span className="pill red">{focus}</span>
       </p>
@@ -315,7 +315,7 @@ function OpenerStep({ s }: { s: S }) {
 
       <div className="card">
         <span className="pill">опенер</span>
-        <p className="nl">{opener.nl}</p>
+        <p className="nl" lang="nl">{opener.nl}</p>
         <p className="ru">{opener.ru}</p>
         <p className="small muted">{opener.when}</p>
         {canSpeak() && (
@@ -343,7 +343,7 @@ function OpenerStep({ s }: { s: S }) {
       <h3>Если всё-таки перешли на английский</h3>
       {RECOVERY_MOVES.map((m) => (
         <div className="card" key={m.id}>
-          <p className="nl">{m.nl}</p>
+          <p className="nl" lang="nl">{m.nl}</p>
           <p className="ru">{m.ru}</p>
           {canSpeak() && (
             <button className="inline secondary" onClick={() => speakDutch(m.nl, 0.95)}>

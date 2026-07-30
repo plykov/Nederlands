@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { storage } from "../lib/storage";
 import { allCards } from "../lib/srs";
+import { tappable } from "../lib/a11y";
 
 export default function Settings() {
   const [confirming, setConfirming] = useState(false);
@@ -48,7 +49,7 @@ export default function Settings() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/inburgering")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/inburgering"))}>
         <span className="pill amber">справочно</span>
         <p className="lead">Мои сроки inburgering</p>
         <p className="ru">
@@ -74,7 +75,7 @@ export default function Settings() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/feedback")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/feedback"))}>
         <span className="pill amber">тестерам</span>
         <p className="lead">Оставить отзыв</p>
         <p className="ru">

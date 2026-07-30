@@ -32,7 +32,7 @@ export default function RepairView() {
       <h2>Начало: чтобы не перешли на английский</h2>
       {openers.map((o) => (
         <div className="card" key={o.id}>
-          <p className="nl">{o.nl}</p>
+          <p className="nl" lang="nl">{o.nl}</p>
           <p className="ru">{o.ru}</p>
           <p className="small muted">{o.when}</p>
           {canSpeak() && (
@@ -49,7 +49,7 @@ export default function RepairView() {
       <h2>Возврат: если уже перешли</h2>
       {recoveries.map((o) => (
         <div className="card" key={o.id}>
-          <p className="nl">{o.nl}</p>
+          <p className="nl" lang="nl">{o.nl}</p>
           <p className="ru">{o.ru}</p>
           <p className="small muted">{o.when}</p>
           {canSpeak() && (
@@ -63,7 +63,7 @@ export default function RepairView() {
       <h2>Ремонт: когда не поняли</h2>
       {REPAIR_MOVES.map((m) => (
         <div className="card" key={m.id}>
-          <p className="nl">{m.nl}</p>
+          <p className="nl" lang="nl">{m.nl}</p>
           <p className="ru">{m.ru}</p>
           <p className="small muted">{m.when}</p>
           {canSpeak() && (

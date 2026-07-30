@@ -38,6 +38,7 @@ export default function Feedback() {
           <textarea
             readOnly
             value={report}
+            aria-label="Готовый текст анкеты для копирования"
             style={{ minHeight: 260, fontSize: "0.85rem" }}
             onFocus={(e) => e.currentTarget.select()}
           />
@@ -86,7 +87,7 @@ export default function Feedback() {
 
       {SURVEY.map((q) => (
         <div className="card" key={q.id}>
-          <p className="lead">
+          <p className="lead" id={`q-${q.id}`}>
             {q.label}
             {q.optional && <span className="pill amber"> необязательно</span>}
           </p>
@@ -109,6 +110,7 @@ export default function Feedback() {
           ) : (
             <textarea
               value={answers[q.id] ?? ""}
+              aria-labelledby={`q-${q.id}`}
               placeholder={q.placeholder}
               onChange={(e) => set(q.id, e.target.value)}
             />

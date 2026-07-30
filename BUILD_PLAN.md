@@ -138,6 +138,43 @@ only as myths, never as loanwords. ✅ — `npm test` enforces both: the
 `LOANWORDS` length bound and source enum, and that all three named words are
 excluded from `LOANWORDS` and present in `LOANWORD_MYTHS`.
 
+## A14 — Accessibility pass ✅
+WCAG 2.2 AA. Three real defects fixed, found by auditing rather than assumed:
+
+- **21 `.card.tappable`/`.tappable` `<div onClick>` elements were invisible to
+  keyboard and screen-reader users** — no role, no tab stop, no key handler.
+  `src/lib/a11y.ts` exports `tappable(onClick)`, spread onto every one of
+  them, adding `role="button"`, `tabIndex={0}` and an Enter/Space
+  `onKeyDown`. A locked `Грамматический зал` lesson card gets none of this —
+  it isn't a control, so it isn't given one.
+- **`--orange` failed 4.5:1** on both `--card` and `--orange-soft`
+  (4.04 / 3.58) — affects every amber pill and the de/render `.article-het`
+  colour, ~30 call sites. Darkened to `#944a09` (7.15 / 6.35), same hue and
+  saturation, just lower lightness — visually still "amber", not a rebrand.
+- **Locked lesson cards used `opacity: 0.5`** to look disabled, which also
+  quietly failed contrast on every child (pill, heading, body text) — dimming
+  a whole subtree by opacity scales all of its contrast down with it. Replaced
+  with a `.card.locked` class that changes only the background, leaving text
+  at full contrast; a locked card should be legible, just not tappable.
+
+Also: every Dutch-text element (`.nl`, `trap-wrong`/`trap-right`, word-order
+chips) now carries `lang="nl"` so screen readers switch pronunciation instead
+of reading Dutch with Russian phonetics — about 30 call sites. Every
+`<select>`/`<input>`/`<textarea>` without a visible adjacent label now has
+`aria-label` or `aria-labelledby` (Home's appointment form, the inburgering
+date picker, the listening-domain and opener-context selects, Course's
+fill-in-the-blank input, Debrief's and Feedback's free-text fields).
+
+**Done when:** an automated WCAG audit shows zero violations on every route,
+and every interactive control is reachable and operable by keyboard alone. ✅
+— verified with `axe-core` (the same rule engine Lighthouse's accessibility
+category runs, invoked directly here since a full Lighthouse/Chrome DevTools
+pass isn't available in this sandbox) injected via Playwright across all 20
+routes, `wcag2a`/`wcag2aa`/`wcag21a`/`wcag21aa`/`wcag22aa` rule sets: **0
+violations**, down from 1 (the locked-card contrast bug, found and fixed in
+the same pass). Keyboard-only navigation confirmed by scripted `Tab`/`Enter`
+reaching and activating a Home card in the correct order.
+
 ---
 
 ## Phase 1 — what remains
@@ -146,13 +183,11 @@ Ordered by value. None of it blocks the others.
 
 1. **Native audio** for the reply bank. Web Speech quality varies by platform
    and this is the single biggest quality lever on the listening trainers.
-2. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
-   word-order chips are `<button>`s and keyboard-reachable, but the whole app
-   has not had a proper pass.
 
-Scenarios (36, six per domain, inside the M12 target of 30–40), the word-order
-builder (A10), the staged `er` module (A11), the inburgering tracker (A12)
-and the loanword hook (A13, above) are all done and no
+Everything else that stood here — scenarios (36, six per domain, inside the
+M12 target of 30–40), the word-order builder (A10), the staged `er` module
+(A11), the inburgering tracker (A12), the loanword hook (A13) and the
+accessibility pass (A14, above) — is done and no
 longer on this list.
 
 The "no test setup" item that stood here is done: `npm test` runs

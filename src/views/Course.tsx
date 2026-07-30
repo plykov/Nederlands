@@ -9,6 +9,7 @@ import {
 import { canSpeak, speakDutch } from "../lib/speech";
 import { storage } from "../lib/storage";
 import { addCards, newCard } from "../lib/srs";
+import { tappable } from "../lib/a11y";
 
 /** Жирный текст в правилах: **вот так**. */
 function Rule({ text }: { text: string }) {
@@ -52,7 +53,7 @@ function ExerciseCard({
       <p className="small muted">
         Задание {index + 1} из {total}
       </p>
-      <p className="nl">{ex.prompt}</p>
+      <p className="nl" lang="nl">{ex.prompt}</p>
       <p className="ru">{ex.ru}</p>
 
       {ex.kind === "choose" ? (
@@ -83,6 +84,7 @@ function ExerciseCard({
           type="text"
           value={typed}
           disabled={checked}
+          aria-label="Впишите пропущенное слово"
           placeholder="впишите пропущенное"
           onChange={(e) => setTyped(e.target.value)}
           onKeyDown={(e) => {
@@ -107,7 +109,7 @@ function ExerciseCard({
             ) : (
               <>
                 <span className="pill red">мимо</span>{" "}
-                <span className="trap-right">{solution}</span>
+                <span className="trap-right" lang="nl">{solution}</span>
               </>
             )}
           </p>
@@ -177,7 +179,7 @@ function LessonView({ lesson, onExit }: { lesson: Lesson; onExit: () => void }) 
         <h2>Примеры</h2>
         {lesson.examples.map((e, i) => (
           <div className="card" key={i}>
-            <p className="nl">{e.nl}</p>
+            <p className="nl" lang="nl">{e.nl}</p>
             <p className="ru">{e.ru}</p>
             {canSpeak() && (
               <button
@@ -321,10 +323,9 @@ export default function Course({ lessonId }: { lessonId?: string }) {
         const locked = isLocked(l, progress);
         return (
           <div
-            className={locked ? "card" : "card tappable"}
+            className={locked ? "card locked" : "card tappable"}
             key={l.id}
-            style={locked ? { opacity: 0.5 } : undefined}
-            onClick={() => !locked && (location.hash = `#/course/${l.id}`)}
+            {...(locked ? {} : tappable(() => (location.hash = `#/course/${l.id}`)))}
           >
             <p className="small">
               <span className="pill amber">{l.level}</span>

@@ -61,7 +61,7 @@ against `git ls-tree` first.
 index.html · package.json · tsconfig.json · vite.config.ts · .gitignore
 public/            manifest.webmanifest · sw.js · icon.svg (Dutch tricolour)
 .github/workflows/ deploy.yml  — Pages, triggers on main + workflow_dispatch
-src/lib/           storage.ts · srs.ts · speech.ts · noise.ts
+src/lib/           storage.ts · srs.ts · speech.ts · noise.ts · a11y.ts
 src/data/          scenarios.ts · repair.ts · openers.ts · nouns.ts
                    grammar.ts · course.ts · cando.ts · survey.ts · wordorder.ts
                    inburgering.ts · loanwords.ts
@@ -119,6 +119,40 @@ Three modules have no Italiano equivalent and were written from the spec:
   `LOANWORD_MYTHS` array with their real origin instead, shown as a
   myth-busting aside on the same screen, never as drillable items.
 
+## Accessibility pass
+
+An `axe-core` audit (injected via Playwright, installed to a scratch
+directory rather than as a project dependency) across all 20 routes,
+`wcag2a`/`wcag2aa`/`wcag21a`/`wcag21aa`/`wcag22aa` rule sets, found and fixed
+three real defects rather than a checklist of assumed ones:
+
+1. **21 `.card.tappable`/`.tappable` `<div onClick>` elements had no keyboard
+   or screen-reader access** — no role, no tab stop, no key handler. Fixed
+   with `src/lib/a11y.ts`'s `tappable(onClick)` helper, spread onto all of
+   them, adding `role="button"`, `tabIndex={0}`, and an Enter/Space
+   `onKeyDown`. A locked `Грамматический зал` lesson gets none of this, since
+   it isn't a control.
+2. **`--orange` (`#c2660c`) failed WCAG AA contrast** (4.04:1 on `--card`,
+   3.58:1 on `--orange-soft`, both need 4.5:1) — affecting every amber pill
+   and `.article-het` across roughly 30 call sites. Darkened to `#944a09`
+   (same hue and saturation, lower lightness only) — passes both at 6+:1
+   without reading as a different colour.
+3. **Locked lesson cards used `opacity: 0.5`**, which silently fails contrast
+   on every child since dimming a subtree scales all of its contrast down
+   with it — this is what the audit actually caught first. Replaced with a
+   `.card.locked` class that only changes the background; text stays at full
+   contrast, because a locked card should still be legible.
+
+`lang="nl"` was also added to every Dutch-text element (`.nl`,
+`trap-wrong`/`trap-right`, word-order chips — ~30 call sites) so screen
+readers pronounce Dutch instead of reading it with Russian phonetics, and
+every unlabeled `<select>`/`<input>`/`<textarea>` got an `aria-label` or
+`aria-labelledby`.
+
+Final audit: **0 violations across all 20 routes** (down from 1). Keyboard-
+only Tab/Enter confirmed reaching and activating a Home card in the correct
+order.
+
 ### Deviations from a pure Italiano port, and why
 
 - Domains come from this repo's `_SCHEMA.md`, not Italiano's.
@@ -146,19 +180,19 @@ Ordered by value, and none of it is blocking:
 
 1. **Audio for the reply bank.** Web Speech quality varies by platform;
    pre-recorded native audio would improve the listening trainers most.
-2. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
-   and keyboard-reachable, but the whole app has not had a proper pass.
 
-Word-order builder, scenario count, the staged `er` module, the inburgering
-tracker and the loanword hook are no longer on this list: the constructor
-shipped (SPEC §2.3, `#/wordorder`), thirty-six scenarios land inside
-`BUILD_PLAN.md` M12's 30–40 target, `er` is now five
-gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in `Грамматический зал`
-instead of one ungated lesson (`BUILD_PLAN.md` A11), and the inburgering
-tracker at `#/inburgering` shows a real countdown and route requirements
-instead of only static copy in Settings and Progress (`BUILD_PLAN.md` A12),
-and `#/loanwords` ships the 10-word reveal plus the three named myths
-(`BUILD_PLAN.md` A13). Further scenario growth should still come from what
+That is the only item left. Word-order builder, scenario count, the staged
+`er` module, the inburgering tracker, the loanword hook and the accessibility
+pass are all off this list: the constructor shipped (SPEC §2.3,
+`#/wordorder`), thirty-six scenarios land inside `BUILD_PLAN.md` M12's 30–40
+target, `er` is now five gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in
+`Грамматический зал` instead of one ungated lesson (`BUILD_PLAN.md` A11), the
+inburgering tracker at `#/inburgering` shows a real countdown and route
+requirements instead of only static copy in Settings and Progress
+(`BUILD_PLAN.md` A12), `#/loanwords` ships the 10-word reveal plus the three
+named myths (`BUILD_PLAN.md` A13), and the accessibility pass fixed the three
+real defects an `axe-core` audit found — see "Accessibility pass" above and
+`BUILD_PLAN.md` A14. Further scenario growth should still come from what
 testers bring back from real conversations, not invented situations.
 
 ## Operational note

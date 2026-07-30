@@ -3,6 +3,7 @@ import { SCENARIOS, DOMAINS, scenarioById } from "../data/scenarios";
 import { canSpeak, speakDutch } from "../lib/speech";
 import { NoiseBed, NOISE_LABELS, canPlayNoise, type NoiseKind } from "../lib/noise";
 import { addCards, newCard } from "../lib/srs";
+import { tappable } from "../lib/a11y";
 import type { Reply } from "../types";
 
 /**
@@ -186,8 +187,12 @@ export default function Listening() {
         </p>
 
         <div className="card">
-          <h3>Из какой области?</h3>
-          <select value={domain} onChange={(e) => setDomain(e.target.value)}>
+          <h3 id="listening-domain">Из какой области?</h3>
+          <select
+            aria-labelledby="listening-domain"
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+          >
             <option value="all">Все области вперемешку</option>
             {DOMAINS.map((d) => (
               <option key={d.id} value={d.id}>
@@ -199,7 +204,7 @@ export default function Listening() {
 
         <h2>Условия</h2>
         {LEVELS.map((lv) => (
-          <div className="card tappable" key={lv.id} onClick={() => begin(lv)}>
+          <div className="card tappable" key={lv.id} {...tappable(() => begin(lv))}>
             <span className="pill">{lv.id}</span>
             {lv.noise !== "none" && (
               <span className="pill amber">{NOISE_LABELS[lv.noise]}</span>
@@ -241,7 +246,7 @@ export default function Listening() {
               <h3>Что не разобрали</h3>
               {missed.map((m, i) => (
                 <p key={i}>
-                  <span className="nl">{m.nl}</span>
+                  <span className="nl" lang="nl">{m.nl}</span>
                   <br />
                   <span className="ru">{m.ru}</span>
                 </p>
@@ -302,7 +307,7 @@ export default function Listening() {
           </>
         ) : (
           <>
-            <p className="nl">{item.nl}</p>
+            <p className="nl" lang="nl">{item.nl}</p>
             <p className="ru">{item.ru}</p>
             {item.key && (
               <p className="small">

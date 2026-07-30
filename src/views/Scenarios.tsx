@@ -1,4 +1,5 @@
 import { DOMAINS, SCENARIOS } from "../data/scenarios";
+import { tappable } from "../lib/a11y";
 
 export default function Scenarios() {
   return (
@@ -17,7 +18,7 @@ export default function Scenarios() {
             <div
               key={s.id}
               className="card tappable"
-              onClick={() => (location.hash = `#/rehearse/${s.id}`)}
+              {...tappable(() => (location.hash = `#/rehearse/${s.id}`))}
             >
               <p className="small">
                 <span className="pill amber">{s.level}</span>
