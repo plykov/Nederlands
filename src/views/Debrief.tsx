@@ -52,6 +52,7 @@ function ListEditor({
       ))}
       <textarea
         value={text}
+        aria-label={label}
         placeholder={placeholder}
         onChange={(e) => setText(e.target.value)}
       />
@@ -190,9 +191,10 @@ export default function Debrief({ scenarioId: raw }: { scenarioId?: string }) {
       />
 
       <div className="card">
-        <h3>Чем закончилось? Одной строкой</h3>
+        <h3 id="debrief-outcome">Чем закончилось? Одной строкой</h3>
         <textarea
           value={outcome}
+          aria-labelledby="debrief-outcome"
           placeholder="напр.: зарегистрировался в гемеенте, на английский не перешли"
           onChange={(e) => setOutcome(e.target.value)}
         />

@@ -107,7 +107,7 @@ export default function ArticleTrainer({ scenarioId }: { scenarioId?: string }) 
               <h3>Не угадали</h3>
               {missed.map((n) => (
                 <p key={n.word}>
-                  <span className="nl">
+                  <span className="nl" lang="nl">
                     <span className={n.article === "de" ? "article-de" : "article-het"}>
                       {n.article}
                     </span>{" "}
@@ -157,7 +157,7 @@ export default function ArticleTrainer({ scenarioId }: { scenarioId?: string }) 
           </>
         ) : (
           <>
-            <p className="nl">
+            <p className="nl" lang="nl">
               <span className={noun.article === "de" ? "article-de" : "article-het"}>
                 {noun.article}
               </span>{" "}

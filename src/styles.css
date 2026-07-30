@@ -7,7 +7,7 @@
   --blue-soft: #e4ecf4;
   --red: #ae1c28;
   --red-soft: #f8e7e8;
-  --orange: #c2660c;
+  --orange: #944a09;
   --orange-soft: #faf0e3;
   --border: #dde3ea;
   --radius: 14px;
@@ -57,8 +57,16 @@ p { margin: 6px 0; }
   box-shadow: var(--shadow);
 }
 
-.card.tappable { cursor: pointer; transition: transform 0.06s ease; }
-.card.tappable:active { transform: scale(0.985); }
+.tappable { cursor: pointer; transition: transform 0.06s ease; }
+.tappable:active { transform: scale(0.985); }
+.tappable:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Заблокированная ступень (er-1…er-5 и т. п.): текст остаётся читаемым —
+   opacity вместо этого притушивала бы контраст ниже WCAG AA. */
+.card.locked { background: var(--bg); }
 
 /*
  * Кириллица интерфейса и латиница нидерландского должны читаться как разные

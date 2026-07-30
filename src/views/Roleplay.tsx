@@ -159,7 +159,7 @@ export default function Roleplay({ scenarioId }: { scenarioId?: string }) {
         </button>
         {revealed && (
           <>
-            <p className="nl">{reply.nl}</p>
+            <p className="nl" lang="nl">{reply.nl}</p>
             <p className="ru">{reply.ru}</p>
             {reply.key && (
               <p className="small">

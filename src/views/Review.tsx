@@ -57,7 +57,7 @@ export default function Review() {
         <p className="small">
           <span className="pill amber">{sourceLabel[card.source]}</span>
         </p>
-        <p className="nl">{card.front}</p>
+        <p className="nl" lang="nl">{card.front}</p>
         {canSpeak() && card.source !== "debrief-say" && (
           <button
             className="inline secondary"

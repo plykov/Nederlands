@@ -3,6 +3,7 @@ import { GRAMMAR_NOTES, type GrammarNote } from "../data/grammar";
 import { SCENARIOS, domainById } from "../data/scenarios";
 import { LESSONS } from "../data/course";
 import { addCards, newCard } from "../lib/srs";
+import { tappable } from "../lib/a11y";
 
 function NoteCard({ note }: { note: GrammarNote }) {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ function NoteCard({ note }: { note: GrammarNote }) {
 
   return (
     <div className="card">
-      <div className="tappable" onClick={() => setOpen(!open)}>
+      <div className="tappable" {...tappable(() => setOpen(!open))}>
         {note.positive && <span className="pill">это вы уже умеете</span>}
         <p className="lead">{note.title}</p>
         <p className="ru">{note.gist}</p>
@@ -27,9 +28,9 @@ function NoteCard({ note }: { note: GrammarNote }) {
         <>
           {note.pairs.map((p, i) => (
             <p key={i}>
-              <span className="trap-wrong">{p.wrong}</span>
+              <span className="trap-wrong" lang="nl">{p.wrong}</span>
               <br />
-              <span className="trap-right">{p.right}</span>
+              <span className="trap-right" lang="nl">{p.right}</span>
             </p>
           ))}
           <p className="small muted">{note.body}</p>
@@ -64,7 +65,7 @@ function AllTraps() {
 
   if (!open) {
     return (
-      <div className="card tappable" onClick={() => setOpen(true)}>
+      <div className="card tappable" {...tappable(() => setOpen(true))}>
         <span className="pill amber">{rows.length}</span>
         <p className="lead">Все ловушки из сценариев</p>
         <p className="ru">
@@ -91,9 +92,9 @@ function AllTraps() {
               </span>
             </p>
             <p>
-              <span className="trap-wrong">{t.wrong}</span>
+              <span className="trap-wrong" lang="nl">{t.wrong}</span>
               <br />
-              <span className="trap-right">{t.right}</span>
+              <span className="trap-right" lang="nl">{t.right}</span>
             </p>
             <p className="small muted">{t.why}</p>
           </div>
@@ -116,7 +117,7 @@ export default function Grammar() {
         читать подряд необязательно.
       </p>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/wordorder")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/wordorder"))}>
         <span className="pill amber">конструктор</span>
         <p className="lead">Порядок слов</p>
         <p className="ru">
@@ -125,7 +126,7 @@ export default function Grammar() {
         </p>
       </div>
 
-      <div className="card tappable" onClick={() => (location.hash = "#/course")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/course"))}>
         <span className="pill">курс</span>
         <p className="lead">Грамматический зал</p>
         <p className="ru">

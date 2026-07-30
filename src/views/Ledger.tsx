@@ -1,5 +1,6 @@
 import { scenarioById } from "../data/scenarios";
 import { storage } from "../lib/storage";
+import { tappable } from "../lib/a11y";
 
 function fmtDate(iso: string): string {
   const d = new Date(iso);
@@ -35,7 +36,7 @@ export default function Ledger() {
         </div>
       )}
 
-      <div className="card tappable" onClick={() => (location.hash = "#/progress")}>
+      <div className="card tappable" {...tappable(() => (location.hash = "#/progress"))}>
         <span className="pill amber">карта умений</span>
         <p className="lead">Что засчитано по CEFR · A2 и B1</p>
         <p className="ru">

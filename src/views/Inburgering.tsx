@@ -61,7 +61,7 @@ function SetupForm({
 
       {obligated && (
         <div className="card">
-          <h3>Когда началась обязанность</h3>
+          <h3 id="obligation-start">Когда началась обязанность</h3>
           <p className="small muted">
             Обычно это дата решения о виде на жительство или регистрации в
             муниципалитете — уточните в письме от вашего gemeente, если не
@@ -69,6 +69,7 @@ function SetupForm({
           </p>
           <input
             type="date"
+            aria-labelledby="obligation-start"
             value={start}
             onChange={(e) => setStart(e.target.value)}
           />

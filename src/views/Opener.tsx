@@ -126,8 +126,9 @@ export default function OpenerDrill({ scenarioId }: { scenarioId?: string }) {
 
       {!scenario && (
         <div className="card">
-          <h3>Где вы будете говорить?</h3>
+          <h3 id="opener-context">Где вы будете говорить?</h3>
           <select
+            aria-labelledby="opener-context"
             value={context}
             onChange={(e) => setContext(e.target.value as OpenerContext)}
             disabled={phase !== "idle" && phase !== "result"}
@@ -142,7 +143,7 @@ export default function OpenerDrill({ scenarioId }: { scenarioId?: string }) {
 
       <div className="card">
         <span className="pill">ваша первая фраза</span>
-        <p className="nl">{opener.nl}</p>
+        <p className="nl" lang="nl">{opener.nl}</p>
         <p className="ru">{opener.ru}</p>
         <p className="small muted">{opener.when}</p>
         {canSpeak() && (
@@ -179,7 +180,7 @@ export default function OpenerDrill({ scenarioId }: { scenarioId?: string }) {
       {phase === "recording" && (
         <div className="card flashcard">
           <span className="pill red">говорите</span>
-          <p className="nl">{opener.nl}</p>
+          <p className="nl" lang="nl">{opener.nl}</p>
           <p className="small muted">
             Запись остановится сама через несколько секунд.
           </p>
@@ -258,7 +259,7 @@ export default function OpenerDrill({ scenarioId }: { scenarioId?: string }) {
       </p>
       {RECOVERY_MOVES.map((m) => (
         <div className="card" key={m.id}>
-          <p className="nl">{m.nl}</p>
+          <p className="nl" lang="nl">{m.nl}</p>
           <p className="ru">{m.ru}</p>
           <p className="small muted">{m.when}</p>
           {canSpeak() && (
@@ -298,7 +299,7 @@ function Unsupported() {
       </p>
       {OPENERS.map((o) => (
         <div className="card" key={o.id}>
-          <p className="nl">{o.nl}</p>
+          <p className="nl" lang="nl">{o.nl}</p>
           <p className="ru">{o.ru}</p>
           <p className="small muted">{o.when}</p>
         </div>

@@ -11,6 +11,7 @@ import {
 } from "../data/wordorder";
 import { canSpeak, speakDutch } from "../lib/speech";
 import { addCards, newCard } from "../lib/srs";
+import { tappable } from "../lib/a11y";
 
 /**
  * Конструктор порядка слов (SPEC §2.3).
@@ -99,6 +100,7 @@ function Puzzle({
             <button
               key={chip.key}
               className="chip placed"
+              lang="nl"
               onClick={() => recall(chip)}
               disabled={checked}
             >
@@ -110,7 +112,7 @@ function Puzzle({
         {bank.length > 0 && (
           <div className="wo-bank">
             {bank.map((chip) => (
-              <button key={chip.key} className="chip" onClick={() => place(chip)}>
+              <button key={chip.key} className="chip" lang="nl" onClick={() => place(chip)}>
                 {chip.word}
               </button>
             ))}
@@ -148,14 +150,15 @@ function Puzzle({
           {!correct && (
             <>
               <p className="small muted">Ваш вариант:</p>
-              <p className="trap-wrong">{renderSentence(line.map((c) => c.word))}</p>
+              <p className="trap-wrong" lang="nl">{renderSentence(line.map((c) => c.word))}</p>
               <p className="small muted">Правильно:</p>
             </>
           )}
-          <p className="nl">{renderSentence(puzzle.chunks)}</p>
+          <p className="nl" lang="nl">{renderSentence(puzzle.chunks)}</p>
           {puzzle.accept?.length ? (
             <p className="small muted">
-              Так тоже верно: {renderSentence(puzzle.accept[0].split(" "))}
+              Так тоже верно:{" "}
+              <span lang="nl">{renderSentence(puzzle.accept[0].split(" "))}</span>
             </p>
           ) : null}
 
@@ -246,14 +249,14 @@ export default function WordOrder({ structure }: { structure?: string }) {
         </p>
 
         {STRUCTURES.map((s) => (
-          <div className="card tappable" key={s.id} onClick={() => begin(s.id)}>
+          <div className="card tappable" key={s.id} {...tappable(() => begin(s.id))}>
             <span className="pill amber">{puzzlesFor(s.id).length} фраз</span>
             <p className="lead">{s.title}</p>
             <p className="ru">{s.gist}</p>
           </div>
         ))}
 
-        <div className="card tappable" onClick={() => begin("all")}>
+        <div className="card tappable" {...tappable(() => begin("all"))}>
           <span className="pill">{PUZZLES.length} фраз</span>
           <p className="lead">Всё вперемешку</p>
           <p className="ru">
@@ -290,7 +293,7 @@ export default function WordOrder({ structure }: { structure?: string }) {
               <h3>Что не собралось</h3>
               {missed.map((p) => (
                 <p key={p.id}>
-                  <span className="nl">{renderSentence(p.chunks)}</span>
+                  <span className="nl" lang="nl">{renderSentence(p.chunks)}</span>
                   <br />
                   <span className="ru">{p.ru}</span>
                 </p>
