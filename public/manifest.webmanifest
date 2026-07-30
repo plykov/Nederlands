@@ -1,0 +1,19 @@
+{
+  "name": "Nederlands Vivo — нидерландский для жизни в Нидерландах",
+  "short_name": "Nederlands Vivo",
+  "description": "Подготовка к реальным разговорам: репетиция, дело, разбор",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f5f8",
+  "theme_color": "#1e4b7a",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
