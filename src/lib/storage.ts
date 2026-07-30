@@ -1,4 +1,9 @@
-import type { Appointment, LedgerEntry, ReviewCard } from "../types";
+import type {
+  Appointment,
+  InburgeringProfile,
+  LedgerEntry,
+  ReviewCard,
+} from "../types";
 
 /**
  * Всё хранится локально на устройстве (localStorage).
@@ -12,6 +17,7 @@ const KEYS = {
   appointments: "nv.appointments.v1",
   onboarded: "nv.onboarded.v1",
   course: "nv.course.v1",
+  inburgering: "nv.inburgering.v1",
 } as const;
 
 /** Лучший результат по уроку: id → доля верных ответов (0…1) */
@@ -55,6 +61,9 @@ export const storage = {
       save(KEYS.course, { ...cur, [lessonId]: score });
     }
   },
+
+  getInburgering: (): InburgeringProfile | null => load(KEYS.inburgering, null),
+  setInburgering: (v: InburgeringProfile | null) => save(KEYS.inburgering, v),
 
   /** Полное удаление всех данных пользователя — право на забвение, одна кнопка. */
   wipeAll: () => {

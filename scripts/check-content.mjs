@@ -44,6 +44,7 @@ try {
     export { LESSONS } from "${root}/src/data/course";
     export { GRAMMAR_NOTES } from "${root}/src/data/grammar";
     export { PUZZLES, STRUCTURES } from "${root}/src/data/wordorder";
+    export { STATUSES, ROUTES } from "${root}/src/data/inburgering";
     `
   );
   const bundle = join(tmp, "data.mjs");
@@ -67,6 +68,8 @@ const {
   LESSONS,
   PUZZLES,
   STRUCTURES,
+  STATUSES,
+  ROUTES,
 } = data;
 
 const problems = [];
@@ -193,6 +196,23 @@ for (const s of STRUCTURES)
   if (!PUZZLES.some((p) => p.structure === s.id))
     problems.push(`structure ${s.id}: has no puzzles`);
 
+// ── inburgering tracker: every legal status and route is covered ──
+const expectedStatuses = ["obligated", "kennismigrant", "temp_protection", "naturalisation"];
+for (const id of expectedStatuses)
+  if (!STATUSES.some((s) => s.id === id))
+    problems.push(`inburgering: missing status "${id}"`);
+for (const s of STATUSES)
+  if (!s.title || !s.hook || !s.deadline)
+    problems.push(`inburgering status ${s.id}: missing title, hook or deadline`);
+
+const expectedRoutes = ["b1", "onderwijs", "z"];
+for (const id of expectedRoutes)
+  if (!ROUTES.some((r) => r.id === id))
+    problems.push(`inburgering: missing route "${id}"`);
+for (const r of ROUTES)
+  if (r.requirements.length < 2)
+    problems.push(`inburgering route ${r.id}: ${r.requirements.length} requirements (want 2+)`);
+
 // ── course exercises are answerable ──
 for (const l of LESSONS)
   l.exercises.forEach((ex, i) => {
@@ -222,7 +242,7 @@ const summary =
   `scenarios ${SCENARIOS.length} · nouns ${NOUNS.length} · ` +
   `can-do ${CAN_DOS.length} · repair ${REPAIR_MOVES.length} · ` +
   `openers ${OPENERS.length} · lessons ${LESSONS.length} · ` +
-  `puzzles ${PUZZLES.length}`;
+  `puzzles ${PUZZLES.length} · routes ${ROUTES.length}`;
 
 if (problems.length) {
   console.error(`✗ content check failed — ${summary}\n`);

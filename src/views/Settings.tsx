@@ -48,6 +48,15 @@ export default function Settings() {
         </p>
       </div>
 
+      <div className="card tappable" onClick={() => (location.hash = "#/inburgering")}>
+        <span className="pill amber">справочно</span>
+        <p className="lead">Мои сроки inburgering</p>
+        <p className="ru">
+          Укажите статус — покажем срок и требования маршрута. Советов по
+          вашему делу здесь нет и не будет.
+        </p>
+      </div>
+
       <div className="card">
         <h3>Языковые требования (справочно)</h3>
         <p className="ru">

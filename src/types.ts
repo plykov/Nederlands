@@ -136,3 +136,24 @@ export interface Appointment {
   rehearsed: boolean;
   debriefed: boolean;
 }
+
+/**
+ * Правовой статус — из таблицы в CLAUDE.md. Определяет, есть ли срок
+ * inburgering вообще, а не то, что делать по существу дела.
+ */
+export type LegalStatus =
+  | "obligated"
+  | "kennismigrant"
+  | "temp_protection"
+  | "naturalisation";
+
+/** Маршрут inburgering — актуален только при обязанности (SPEC §2.7). */
+export type InburgeringRoute = "b1" | "onderwijs" | "z";
+
+/** Профиль трекера inburgering: сроки и требования, без совета по делу. */
+export interface InburgeringProfile {
+  status: LegalStatus;
+  /** только для obligated: дата начала обязанности (ISO) */
+  obligationStartISO?: string;
+  route?: InburgeringRoute;
+}
