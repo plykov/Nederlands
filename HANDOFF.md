@@ -6,9 +6,9 @@ bigger* architecture than what is actually built (see "Architecture decision"
 below). This file is the source of truth for what actually exists.
 
 **Status: shipped and live at https://plykov.github.io/Nederlands/.** PRs #1
-(the build), #2 (this doc reconciliation) and #3 (scenarios 13–24) are merged.
-The sections below record what was decided, what shipped, and what is
-deliberately left.
+(the build), #2 (doc reconciliation), #3 (scenarios 13–24), #5 (`npm test`),
+#6 (word-order builder) and #7 (scenarios 25–36) are merged. The sections
+below record what was decided, what shipped, and what is deliberately left.
 
 ## Where this came from
 
@@ -63,8 +63,9 @@ public/            manifest.webmanifest · sw.js · icon.svg (Dutch tricolour)
 .github/workflows/ deploy.yml  — Pages, triggers on main + workflow_dispatch
 src/lib/           storage.ts · srs.ts · speech.ts · noise.ts
 src/data/          scenarios.ts · repair.ts · openers.ts · nouns.ts
-                   grammar.ts · course.ts · cando.ts · survey.ts
-src/views/         16 views (14 ported + ArticleTrainer + Opener)
+                   grammar.ts · course.ts · cando.ts · survey.ts · wordorder.ts
+src/views/         17 views (14 ported + ArticleTrainer + Opener + WordOrder)
+scripts/           check-content.mjs — what `npm test` runs
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
 
@@ -88,6 +89,12 @@ Three modules have no Italiano equivalent and were written from the spec:
   a dedicated `article` card source.
 - **Recovery moves** (`src/data/openers.ts`) — what to say once they have
   already switched to English.
+- **Word-order builder** (`src/views/WordOrder.tsx`, `src/data/wordorder.ts`) —
+  SPEC §2.3. Tap-to-place, not drag-and-drop: HTML5 DnD is unreliable on touch
+  and this app is phone-first. Chunks are stored lowercase so a capital letter
+  cannot leak which one goes first; the view capitalises on render. Puzzles
+  where two orders are both correct accept both, and `npm test` verifies each
+  such variant is actually reachable by rearranging that puzzle's chunks.
 
 ### Deviations from a pure Italiano port, and why
 
@@ -114,24 +121,24 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 Ordered by value, and none of it is blocking:
 
-1. **Word-order builder** (SPEC §2.3) — drag-and-drop for V2, inversion,
-   verb-final and the sentence bracket. Currently covered by course lessons and
-   grammar notes only, with no constructor.
-2. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
+1. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
    note covering all functions at once, where the spec wants each stage gated
    on the previous.
-3. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
+2. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
    Nothing that advises on a case.
-4. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
+3. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
    Russian. Ship only items with sound etymology; стул, галстук and рюкзак are
    German or Low German and must not appear.
-5. **Audio for the reply bank.** Web Speech quality varies by platform;
+4. **Audio for the reply bank.** Web Speech quality varies by platform;
    pre-recorded native audio would improve the listening trainers most.
+5. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
+   and keyboard-reachable, but the whole app has not had a proper pass.
 
-Scenario count is no longer on this list: thirty-six scenarios, six per domain,
-land inside `BUILD_PLAN.md` M12's 30–40 target. Further growth should still
-come from what testers bring back from real conversations, not invented
-situations.
+Word-order builder and scenario count are no longer on this list: the
+constructor shipped (SPEC §2.3, `#/wordorder`), and thirty-six scenarios, six
+per domain, land inside `BUILD_PLAN.md` M12's 30–40 target. Further scenario
+growth should still come from what testers bring back from real conversations,
+not invented situations.
 
 ## Operational note
 

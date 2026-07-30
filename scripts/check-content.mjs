@@ -43,6 +43,7 @@ try {
     export { CAN_DOS } from "${root}/src/data/cando";
     export { LESSONS } from "${root}/src/data/course";
     export { GRAMMAR_NOTES } from "${root}/src/data/grammar";
+    export { PUZZLES, STRUCTURES } from "${root}/src/data/wordorder";
     `
   );
   const bundle = join(tmp, "data.mjs");
@@ -56,8 +57,17 @@ try {
   rmSync(tmp, { recursive: true, force: true });
 }
 
-const { SCENARIOS, DOMAINS, REPAIR_MOVES, OPENERS, NOUNS, CAN_DOS, LESSONS } =
-  data;
+const {
+  SCENARIOS,
+  DOMAINS,
+  REPAIR_MOVES,
+  OPENERS,
+  NOUNS,
+  CAN_DOS,
+  LESSONS,
+  PUZZLES,
+  STRUCTURES,
+} = data;
 
 const problems = [];
 const dup = (arr) => [...new Set(arr.filter((x, i) => arr.indexOf(x) !== i))];
@@ -71,6 +81,8 @@ for (const [name, ids] of [
   ["can-do", CAN_DOS.map((c) => c.id)],
   ["lesson", LESSONS.map((l) => l.id)],
   ["noun", NOUNS.map((n) => n.word)],
+  ["puzzle", PUZZLES.map((p) => p.id)],
+  ["structure", STRUCTURES.map((s) => s.id)],
 ]) {
   const d = dup(ids);
   if (d.length) problems.push(`duplicate ${name} ids: ${d.join(", ")}`);
@@ -123,6 +135,64 @@ const covered = new Set(CAN_DOS.flatMap((c) => c.scenarios));
 for (const s of SCENARIOS)
   if (!covered.has(s.id)) problems.push(`scenario ${s.id}: not in any can-do`);
 
+/**
+ * Can `target` be built by placing every chunk exactly once, in some order?
+ * That is precisely what the tap-to-place UI can produce, so it is the right
+ * question to ask of an `accept` variant.
+ */
+function reachableByChunkOrder(target, chunks) {
+  const used = chunks.map(() => false);
+  const walk = (pos) => {
+    if (pos >= target.length) return used.every(Boolean);
+    for (let i = 0; i < chunks.length; i++) {
+      if (used[i]) continue;
+      const end = pos + chunks[i].length;
+      if (target.slice(pos, end) !== chunks[i]) continue;
+      if (end < target.length && target[end] !== " ") continue;
+      used[i] = true;
+      if (walk(end + 1)) return true;
+      used[i] = false;
+    }
+    return false;
+  };
+  return walk(0);
+}
+
+// ── word-order puzzles are solvable ──
+const structureIds = new Set(STRUCTURES.map((s) => s.id));
+for (const p of PUZZLES) {
+  const at = (msg) => problems.push(`puzzle ${p.id}: ${msg}`);
+
+  if (!structureIds.has(p.structure)) at(`unknown structure "${p.structure}"`);
+  if (!["A1", "A2", "B1"].includes(p.level)) at(`bad level "${p.level}"`);
+  if (p.scenarioId && !scenarioIds.has(p.scenarioId))
+    at(`unknown scenario "${p.scenarioId}"`);
+  if (p.chunks.length < 3) at(`${p.chunks.length} chunks (want 3+)`);
+  if (p.chunks.some((c) => c !== c.trim() || !c))
+    at("a chunk is empty or has stray whitespace");
+
+  // A capitalised first chunk would give away where the sentence starts, so
+  // chunks are stored lowercase and the view capitalises on render. Proper
+  // nouns are the legitimate exception.
+  const PROPER = /^(nederlands|ind|anne|digid)/i;
+  for (const c of p.chunks)
+    if (/^[A-ZÀ-Þ]/.test(c) && !PROPER.test(c))
+      at(`chunk "${c}" is capitalised — store it lowercase`);
+
+  // An `accept` variant the UI cannot actually produce would silently mark a
+  // correct answer wrong. Chunks are multi-word, so comparing word multisets
+  // is not enough — the variant must be segmentable into the chunks
+  // themselves, each used exactly once.
+  for (const alt of p.accept ?? []) {
+    if (!reachableByChunkOrder(alt, p.chunks))
+      at(`accept variant "${alt}" cannot be assembled from the chunks`);
+    if (alt === p.chunks.join(" ")) at("accept variant duplicates the main order");
+  }
+}
+for (const s of STRUCTURES)
+  if (!PUZZLES.some((p) => p.structure === s.id))
+    problems.push(`structure ${s.id}: has no puzzles`);
+
 // ── course exercises are answerable ──
 for (const l of LESSONS)
   l.exercises.forEach((ex, i) => {
@@ -141,7 +211,8 @@ for (const l of LESSONS)
 const summary =
   `scenarios ${SCENARIOS.length} · nouns ${NOUNS.length} · ` +
   `can-do ${CAN_DOS.length} · repair ${REPAIR_MOVES.length} · ` +
-  `openers ${OPENERS.length} · lessons ${LESSONS.length}`;
+  `openers ${OPENERS.length} · lessons ${LESSONS.length} · ` +
+  `puzzles ${PUZZLES.length}`;
 
 if (problems.length) {
   console.error(`✗ content check failed — ${summary}\n`);

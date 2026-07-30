@@ -234,4 +234,47 @@ nav.tabs a.active { color: var(--blue); }
 .article-de { color: var(--blue); font-weight: 700; }
 .article-het { color: var(--orange); font-weight: 700; }
 
+/* Конструктор порядка слов. Сборка касанием, а не перетаскиванием:
+   HTML5 drag-and-drop на тачскринах ненадёжен, а приложение телефонное. */
+.chip {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 600;
+  font-size: 1rem;
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid transparent;
+}
+.chip.placed {
+  background: var(--card);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.wo-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  min-height: 56px;
+  padding: 10px;
+  margin: 8px 0;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+.wo-line.ok { border-style: solid; border-color: var(--blue); }
+.wo-line.bad { border-style: solid; border-color: var(--red); }
+.wo-placeholder { color: var(--muted); font-size: 0.85rem; }
+
+.wo-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
 a { color: var(--blue); }

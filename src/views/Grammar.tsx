@@ -116,6 +116,15 @@ export default function Grammar() {
         читать подряд необязательно.
       </p>
 
+      <div className="card tappable" onClick={() => (location.hash = "#/wordorder")}>
+        <span className="pill amber">конструктор</span>
+        <p className="lead">Порядок слов</p>
+        <p className="ru">
+          Четыре структуры, которые ломаются первыми: глагол вторым, инверсия,
+          глагол в конце придаточного, рамка. Не выбор из вариантов, а сборка.
+        </p>
+      </div>
+
       <div className="card tappable" onClick={() => (location.hash = "#/course")}>
         <span className="pill">курс</span>
         <p className="lead">Грамматический зал</p>
