@@ -21,7 +21,7 @@ service worker, GitHub Pages via Actions.
 root and on a `/<repo>/` subpath. ✅
 
 ## A1 — Content ✅
-36 scenarios across the six `_SCHEMA.md` domains, 6 each (A1 14 / A2 12 / B1 10).
+57 scenarios across the six `_SCHEMA.md` domains (A1 35 / A2 12 / B1 10).
 104 article-attached nouns, 8 repair moves, 7 openers and recovery moves, 12
 grammar notes, 8 course lessons, 39 CEFR can-do statements, tester survey.
 
@@ -175,6 +175,21 @@ violations**, down from 1 (the locked-card contrast bug, found and fixed in
 the same pass). Keyboard-only navigation confirmed by scripted `Tab`/`Enter`
 reaching and activating a Home card in the correct order.
 
+## A15 — Scenario batch 4: 21 more A1 scenarios ✅
+Explicit user request, made after deciding against native audio: skip that,
+add 21 more A1-level scenarios instead. Takes the library from 36 to **57**
+(A1 35 / A2 12 / B1 10), well past the original M12 target of 30–40 —
+intentionally, per that request, not a drift. Four bureaucratie, three
+gezondheid, four school, four wonen, three werk, three dagelijks — all
+distinct "survival" errands not already covered: phone bookings, document
+requests, school logistics, neighbour favours, workplace small talk, errands
+around town. Same shape as every other batch: exactly one `register:
+"switch"` reply each, 2 traps drawn from the scenario's own vocabulary, 2
+gate items, matching `CAN_DOS` entries so none is orphaned from the CEFR map.
+
+**Done when:** `npm test` passes with the new totals and every scenario is
+reachable from `#/scenarios` and the CEFR map. ✅
+
 ---
 
 ## Phase 1 — what remains
@@ -189,10 +204,10 @@ listening trainers if this is revisited — see `CLAUDE.md`'s Phase 2 stack for
 the pre-recorded-audio path (`pnpm audio:generate`, normal + fast variants to
 R2) if a backend ever gets built. Nothing here blocks anything else.
 
-Everything else that stood here — scenarios (36, six per domain, inside the
-M12 target of 30–40), the word-order builder (A10), the staged `er` module
-(A11), the inburgering tracker (A12), the loanword hook (A13) and the
-accessibility pass (A14, above) — is done and no
+Everything else that stood here — scenarios (57 now, past the original M12
+target of 30–40 by explicit request — A15 above), the word-order builder
+(A10), the staged `er` module (A11), the inburgering tracker (A12), the
+loanword hook (A13) and the accessibility pass (A14) — is done and no
 longer on this list.
 
 The "no test setup" item that stood here is done: `npm test` runs
