@@ -85,6 +85,54 @@ export const NOUNS: Noun[] = [
   { word: "station", article: "het", ru: "вокзал, станция", scenarioId: "ov-controle" },
   { word: "brief", article: "de", ru: "письмо", scenarioId: "ov-controle" },
   { word: "geld", article: "het", ru: "деньги", scenarioId: "ov-controle" },
+
+  // ── вторая партия сценариев ──
+  { word: "toeslag", article: "de", ru: "пособие, доплата от государства", scenarioId: "belastingdienst-toeslagen" },
+  { word: "inkomen", article: "het", ru: "доход", scenarioId: "belastingdienst-toeslagen" },
+  { word: "bedrag", article: "het", ru: "сумма", scenarioId: "belastingdienst-toeslagen" },
+  { word: "naheffing", article: "de", ru: "доначисление", scenarioId: "belastingdienst-toeslagen" },
+  { word: "bankpas", article: "de", ru: "банковская карта", scenarioId: "bank-rekening-openen" },
+  { word: "geldautomaat", article: "de", ru: "банкомат", scenarioId: "bank-rekening-openen" },
+  { word: "spaarrekening", article: "de", ru: "сберегательный счёт", scenarioId: "bank-rekening-openen" },
+  { word: "salaris", article: "het", ru: "зарплата", scenarioId: "bank-rekening-openen" },
+
+  { word: "tandarts", article: "de", ru: "стоматолог", scenarioId: "tandarts-afspraak" },
+  { word: "kiespijn", article: "de", ru: "зубная боль", scenarioId: "tandarts-afspraak" },
+  { word: "praktijk", article: "de", ru: "кабинет, практика", scenarioId: "tandarts-afspraak" },
+  { word: "verwijzing", article: "de", ru: "направление к врачу", scenarioId: "ziekenhuis-verwijzing" },
+  { word: "uitslag", article: "de", ru: "результат анализа", scenarioId: "ziekenhuis-verwijzing" },
+  { word: "bloed", article: "het", ru: "кровь", scenarioId: "ziekenhuis-verwijzing" },
+  { word: "klacht", article: "de", ru: "жалоба, симптом", scenarioId: "ziekenhuis-verwijzing" },
+
+  { word: "opvang", article: "de", ru: "детский сад, присмотр", scenarioId: "kinderopvang-plek" },
+  { word: "voorrang", article: "de", ru: "приоритет, преимущество", scenarioId: "kinderopvang-plek" },
+  { word: "ziekmelding", article: "de", ru: "сообщение о болезни", scenarioId: "ziekmelding-school" },
+  { word: "administratie", article: "de", ru: "администрация, канцелярия", scenarioId: "ziekmelding-school" },
+  { word: "groep", article: "de", ru: "класс в началке", scenarioId: "ziekmelding-school" },
+
+  { word: "bezichtiging", article: "de", ru: "просмотр жилья", scenarioId: "woning-bezichtiging" },
+  { word: "borg", article: "de", ru: "залог", scenarioId: "woning-bezichtiging" },
+  { word: "huurprijs", article: "de", ru: "арендная плата", scenarioId: "woning-bezichtiging" },
+  { word: "eigenaar", article: "de", ru: "владелец", scenarioId: "woning-bezichtiging" },
+  { word: "lampje", article: "het", ru: "лампочка, индикатор", scenarioId: "internet-storing" },
+  { word: "stekker", article: "de", ru: "вилка, штекер", scenarioId: "internet-storing" },
+  { word: "signaal", article: "het", ru: "сигнал", scenarioId: "internet-storing" },
+  { word: "zaaknummer", article: "het", ru: "номер обращения", scenarioId: "internet-storing" },
+
+  { word: "ervaring", article: "de", ru: "опыт", scenarioId: "sollicitatiegesprek" },
+  { word: "functie", article: "de", ru: "должность, позиция", scenarioId: "sollicitatiegesprek" },
+  { word: "vacature", article: "de", ru: "вакансия", scenarioId: "sollicitatiegesprek" },
+  { word: "bedrijfsarts", article: "de", ru: "врач компании", scenarioId: "ziekmelding-werk" },
+  { word: "team", article: "het", ru: "команда", scenarioId: "ziekmelding-werk" },
+
+  { word: "pakket", article: "het", ru: "посылка", scenarioId: "pakket-bezorger" },
+  { word: "brievenbus", article: "de", ru: "почтовый ящик", scenarioId: "pakket-bezorger" },
+  { word: "afhaalpunt", article: "het", ru: "пункт выдачи", scenarioId: "pakket-bezorger" },
+  { word: "bezorger", article: "de", ru: "курьер", scenarioId: "pakket-bezorger" },
+  { word: "aanbieding", article: "de", ru: "акция, скидка", scenarioId: "markt-winkel" },
+  { word: "kaas", article: "de", ru: "сыр", scenarioId: "markt-winkel" },
+  { word: "markt", article: "de", ru: "рынок", scenarioId: "markt-winkel" },
+  { word: "bonuskaart", article: "de", ru: "карта магазина", scenarioId: "markt-winkel" },
 ];
 
 export const nounsForScenario = (scenarioId: string): Noun[] =>

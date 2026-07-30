@@ -1157,6 +1157,1142 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
   },
+
+  // ──────────────── БЮРОКРАТИЯ · вторая пара ────────────────
+  {
+    id: "belastingdienst-toeslagen",
+    domain: "bureaucratie",
+    level: "B1",
+    title: "Налоговая: вопрос по пособиям (toeslagen)",
+    context: "Звонок в Belastingdienst после изменения дохода",
+    minutes: 9,
+    openerContext: "telefoon",
+    brief: [
+      "Голосовое меню и очередь съедят первые минуты. Ловите цифры, остальное можно пропускать.",
+      "Для опознания спросят BSN и дату рождения. Держите их перед глазами.",
+      "Разговор пойдёт про суммы, даты и «изменение обстоятельств» — это ключевое понятие всей системы.",
+      "Могут сказать, что вы получили лишнее и придётся вернуть. Это рядовая ситуация, а не обвинение.",
+      "В конце — что вы должны сделать и до какого числа. Перескажите своими словами, иначе уйдёте без плана.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, u spreekt met … . Ik bel over mijn huurtoeslag.",
+        ru: "Добрый день, вас беспокоит … . Я звоню по поводу жилищного пособия.",
+        note: "de huurtoeslag, de zorgtoeslag, de kinderopvangtoeslag — все с de.",
+      },
+      {
+        nl: "Mijn burgerservicenummer is … .",
+        ru: "Мой BSN … .",
+        note: "Диктуйте по цифрам и медленно: это первое, что у вас спросят.",
+      },
+      {
+        nl: "Mijn inkomen is veranderd. Ik ben in mei van baan gewisseld.",
+        ru: "Мой доход изменился. В мае я сменил работу.",
+        note: "«van baan wisselen» — сменить работу. Устойчивое сочетание, без артикля.",
+      },
+      {
+        nl: "Moet ik dat zelf doorgeven, of doet mijn werkgever dat?",
+        ru: "Мне нужно сообщить самому, или это делает работодатель?",
+        note: "Второй вариант вопроса начинается с «of» и снова с глагола.",
+      },
+      {
+        nl: "Sorry, dat ging te snel. Kunt u het bedrag herhalen? Cijfer voor cijfer.",
+        ru: "Извините, слишком быстро. Повторите сумму по цифрам?",
+      },
+      {
+        nl: "Dus ik moet het voor het einde van de maand wijzigen, anders krijg ik een naheffing. Klopt dat?",
+        ru: "То есть мне нужно изменить это до конца месяца, иначе придёт доначисление. Верно?",
+        note: "de naheffing — доначисление. Это слово лучше узнать в разговоре, чем потом в письме.",
+      },
+    ],
+    replyBank: [
+      { nl: "Voor toeslagen toets drie.", ru: "По пособиям нажмите три.", key: "toets drie", register: "formeel" },
+      { nl: "U wordt doorverbonden, een moment geduld alstublieft.", ru: "Соединяю, подождите, пожалуйста.", key: "doorverbonden", register: "formeel" },
+      { nl: "Kunt u uw burgerservicenummer en geboortedatum geven?", ru: "Назовите BSN и дату рождения.", key: "burgerservicenummer", register: "formeel" },
+      { nl: "Waar gaat uw vraag over? Huurtoeslag, zorgtoeslag of kinderopvangtoeslag?", ru: "По какому пособию вопрос? Жильё, медицина или детский сад?", key: "waar gaat uw vraag over", register: "formeel" },
+      { nl: "Een wijziging in uw inkomen moet u zelf binnen vier weken doorgeven.", ru: "Об изменении дохода нужно сообщить самому в течение четырёх недель.", key: "wijziging doorgeven", register: "formeel" },
+      { nl: "U heeft over de afgelopen maanden te veel ontvangen.", ru: "За прошедшие месяцы вы получили больше положенного.", key: "te veel ontvangen", register: "formeel" },
+      { nl: "Dat bedrag moet u terugbetalen, u krijgt daarover een brief.", ru: "Эту сумму нужно вернуть, вам придёт письмо.", key: "terugbetalen", register: "formeel" },
+      { nl: "U kunt een betalingsregeling aanvragen als het niet in één keer lukt.", ru: "Можно оформить рассрочку, если единовременно не получается.", key: "betalingsregeling", register: "formeel" },
+      { nl: "Dat regelt u het beste zelf via Mijn Toeslagen met uw DigiD.", ru: "Удобнее сделать это самому через Mijn Toeslagen с DigiD.", key: "DigiD", register: "neutraal" },
+      { nl: "Heeft u verder nog vragen?", ru: "Есть ещё вопросы?", key: "verder nog vragen", register: "neutraal" },
+      { nl: "I can continue in English if you prefer.", ru: "Могу продолжить по-английски, если вам удобнее.", register: "switch" },
+    ],
+    repairIds: ["cijfers", "herhalen", "opschrijven", "klopt"],
+    traps: [
+      {
+        wrong: "de toeslag = надбавка от работодателя",
+        right: "de toeslag = государственное пособие",
+        why: "В нидерландском обиходе toeslag — это доплата от государства: huurtoeslag, zorgtoeslag. Надбавка к зарплате называется иначе. Спутав их, вы уведёте весь разговор не туда.",
+      },
+      {
+        wrong: "Ik wil een betalingsregeling vragen.",
+        right: "Ik wil een betalingsregeling aanvragen.",
+        why: "vragen — спросить, aanvragen — подать заявление. Приставка меняет «поинтересоваться» на «оформить», и в разговоре с ведомством это совершенно разные действия.",
+      },
+      {
+        wrong: "Ik moet zelf het doorgeven.",
+        right: "Ik moet het zelf doorgeven.",
+        why: "Короткое безударное местоимение het стремится к началу средней части предложения — перед zelf, перед обстоятельствами. Русский порядок «сам это сообщить» ставит их наоборот.",
+      },
+    ],
+    gate: [
+      {
+        word: "toeslag",
+        focus: "oe = «у», конечное g хриплое",
+        tip: "ТУ-слах. oe — чистое «у», не «оэ». Конечное -g как в dag.",
+      },
+      {
+        word: "burgerservicenummer",
+        focus: "длинное составное, ударение на первой части",
+        tip: "БЮР-хер-сер-ви-сə-ню-мер. Произносится одним потоком; по слогам звучит как диктант.",
+      },
+      {
+        word: "naheffing",
+        focus: "ударная приставка na-, -ing = «инх»",
+        tip: "НА-хе-финх. Приставка ударная, дальше всё смазывается.",
+      },
+    ],
+  },
+  {
+    id: "bank-rekening-openen",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Открытие счёта в банке",
+    context: "Приём в отделении: расчётный счёт и дебетовая карта",
+    minutes: 7,
+    openerContext: "loket",
+    brief: [
+      "Чаще всего нужна запись — без неё в отделении могут не принять.",
+      "Попросят паспорт, BSN и подтверждение адреса.",
+      "Спросят, зачем вам счёт и откуда доходы. Это обязательная процедура для всех, а не подозрение к вам.",
+      "Расскажут про тип счёта, карту и ежемесячную комиссию.",
+      "В конце — когда придёт карта и как её активировать. Это два разных срока и два разных письма.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, ik wil graag een betaalrekening openen.",
+        ru: "Добрый день, я хотел бы открыть расчётный счёт.",
+        note: "de betaalrekening — расчётный, de spaarrekening — сберегательный.",
+      },
+      {
+        nl: "Hier is mijn paspoort, mijn BSN en een bewijs van mijn adres.",
+        ru: "Вот паспорт, BSN и подтверждение адреса.",
+      },
+      {
+        nl: "Ik werk hier sinds maart. Mijn salaris komt van mijn werkgever.",
+        ru: "Я работаю здесь с марта. Зарплату получаю от работодателя.",
+        note: "«sinds» указывает момент начала: sinds maart. Длительность — это «al»: al drie maanden.",
+      },
+      {
+        nl: "Wat kost de rekening per maand?",
+        ru: "Сколько стоит счёт в месяц?",
+      },
+      {
+        nl: "Sorry, kunt u dat langzamer herhalen?",
+        ru: "Извините, можете повторить медленнее?",
+      },
+      {
+        nl: "Dus de pas komt binnen vijf werkdagen en de pincode apart. Klopt dat?",
+        ru: "То есть карта придёт в течение пяти рабочих дней, а пин-код отдельно. Верно?",
+        note: "Они приходят разными письмами — это не сбой, а правило безопасности.",
+      },
+    ],
+    replyBank: [
+      { nl: "Heeft u een afspraak gemaakt?", ru: "Вы записывались?", key: "een afspraak maken", register: "formeel" },
+      { nl: "Mag ik uw identiteitsbewijs en uw burgerservicenummer?", ru: "Можно ваш документ и BSN?", key: "identiteitsbewijs", register: "formeel" },
+      { nl: "Waarvoor wilt u de rekening gebruiken?", ru: "Для чего вам нужен счёт?", key: "waarvoor", register: "formeel" },
+      { nl: "Wij zijn verplicht te vragen waar uw inkomen vandaan komt.", ru: "Мы обязаны спросить, откуда у вас доход.", key: "verplicht te vragen", register: "formeel" },
+      { nl: "Een betaalrekening kost twee euro vijfentwintig per maand.", ru: "Расчётный счёт стоит два двадцать пять в месяц.", key: "vijfentwintig", register: "neutraal" },
+      { nl: "U krijgt een bankpas en een pincode, die komen apart per post.", ru: "Вы получите карту и пин-код, они придут отдельно по почте.", key: "apart per post", register: "formeel" },
+      { nl: "De pas moet u eerst activeren bij een geldautomaat.", ru: "Карту нужно сначала активировать в банкомате.", key: "activeren", register: "formeel" },
+      { nl: "Wilt u er ook een spaarrekening bij?", ru: "Хотите ещё и сберегательный счёт?", key: "spaarrekening", register: "neutraal" },
+      { nl: "U kunt alles regelen in de app, die is ook in het Engels.", ru: "Всё можно делать в приложении, оно есть и на английском.", key: "in de app", register: "informeel" },
+      { nl: "Would you like me to continue in English?", ru: "Продолжить по-английски?", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers", "spellen", "klopt"],
+    traps: [
+      {
+        wrong: "Voor wat wilt u de rekening?",
+        right: "Waarvoor wilt u de rekening?",
+        why: "Предлог с вопросительным словом склеивается в одно слово: waarvoor, waarmee, waarover, waarnaar. «Voor wat» понятно, но сразу выдаёт кальку.",
+      },
+      {
+        wrong: "«twee euro vijfentwintig» — два ноль пять",
+        right: "«twee euro vijfentwintig» — два евро двадцать пять",
+        why: "Центы называются как обычное число, задом наперёд: vijfentwintig — «пять-и-двадцать», то есть 25. В цене это слышно мгновенно и стоит дорого.",
+      },
+      {
+        wrong: "Ik werk hier al maart.",
+        right: "Ik werk hier sinds maart.",
+        why: "«Sinds» — с какого момента, «al» — как долго: sinds maart, но al drie maanden. Русское «уже с марта» соединяет оба смысла в одной фразе, нидерландский их разводит.",
+      },
+    ],
+    gate: [
+      {
+        word: "rekening",
+        focus: "-ing = «инх», ударение на RE-",
+        tip: "РЕ-кə-нинх. Средний слог проглатывается почти полностью.",
+      },
+      {
+        word: "geldautomaat",
+        focus: "харде G, au = «ау»",
+        tip: "ХЕЛТ-ау-то-ма:т. Начальный g хриплый, конечное d в geld оглушается в «т».",
+      },
+      {
+        word: "verplicht",
+        focus: "-cht = харде G + т",
+        tip: "фер-ПЛИХТ. Сочетание -cht звучит хрипло: recht, echt, nacht, verplicht.",
+      },
+    ],
+  },
+
+  // ──────────────── ЗДОРОВЬЕ · вторая пара ────────────────
+  {
+    id: "tandarts-afspraak",
+    domain: "gezondheid",
+    level: "A1",
+    title: "Стоматолог: острая боль",
+    context: "Утренний звонок в стоматологию за срочным приёмом",
+    minutes: 6,
+    openerContext: "telefoon",
+    brief: [
+      "Звонить нужно утром: окна для срочных случаев держат на тот же день и разбирают их быстро.",
+      "Спросят, пациент ли вы у них. Если нет, направят в дежурную клинику — это не отказ.",
+      "Спросят, что болит и как давно. Коротко и конкретно.",
+      "Время назовут цифрами и быстро. Здесь ошибаются чаще всего — переспрашивайте.",
+      "Уточните, что взять и сколько будет стоить: взрослым стоматология в базовую страховку не входит.",
+    ],
+    lines: [
+      {
+        nl: "Goedemorgen, u spreekt met … . Ik heb veel kiespijn.",
+        ru: "Доброе утро, вас беспокоит … . У меня сильно болит зуб.",
+        note: "de kiespijn — про коренной зуб, и это слово используют по умолчанию.",
+      },
+      {
+        nl: "Ja, ik ben patiënt bij u. Mijn geboortedatum is … .",
+        ru: "Да, я ваш пациент. Дата рождения … .",
+      },
+      {
+        nl: "Sinds gisteravond. Het doet vooral pijn bij koud drinken.",
+        ru: "Со вчерашнего вечера. Особенно больно от холодного.",
+        note: "«bij koud drinken» — при питье холодного. Действие как существительное передаётся инфинитивом.",
+      },
+      {
+        nl: "Kunt u dat langzamer herhalen? Hoe laat precies?",
+        ru: "Можете повторить медленнее? Во сколько именно?",
+      },
+      {
+        nl: "Moet ik iets meenemen? En wat kost het ongeveer?",
+        ru: "Нужно что-то взять с собой? И сколько это примерно стоит?",
+        note: "meenemen отделяемый, но после модального стоит целиком.",
+      },
+      {
+        nl: "Dus vandaag om kwart over drie. Klopt dat?",
+        ru: "То есть сегодня в четверть четвёртого. Верно?",
+      },
+    ],
+    replyBank: [
+      { nl: "Tandartspraktijk, goedemorgen. Waarmee kan ik u helpen?", ru: "Стоматология, доброе утро. Чем могу помочь?", key: "waarmee", register: "formeel" },
+      { nl: "Bent u al patiënt bij ons?", ru: "Вы уже наш пациент?", key: "patiënt bij ons", register: "neutraal" },
+      { nl: "Wat is uw geboortedatum?", ru: "Ваша дата рождения?", key: "geboortedatum", register: "neutraal" },
+      { nl: "Sinds wanneer heeft u er last van?", ru: "С какого времени беспокоит?", key: "last hebben van", register: "neutraal" },
+      { nl: "Is het een kloppende pijn, of alleen bij warm en koud?", ru: "Боль пульсирующая или только от горячего и холодного?", key: "kloppende pijn", register: "formeel" },
+      { nl: "Ik heb vanmiddag nog een plekje vrij, kwart over drie.", ru: "На сегодня есть окно, в четверть четвёртого.", key: "een plekje vrij", register: "informeel" },
+      { nl: "Kunt u een kwartier eerder komen voor de administratie?", ru: "Можете прийти на пятнадцать минут раньше для оформления?", key: "een kwartier eerder", register: "formeel" },
+      { nl: "Neemt u uw verzekeringspas en identiteitsbewijs mee.", ru: "Возьмите страховую карту и документ.", key: "meenemen", register: "formeel" },
+      { nl: "Tandheelkundige zorg zit voor volwassenen niet in het basispakket.", ru: "Стоматология взрослым в базовую страховку не входит.", key: "basispakket", register: "formeel" },
+      { nl: "Is English easier for you?", ru: "Вам проще по-английски?", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers", "klopt", "opschrijven"],
+    traps: [
+      {
+        wrong: "kwart over drie = без четверти три",
+        right: "kwart over drie = 15:15",
+        why: "«Over» — после, «voor» — до. Kwart over drie это 15:15, а kwart voor vier — 15:45. Обе фразы про один и тот же час, и перепутать их значит опоздать на сорок минут.",
+      },
+      {
+        wrong: "Ik heb last met mijn kies.",
+        right: "Ik heb last van mijn kies.",
+        why: "«last hebben van» — беспокоит, мешает. Предлог van, не met. У врача эта конструкция звучит постоянно: last van hoofdpijn, last van mijn rug.",
+      },
+      {
+        wrong: "Het doet pijn bij koud drinken vooral.",
+        right: "Het doet vooral pijn bij koud drinken.",
+        why: "Наречия степени — vooral, echt, heel — встают перед тем, что уточняют, а не сползают в конец. Русский порядок слов здесь свободнее.",
+      },
+    ],
+    gate: [
+      {
+        word: "kiespijn",
+        focus: "ie = долгое «и», ij = «эй»",
+        tip: "КИ:С-пэйн. Два разных диграфа в одном коротком слове: ie тянется как «и», ij звучит «эй».",
+      },
+      {
+        word: "tandarts",
+        focus: "конечное d оглушается",
+        tip: "ТАНТ-артс. d звучит как «т» — то же оглушение, что в русском «зуб» → «зуп». Это вы уже умеете.",
+      },
+      {
+        word: "afspraak",
+        focus: "aa = долгое «а», ударение на -SPRAAK",
+        tip: "аф-СПРА:К. Тяните aa по-настоящему. Слово, которое вы произнесёте чаще любого другого.",
+      },
+    ],
+  },
+  {
+    id: "ziekenhuis-verwijzing",
+    domain: "gezondheid",
+    level: "B1",
+    title: "Приём специалиста по направлению",
+    context: "Больница: первый визит к специалисту после направления от huisarts",
+    minutes: 9,
+    openerContext: "loket",
+    brief: [
+      "Сначала регистрация — через автомат или стойку. Нужен документ и страховка.",
+      "Врач будет говорить быстро и терминами. Это норма профессиональной речи, а не пренебрежение.",
+      "Спросят историю: когда началось, что уже пробовали, какие лекарства принимаете.",
+      "Могут назначить исследование. Уточните: где, когда и нужно ли готовиться.",
+      "В конце спросите, что дальше и кто с вами свяжется. Без этого вы уйдёте без плана.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, ik heb een afspraak. Ik ben doorverwezen door mijn huisarts.",
+        ru: "Добрый день, у меня приём. Меня направил семейный врач.",
+        note: "«doorverwezen worden door» — пассив с указанием, кем. de verwijzing — направление.",
+      },
+      {
+        nl: "De klachten zijn ongeveer drie maanden geleden begonnen.",
+        ru: "Жалобы начались примерно три месяца назад.",
+        note: "«geleden» стоит ПОСЛЕ отрезка времени: drie maanden geleden.",
+      },
+      {
+        nl: "Ik gebruik op dit moment geen medicijnen.",
+        ru: "Сейчас я не принимаю лекарств.",
+        note: "О лекарствах говорят «gebruiken», а не «nemen».",
+      },
+      {
+        nl: "Sorry, ik ken dat woord niet. Wat betekent «…»?",
+        ru: "Извините, я не знаю это слово. Что значит «…»?",
+      },
+      {
+        nl: "Begrijp ik goed dat ik eerst bloed moet laten prikken?",
+        ru: "Правильно ли я понимаю, что сначала нужно сдать кровь?",
+        note: "«bloed laten prikken» — сдать кровь. Конструкция laten + инфинитив: дать сделать.",
+      },
+      {
+        nl: "Wanneer hoor ik de uitslag, en van wie?",
+        ru: "Когда я узнаю результат, и от кого?",
+        note: "de uitslag — результат анализа. Ключевое слово всего визита.",
+      },
+    ],
+    replyBank: [
+      { nl: "Meldt u zich eerst aan bij de zuil, daarna neemt u plaats.", ru: "Сначала отметьтесь на стойке-автомате, потом присаживайтесь.", key: "de zuil, aanmelden", register: "formeel" },
+      { nl: "Heeft u een verwijzing van uw huisarts?", ru: "У вас есть направление от семейного врача?", key: "de verwijzing", register: "formeel" },
+      { nl: "De dokter loopt ongeveer twintig minuten uit.", ru: "Врач задерживается примерно на двадцать минут.", key: "uitlopen", register: "neutraal" },
+      { nl: "Vertelt u eens, wat zijn precies uw klachten?", ru: "Расскажите, что именно вас беспокоит?", key: "vertelt u eens", register: "formeel" },
+      { nl: "Wanneer zijn de klachten begonnen, en is het erger geworden?", ru: "Когда начались жалобы и стало ли хуже?", key: "erger geworden", register: "formeel" },
+      { nl: "Gebruikt u medicijnen? Ook zelfzorgmiddelen?", ru: "Принимаете лекарства? В том числе безрецептурные?", key: "zelfzorgmiddelen", register: "formeel" },
+      { nl: "Ik wil eerst bloed laten prikken en een echo aanvragen.", ru: "Сначала сдадим кровь и назначим УЗИ.", key: "een echo aanvragen", register: "formeel" },
+      { nl: "U hoeft daarvoor niet nuchter te zijn.", ru: "Для этого натощак приходить не нужно.", key: "nuchter", register: "formeel" },
+      { nl: "De uitslag bespreken we over twee weken telefonisch.", ru: "Результат обсудим через две недели по телефону.", key: "de uitslag bespreken", register: "formeel" },
+      { nl: "Als er iets afwijkends is, bellen wij u eerder.", ru: "Если будет что-то отклоняющееся от нормы, позвоним раньше.", key: "afwijkend", register: "formeel" },
+      { nl: "Shall I explain this in English? It's quite technical.", ru: "Объяснить по-английски? Тема техническая.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen", "klopt", "laatste"],
+    traps: [
+      {
+        wrong: "geleden drie maanden",
+        right: "drie maanden geleden",
+        why: "«Назад» ставится ПОСЛЕ отрезка времени. Русский порядок «три месяца назад» совпадает — сбивает как раз английское «ago», если вы переводите через английский.",
+      },
+      {
+        wrong: "Ik moet bloed prikken.",
+        right: "Ik moet bloed laten prikken.",
+        why: "Без «laten» получается, что кровь берёте вы сами. Laten + инфинитив означает «поручить, дать сделать»: laten prikken, laten zien, laten weten, mijn haar laten knippen.",
+      },
+      {
+        wrong: "nuchter = трезвый",
+        right: "nuchter = натощак",
+        why: "В больнице nuchter значит «на голодный желудок». «U moet nuchter komen» — прийти не поев. Понять это как «трезвым» стоит отменённого анализа.",
+      },
+    ],
+    gate: [
+      {
+        word: "ziekenhuis",
+        focus: "ie = долгое «и», ui = /œy/",
+        tip: "ЗИ:-кəн-хёйс. Два диграфа подряд: ie тянется как «и», ui — огублённый дифтонг из huis.",
+      },
+      {
+        word: "verwijzing",
+        focus: "ij = «эй», -ing = «инх»",
+        tip: "фер-ВЭЙ-зинх. Ударение на средний слог, первый проглатывается.",
+      },
+      {
+        word: "uitslag",
+        focus: "ui = /œy/, харде G на конце",
+        tip: "ЁЙТ-слах. Конечное -g хриплое. Ради этого слова вы придёте второй раз — узнавайте его сразу.",
+      },
+    ],
+  },
+
+  // ──────────────── ДЕТИ И ШКОЛА · вторая пара ────────────────
+  {
+    id: "kinderopvang-plek",
+    domain: "school",
+    level: "A2",
+    title: "Детский сад: есть ли место",
+    context: "Звонок в kinderopvang по поводу места и очереди",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Очереди длинные, поэтому вопрос почти всегда «когда», а не «есть ли».",
+      "Спросят возраст ребёнка и с какой даты нужно место.",
+      "Спросят, сколько дней в неделю и какие именно. Решите это до звонка.",
+      "Расскажут про почасовой тариф и про компенсацию от государства — это разные вещи.",
+      "Запишут в лист ожидания. Уточните, когда перезвонят: без этого вы просто исчезнете из виду.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, u spreekt met … . Ik bel voor een plek op de opvang.",
+        ru: "Добрый день, вас беспокоит … . Я звоню по поводу места в саду.",
+        note: "«bellen voor» — звонить ради чего-то; «bellen over» — по поводу проблемы. Разные предлоги, разные ситуации.",
+      },
+      {
+        nl: "Mijn zoon is twee jaar. Wij zoeken opvang vanaf september.",
+        ru: "Сыну два года. Место нужно с сентября.",
+        note: "«vanaf» — начиная с (в будущем). «Sinds» — только про прошлое.",
+      },
+      {
+        nl: "Wij hebben drie dagen nodig: maandag, dinsdag en donderdag.",
+        ru: "Нам нужно три дня: понедельник, вторник и четверг.",
+        note: "Дни недели идут без предлога и без артикля.",
+      },
+      {
+        nl: "Sorry, kunt u dat herhalen? Hoeveel kost het per dag?",
+        ru: "Извините, повторите? Сколько это стоит в день?",
+      },
+      {
+        nl: "Krijgen wij daar kinderopvangtoeslag over?",
+        ru: "На это положена государственная компенсация?",
+        note: "Предлог отрывается и уходит в конец: daar … over.",
+      },
+      {
+        nl: "Dus wij staan op de wachtlijst en u belt in mei. Klopt dat?",
+        ru: "То есть мы в листе ожидания и вы позвоните в мае. Верно?",
+      },
+    ],
+    replyBank: [
+      { nl: "Kinderopvang De Vlinder, goedemiddag.", ru: "Детский сад «Де Влиндер», добрый день.", key: "kinderopvang", register: "formeel" },
+      { nl: "Hoe oud is uw zoon, en per wanneer zoekt u opvang?", ru: "Сколько сыну лет и с какой даты нужно место?", key: "per wanneer", register: "formeel" },
+      { nl: "Wij hebben op dit moment een wachtlijst van ongeveer een jaar.", ru: "Сейчас лист ожидания примерно на год.", key: "wachtlijst", register: "formeel" },
+      { nl: "Welke dagen zou u willen? Vaste dagen werken het beste.", ru: "Какие дни вам нужны? Лучше всего фиксированные.", key: "vaste dagen", register: "neutraal" },
+      { nl: "De hele dagopvang is van half acht tot half zeven.", ru: "Полный день — с половины восьмого до половины седьмого.", key: "half acht", register: "formeel" },
+      { nl: "Het uurtarief is negen euro vijftien.", ru: "Почасовой тариф — девять пятнадцать.", key: "uurtarief", register: "formeel" },
+      { nl: "Een deel krijgt u terug via de kinderopvangtoeslag, dat regelt u zelf.", ru: "Часть вернётся через компенсацию, оформляете её сами.", key: "terugkrijgen", register: "formeel" },
+      { nl: "Ik zet u op de lijst, u hoort in mei van ons.", ru: "Ставлю вас в список, ответим в мае.", key: "op de lijst zetten", register: "neutraal" },
+      { nl: "Wilt u eerst een keer komen kijken?", ru: "Хотите сначала прийти посмотреть?", key: "komen kijken", register: "informeel" },
+      { nl: "Broertjes en zusjes hebben voorrang.", ru: "У братьев и сестёр приоритет.", key: "voorrang", register: "formeel" },
+      { nl: "We can also do this in English if that helps.", ru: "Можем и по-английски, если так удобнее.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers", "klopt", "betekent"],
+    traps: [
+      {
+        wrong: "Wij zoeken opvang sinds september. (имея в виду «с сентября и дальше»)",
+        right: "Wij zoeken opvang vanaf september.",
+        why: "«Sinds» смотрит назад: sinds september значит «ищем с сентября и до сих пор». «Vanaf» смотрит вперёд: нужно начиная с сентября. Русское «с сентября» покрывает оба смысла, и выбрать приходится осознанно.",
+      },
+      {
+        wrong: "half acht = 8:30",
+        right: "half acht = 7:30",
+        why: "Половина ДО восьми. Правило то же, что и в half elf, но на часах работы сада ошибка стоит опоздания на целый час.",
+      },
+      {
+        wrong: "Krijgen wij toeslag over dat?",
+        right: "Krijgen wij daar toeslag over?",
+        why: "Неодушевлённое после предлога заменяется на daar или er, а сам предлог уезжает в конец: daar … over. «Over dat» понятно, но так не говорят.",
+      },
+    ],
+    gate: [
+      {
+        word: "kinderopvang",
+        focus: "ударение на KIN-, -ng = «нх»",
+        tip: "КИН-дер-оп-фанх. Конечное -ng задненёбное, отдельного «г» на конце нет.",
+      },
+      {
+        word: "wachtlijst",
+        focus: "-cht + ij",
+        tip: "ВАХТ-лэйст. Хриплое -cht, сразу за ним «эй». Два трудных места подряд.",
+      },
+      {
+        word: "uurtarief",
+        focus: "uu = /yː/, ie = долгое «и»",
+        tip: "Ю:Р-та-ри:ф. Начинается тем же звуком, что uur и huur.",
+      },
+    ],
+  },
+  {
+    id: "ziekmelding-school",
+    domain: "school",
+    level: "A1",
+    title: "Сообщить в школу, что ребёнок болеет",
+    context: "Короткий утренний звонок до начала уроков",
+    minutes: 5,
+    openerContext: "telefoon",
+    brief: [
+      "Звонить нужно до начала уроков, обычно до половины девятого. Позже это уже считается прогулом.",
+      "Отвечает администратор или автоответчик, не учитель.",
+      "Назовите ребёнка, класс и причину — тремя короткими фразами.",
+      "Могут спросить, что именно и надолго ли. Отвечайте просто, диагноз от вас не ждут.",
+      "Разговор длится меньше минуты. Это ровно тот случай, где скорость важнее правильности.",
+    ],
+    lines: [
+      {
+        nl: "Goedemorgen, u spreekt met … . Ik bel over … uit groep vier.",
+        ru: "Доброе утро, вас беспокоит … . Я звоню по поводу … из четвёртой группы.",
+        note: "Так представляются по телефону: сначала вы, потом о ком речь.",
+      },
+      {
+        nl: "Hij is ziek, hij kan vandaag niet komen.",
+        ru: "Он болеет, сегодня прийти не сможет.",
+      },
+      {
+        nl: "Hij heeft koorts, achtendertig vijf.",
+        ru: "У него температура, тридцать восемь и пять.",
+        note: "Температуру называют двумя числами подряд, слово «градусов» не добавляют.",
+      },
+      {
+        nl: "Ik weet nog niet hoe lang. Ik bel morgen weer.",
+        ru: "Пока не знаю, насколько. Позвоню завтра снова.",
+      },
+      {
+        nl: "Sorry, kunt u dat herhalen?",
+        ru: "Извините, можете повторить?",
+      },
+      {
+        nl: "Dus ik hoef verder niets te doen. Klopt dat?",
+        ru: "То есть больше ничего делать не нужно. Верно?",
+        note: "«hoeven niet te» — не нужно. Не «moeten niet», это означало бы «нельзя».",
+      },
+    ],
+    replyBank: [
+      { nl: "Basisschool De Regenboog, goedemorgen.", ru: "Начальная школа «Де Регенбоох», доброе утро.", key: "basisschool", register: "formeel" },
+      { nl: "U spreekt met de administratie. Om welk kind gaat het?", ru: "Это администрация. О каком ребёнке речь?", key: "om welk kind gaat het", register: "formeel" },
+      { nl: "In welke groep zit hij?", ru: "В какой он группе?", key: "in welke groep", register: "neutraal" },
+      { nl: "Wat heeft hij precies?", ru: "Что именно у него?", key: "wat heeft hij", register: "neutraal" },
+      { nl: "Heeft hij koorts gemeten?", ru: "Температуру мерили?", key: "koorts", register: "neutraal" },
+      { nl: "Oké, ik geef het door aan de leerkracht.", ru: "Хорошо, передам учителю.", key: "doorgeven aan", register: "neutraal" },
+      { nl: "Belt u morgen weer even als hij nog ziek is?", ru: "Позвоните завтра, если он ещё будет болеть?", key: "weer even bellen", register: "informeel" },
+      { nl: "Als het langer duurt dan een week, horen wij het graag.", ru: "Если продлится больше недели, сообщите нам.", key: "langer dan", register: "formeel" },
+      { nl: "Beterschap alvast!", ru: "Выздоравливайте!", key: "beterschap", register: "informeel" },
+      { nl: "Sorry, shall I take this in English?", ru: "Извините, перейти на английский?", register: "switch" },
+    ],
+    repairIds: ["herhalen", "klopt", "spellen", "cijfers"],
+    traps: [
+      {
+        wrong: "achtendertig graden vijf",
+        right: "achtendertig vijf",
+        why: "Температуру называют двумя числами подряд, без слова «градусов». Добавленное graden звучит как перевод и сразу это выдаёт.",
+      },
+      {
+        wrong: "Ik moet verder niets doen.",
+        right: "Ik hoef verder niets te doen.",
+        why: "«Не нужно» — это hoeven niet/niets te. «Moeten niet» значит «нельзя». Правило уже встречалось в разговоре с IND и упрямо не приживается — потому что в русском обе мысли звучат как «не должен».",
+      },
+      {
+        wrong: "langer als een week",
+        right: "langer dan een week",
+        why: "Сравнение строится через dan: groter dan, langer dan, meer dan. Путаница с als настолько распространена, что её допускают и сами нидерландцы, — но в школе и в официальном разговоре её замечают.",
+      },
+    ],
+    gate: [
+      {
+        word: "ziekmelding",
+        focus: "ie = долгое «и», -ing = «инх»",
+        tip: "ЗИ:К-мел-динх. Ударение на первый слог, дальше всё смазывается.",
+      },
+      {
+        word: "koorts",
+        focus: "oo = долгое «о»",
+        tip: "КО:РТС. Тяните oo: короткий гласный превращает слово в неузнаваемое.",
+      },
+      {
+        word: "beterschap",
+        focus: "-sch- = s + харде G",
+        tip: "БЕ:-тəр-схап. Снова sch: сначала s, потом хриплый G. Этим словом с вами попрощаются — узнайте его заранее.",
+      },
+    ],
+  },
+
+  // ──────────────── ЖИЛЬЁ · вторая пара ────────────────
+  {
+    id: "woning-bezichtiging",
+    domain: "wonen",
+    level: "B1",
+    title: "Просмотр съёмной квартиры",
+    context: "Bezichtiging на конкурентном рынке: пятнадцать минут и сорок претендентов",
+    minutes: 9,
+    openerContext: "informeel",
+    brief: [
+      "На просмотр приходят десятки людей. У вас пятнадцать минут, и внимание агента — минуты две.",
+      "Про доход и состав семьи спросят почти сразу. Это фильтр, а не бестактность.",
+      "Задавайте вопросы про сроки, залог и коммунальные. Молчаливый кандидат не запоминается.",
+      "Скажут, что откликов много и решение будет к концу недели.",
+      "Спросите прямо, что прислать и до какого числа. Это единственный способ попасть в короткий список.",
+    ],
+    lines: [
+      {
+        nl: "Hoi, ik kom voor de bezichtiging. Ik ben Nederlands aan het leren, dus zeg het maar als ik te langzaam ben.",
+        ru: "Здравствуйте, я на просмотр. Я учу нидерландский, так что скажите, если я слишком медленно.",
+      },
+      {
+        nl: "Is de huurprijs inclusief of exclusief servicekosten?",
+        ru: "Цена включает коммунальные или нет?",
+        note: "inclusief / exclusief — ключевая пара при аренде. Разница бывает в сотню евро в месяц.",
+      },
+      {
+        nl: "Wij zijn met zijn tweeën en wij hebben allebei een vast contract.",
+        ru: "Нас двое, и у обоих постоянный контракт.",
+        note: "«met zijn tweeën» — вдвоём. Конструкция нелогичная, запоминается только целиком.",
+      },
+      {
+        nl: "Hoeveel maanden borg vraagt u?",
+        ru: "Сколько месяцев залога?",
+        note: "de borg — залог.",
+      },
+      {
+        nl: "Sorry, wat betekent «kale huur» precies?",
+        ru: "Извините, что именно значит «kale huur»?",
+        note: "kale huur — «голая» аренда, без коммунальных платежей.",
+      },
+      {
+        nl: "Wat moet ik aanleveren, en tot wanneer?",
+        ru: "Что нужно прислать и до какого числа?",
+        note: "aanleveren — предоставить документы. Отделяемый глагол.",
+      },
+    ],
+    replyBank: [
+      { nl: "Loop maar even rond, ik ben zo bij je.", ru: "Осмотритесь пока, я сейчас подойду.", key: "rondlopen", register: "informeel" },
+      { nl: "De kale huur is twaalfhonderd, servicekosten zijn honderd euro.", ru: "Голая аренда — тысяча двести, коммунальные — сто.", key: "kale huur", register: "formeel" },
+      { nl: "Wij vragen twee maanden borg.", ru: "Залог — два месяца.", key: "borg", register: "neutraal" },
+      { nl: "Wat is jullie gezamenlijk bruto-inkomen?", ru: "Какой у вас совокупный доход до налогов?", key: "gezamenlijk bruto-inkomen", register: "formeel" },
+      { nl: "De eis is drieënhalf keer de maandhuur.", ru: "Требование — три с половиной месячных аренды.", key: "drieënhalf keer", register: "formeel" },
+      { nl: "Er zijn veertig aanmeldingen voor deze woning.", ru: "На эту квартиру сорок откликов.", key: "aanmeldingen", register: "neutraal" },
+      { nl: "Als je interesse hebt, mail me dan vandaag je gegevens.", ru: "Если интересно, пришлите сегодня свои данные.", key: "gegevens mailen", register: "informeel" },
+      { nl: "Wij hebben een werkgeversverklaring en drie loonstroken nodig.", ru: "Нужна справка от работодателя и три расчётных листка.", key: "werkgeversverklaring", register: "formeel" },
+      { nl: "De eigenaar beslist eind van de week.", ru: "Владелец решит к концу недели.", key: "de eigenaar beslist", register: "neutraal" },
+      { nl: "Huisdieren zijn helaas niet toegestaan.", ru: "Домашние животные, к сожалению, не разрешены.", key: "toegestaan", register: "formeel" },
+      { nl: "Your Dutch is fine, but shall we switch to English to go faster?", ru: "У вас нормальный нидерландский, но, может, по-английски будет быстрее?", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers", "opschrijven", "klopt"],
+    traps: [
+      {
+        wrong: "Wij zijn twee.",
+        right: "Wij zijn met zijn tweeën.",
+        why: "«Нас двое» — met zijn tweeën, met zijn drieën. Буквальное «wij zijn twee» звучит как «мы — число два». Логики в конструкции нет, учить только целиком.",
+      },
+      {
+        wrong: "exclusief servicekosten = включая коммунальные",
+        right: "exclusief servicekosten = БЕЗ коммунальных",
+        why: "Inclusief — с, exclusief — без. Сбивает английское exclusive, которое про исключительность, а не про исключение из суммы. Цена ошибки — около сотни евро в месяц.",
+      },
+      {
+        wrong: "drieënhalf = 3,15",
+        right: "drieënhalf = 3,5",
+        why: "«Три с половиной», пишется слитно: tweeënhalf, drieënhalf, vierenhalf. В требовании к доходу это множитель, от которого зависит, рассматривают вас вообще или нет.",
+      },
+    ],
+    gate: [
+      {
+        word: "bezichtiging",
+        focus: "-cht- в середине, -ing в конце",
+        tip: "бə-ЗИХ-тə-хинх. Хриплое -cht посередине. Слово трудное, но без него на просмотр не записаться.",
+      },
+      {
+        word: "huurprijs",
+        focus: "uu = /yː/, ij = «эй»",
+        tip: "ХЮ:Р-прэйс. Тот же /yː/, что в huur, huurder и verhuurder.",
+      },
+      {
+        word: "borg",
+        focus: "конечное -g хриплое",
+        tip: "БОРХ, не «борг». Слово короткое, а стоит двух месячных аренд — произнесите его чисто.",
+      },
+    ],
+  },
+  {
+    id: "internet-storing",
+    domain: "wonen",
+    level: "A2",
+    title: "Провайдер: не работает интернет",
+    context: "Звонок в службу поддержки, чек-лист и вызов мастера",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Сначала автоответчик и проверка «известных сбоев» в вашем районе.",
+      "Проведут по чек-листу: перезагрузка, индикаторы, кабель. Спорить бесполезно — быстрее пройти его.",
+      "Спросят про цвет лампочек. Посмотрите на модем ДО звонка, иначе будете бегать по квартире с телефоном.",
+      "Если не чинится — назначат мастера или пришлют новый модем.",
+      "Возьмите номер обращения. Без него следующий разговор начнётся с нуля.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, u spreekt met … . Mijn internet doet het niet.",
+        ru: "Добрый день, вас беспокоит … . У меня не работает интернет.",
+        note: "«het doet het niet» — та же устойчивая формула, что и про отопление.",
+      },
+      {
+        nl: "Ik heb de modem al opnieuw opgestart, maar het hielp niet.",
+        ru: "Модем я уже перезагрузил, но не помогло.",
+        note: "opstarten — отделяемый; в перфекте ge- уходит внутрь: op-GE-start.",
+      },
+      {
+        nl: "Er brandt een rood lampje bij «internet».",
+        ru: "У надписи «internet» горит красная лампочка.",
+        note: "Пустое er при неопределённом подлежащем: er brandt een lampje.",
+      },
+      {
+        nl: "Sorry, ik versta u slecht. Kunt u dat herhalen?",
+        ru: "Извините, я вас плохо слышу. Повторите?",
+      },
+      {
+        nl: "Wanneer kan de monteur komen? Ik werk overdag thuis.",
+        ru: "Когда может прийти мастер? Я днём работаю дома.",
+      },
+      {
+        nl: "Kunt u mij het zaaknummer geven? Ik schrijf het op.",
+        ru: "Можете дать номер обращения? Я запишу.",
+      },
+    ],
+    replyBank: [
+      { nl: "Voor storingen toets een.", ru: "По неисправностям нажмите один.", key: "storingen", register: "formeel" },
+      { nl: "Er is op dit moment geen bekende storing in uw postcodegebied.", ru: "Известных сбоев в вашем районе сейчас нет.", key: "bekende storing", register: "formeel" },
+      { nl: "Kunt u de stekker er dertig seconden uit halen?", ru: "Выньте вилку на тридцать секунд.", key: "de stekker eruit halen", register: "neutraal" },
+      { nl: "Welke lampjes branden er, en welke kleur hebben ze?", ru: "Какие лампочки горят и какого цвета?", key: "lampjes", register: "neutraal" },
+      { nl: "Ik doe nu een meting op afstand, blijft u even aan de lijn.", ru: "Делаю удалённую проверку, оставайтесь на линии.", key: "aan de lijn blijven", register: "formeel" },
+      { nl: "Ik zie dat er geen signaal binnenkomt.", ru: "Вижу, что сигнал не приходит.", key: "geen signaal", register: "formeel" },
+      { nl: "Ik stuur u een nieuwe modem op, die is er overmorgen.", ru: "Вышлю новый модем, будет послезавтра.", key: "overmorgen", register: "formeel" },
+      { nl: "Anders plannen wij een monteur in, tussen acht en dertien uur.", ru: "Иначе назначим мастера, между восемью и часом дня.", key: "inplannen", register: "formeel" },
+      { nl: "U ontvangt het zaaknummer per sms.", ru: "Номер обращения придёт по СМС.", key: "zaaknummer", register: "formeel" },
+      { nl: "Zijn er verder nog dingen waarmee ik u kan helpen?", ru: "Могу ещё чем-то помочь?", key: "waarmee", register: "formeel" },
+      { nl: "I could switch to English, might be quicker?", ru: "Могу перейти на английский, возможно, будет быстрее?", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers", "opschrijven", "momentje"],
+    traps: [
+      {
+        wrong: "Brandt een rood lampje.",
+        right: "Er brandt een rood lampje.",
+        why: "Неопределённое подлежащее требует пустого er в начале: er brandt, er komt, er staat. Без него фраза повисает. Это первая и самая частая функция er.",
+      },
+      {
+        wrong: "over morgen",
+        right: "overmorgen",
+        why: "Слитно и одним словом: overmorgen — послезавтра, eergisteren — позавчера. Раздельное «over morgen» значило бы «про завтра», и вас переспросят.",
+      },
+      {
+        wrong: "Ik heb de modem gestart op.",
+        right: "Ik heb de modem opgestart.",
+        why: "В перфекте отделяемый глагол собирается обратно, и ge- встаёт ВНУТРЬ: op-ge-start. В конце приставка стоит только в настоящем времени.",
+      },
+    ],
+    gate: [
+      {
+        word: "lampje",
+        focus: "-je делает слово het-словом",
+        tip: "ЛАМ-пйə. Уменьшительное здесь чисто техническое — «лампочка». И артикль автоматически het, независимо от de lamp.",
+      },
+      {
+        word: "zaaknummer",
+        focus: "aa = долгое «а»",
+        tip: "ЗА:К-ню-мер. Тяните aa; ударение на первый слог.",
+      },
+      {
+        word: "overmorgen",
+        focus: "харде G в середине",
+        tip: "о-фер-МОР-хəн. Ударный только третий слог, остальные смазываются.",
+      },
+    ],
+  },
+
+  // ──────────────── РАБОТА И ДЕНЬГИ · вторая пара ────────────────
+  {
+    id: "sollicitatiegesprek",
+    domain: "werk",
+    level: "B1",
+    title: "Собеседование о работе",
+    context: "Первая встреча с нанимающим менеджером",
+    minutes: 10,
+    openerContext: "loket",
+    brief: [
+      "Начнут со small talk: дорога, погода, легко ли нашли офис. Это не формальность, а первая оценка.",
+      "Попросят рассказать о себе. Держите наготове две минуты, не десять.",
+      "Спросят, почему эта компания и почему вы. «Мне нужна работа» — не ответ.",
+      "Про слабые стороны и про деньги спросят прямо. В Нидерландах это не считается бестактным.",
+      "В конце ваша очередь спрашивать. Не задать ни одного вопроса — плохой сигнал.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, aangenaam. Ik ben Nederlands aan het leren, dus mag het wat langzamer?",
+        ru: "Добрый день, приятно познакомиться. Я учу нидерландский, можно чуть медленнее?",
+        note: "«aangenaam» — стандартное «приятно познакомиться» при рукопожатии.",
+      },
+      {
+        nl: "Ik heb zeven jaar ervaring als … , waarvan drie jaar in een internationaal team.",
+        ru: "У меня семь лет опыта как … , из них три года в международной команде.",
+        note: "«waarvan» — «из которых», одним словом.",
+      },
+      {
+        nl: "Wat mij aanspreekt in deze functie is … .",
+        ru: "В этой позиции меня привлекает … .",
+        note: "«aanspreken» — привлекать, находить отклик. Отделяемый: spreekt … aan.",
+      },
+      {
+        nl: "Sorry, ik weet niet zeker of ik de vraag goed begrijp. Bedoelt u …?",
+        ru: "Извините, я не уверен, что правильно понял вопрос. Вы имеете в виду …?",
+      },
+      {
+        nl: "Ik zit te denken aan een bedrag tussen … en … .",
+        ru: "Я рассчитываю на сумму между … и … .",
+        note: "«zitten te denken» — думать прямо сейчас. Конструкция zitten/staan/liggen te + инфинитив звучит очень по-нидерландски.",
+      },
+      {
+        nl: "Ik heb zelf ook een paar vragen. Hoe ziet het team eruit?",
+        ru: "У меня тоже есть пара вопросов. Что представляет собой команда?",
+        note: "«eruit zien» — выглядеть. Части разлетаются: ziet … eruit.",
+      },
+    ],
+    replyBank: [
+      { nl: "Kom binnen, heb je de weg goed kunnen vinden?", ru: "Проходите, легко нас нашли?", key: "de weg vinden", register: "informeel" },
+      { nl: "Vertel eens wat over jezelf.", ru: "Расскажите немного о себе.", key: "vertel eens", register: "informeel" },
+      { nl: "Waarom heb je op deze functie gesolliciteerd?", ru: "Почему вы откликнулись на эту вакансию?", key: "solliciteren op", register: "neutraal" },
+      { nl: "Wat zijn je sterke en minder sterke punten?", ru: "Какие у вас сильные и слабые стороны?", key: "minder sterke punten", register: "neutraal" },
+      { nl: "Wij werken hier vrij plat, iedereen zegt gewoon wat hij vindt.", ru: "У нас довольно плоская структура, все говорят что думают.", key: "plat", register: "informeel" },
+      { nl: "Wat had je qua salaris in gedachten?", ru: "Какую зарплату вы имели в виду?", key: "qua salaris", register: "neutraal" },
+      { nl: "Dat ligt iets boven onze schaal, maar er is ruimte om over te praten.", ru: "Это чуть выше нашей вилки, но обсудить можно.", key: "ruimte om over te praten", register: "formeel" },
+      { nl: "Het is een contract voor een jaar, met uitzicht op vast.", ru: "Договор на год, с перспективой постоянного.", key: "uitzicht op vast", register: "formeel" },
+      { nl: "Heb je zelf nog vragen aan ons?", ru: "У вас есть вопросы к нам?", key: "nog vragen", register: "neutraal" },
+      { nl: "Wij laten uiterlijk vrijdag iets weten.", ru: "Ответим не позднее пятницы.", key: "uiterlijk", register: "formeel" },
+      { nl: "By the way, our working language is English — feel free to switch.", ru: "Кстати, рабочий язык у нас английский — можете переходить.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen", "klopt", "momentje"],
+    traps: [
+      {
+        wrong: "Ik heb voor deze functie gesolliciteerd.",
+        right: "Ik heb op deze functie gesolliciteerd.",
+        why: "solliciteren OP een functie — откликнуться на вакансию. Предлог op, не voor. Ещё одна пара «глагол плюс свой предлог», которую учат целиком.",
+      },
+      {
+        wrong: "Ik denk aan een bedrag tussen … en … .",
+        right: "Ik zit te denken aan een bedrag tussen … en … .",
+        why: "Конструкция zitten/staan/liggen te + инфинитив описывает действие в процессе: ik zit te denken, hij staat te wachten. В русском ей соответствует просто несовершенный вид, поэтому её не производят — а звучит она очень естественно.",
+      },
+      {
+        wrong: "plat = плоский, скучный",
+        right: "plat (об организации) = без иерархии",
+        why: "«Wij werken hier plat» значит, что дистанции между начальником и подчинённым почти нет. Это ключевая черта нидерландской рабочей культуры, и на собеседовании её опишут буквально этим словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "sollicitatiegesprek",
+        focus: "-tie = «ци», харде G в -gesprek",
+        tip: "со-ли-си-ТА-ци-хə-спрек. Сочетание -tie всегда звучит «ци», а gesprek — с хриплым G.",
+      },
+      {
+        word: "ervaring",
+        focus: "v ближе к «ф», -ing = «инх»",
+        tip: "эр-ФА:-ринх. Ударение на второй слог, тяните a.",
+      },
+      {
+        word: "salaris",
+        focus: "ударение на -LA-",
+        tip: "са-ЛА:-рис. Ударение на второй слог и долгое a. Слово, которое надо произнести уверенно.",
+      },
+    ],
+  },
+  {
+    id: "ziekmelding-werk",
+    domain: "werk",
+    level: "A1",
+    title: "Сообщить на работу, что заболел",
+    context: "Короткий звонок руководителю до начала рабочего дня",
+    minutes: 5,
+    openerContext: "telefoon",
+    brief: [
+      "Звонить нужно до начала дня, обычно до девяти. Сообщение в чате во многих компаниях не считается.",
+      "Звоните руководителю, а не коллеге. В Нидерландах правила на этот счёт довольно строгие.",
+      "Диагноз называть вы не обязаны, и спрашивать вас о нём не должны.",
+      "Скажите, надолго ли, и что делать со срочными задачами.",
+      "Через несколько дней может позвонить bedrijfsarts — врач компании. Это обычная процедура, а не проверка.",
+    ],
+    lines: [
+      {
+        nl: "Goedemorgen, met … . Ik bel om me ziek te melden.",
+        ru: "Доброе утро, это … . Я звоню сообщить, что заболел.",
+        note: "«met …» — короткое представление по телефону. «om … te melden» — чтобы сообщить.",
+      },
+      {
+        nl: "Ik voel me niet goed, ik heb koorts.",
+        ru: "Я плохо себя чувствую, у меня температура.",
+        note: "«zich voelen» возвратный: ik voel me, jij voelt je, hij voelt zich.",
+      },
+      {
+        nl: "Ik denk dat ik er morgen ook niet ben.",
+        ru: "Думаю, завтра меня тоже не будет.",
+        note: "«er zijn» — быть на месте. В придаточном глагол уходит в конец.",
+      },
+      {
+        nl: "De presentatie van donderdag heb ik al doorgestuurd naar Anne.",
+        ru: "Презентацию на четверг я уже переслал Анне.",
+        note: "Дополнение вынесено вперёд, поэтому инверсия: heb IK. Причастие в самый конец.",
+      },
+      {
+        nl: "Sorry, kun je dat herhalen?",
+        ru: "Извини, можешь повторить?",
+      },
+      {
+        nl: "Ik hou je op de hoogte.",
+        ru: "Буду держать в курсе.",
+        note: "«op de hoogte houden» — фраза, которой такой звонок заканчивают.",
+      },
+    ],
+    replyBank: [
+      { nl: "Goedemorgen, wat vervelend. Wat is er aan de hand?", ru: "Доброе утро, как неприятно. Что случилось?", key: "wat is er aan de hand", register: "informeel" },
+      { nl: "Geen probleem, beterschap.", ru: "Без проблем, выздоравливай.", key: "beterschap", register: "informeel" },
+      { nl: "Denk je dat het één dag is of langer?", ru: "Думаешь, это на день или дольше?", key: "of langer", register: "informeel" },
+      { nl: "Zal ik je afspraken van vandaag afzeggen?", ru: "Отменить твои сегодняшние встречи?", key: "afzeggen", register: "informeel" },
+      { nl: "Is er iets wat echt vandaag af moet?", ru: "Есть что-то, что обязательно надо закончить сегодня?", key: "af moeten", register: "informeel" },
+      { nl: "Ik geef het door aan het team.", ru: "Передам команде.", key: "doorgeven aan", register: "neutraal" },
+      { nl: "Meld je morgen even weer, ook als je beter bent.", ru: "Отпишись завтра, даже если станет лучше.", key: "je melden", register: "informeel" },
+      { nl: "Als het langer duurt, neemt de bedrijfsarts contact op.", ru: "Если затянется, свяжется врач компании.", key: "bedrijfsarts", register: "formeel" },
+      { nl: "Doe rustig aan, het werk loopt niet weg.", ru: "Не торопись, работа никуда не денется.", key: "rustig aan doen", register: "informeel" },
+      { nl: "No worries — English is fine too if you're not feeling well.", ru: "Ничего страшного — можно и по-английски, раз вам нехорошо.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "klopt", "laatste", "betekent"],
+    traps: [
+      {
+        wrong: "Ik voel niet goed.",
+        right: "Ik voel me niet goed.",
+        why: "«Чувствовать себя» обязательно возвратное: ik voel me, jij voelt je, hij voelt zich. Без местоимения фраза означает «я плохо ощущаю» — то есть про осязание.",
+      },
+      {
+        wrong: "Ik bel om ziek te melden.",
+        right: "Ik bel om me ziek te melden.",
+        why: "«zich ziek melden» тоже возвратное, и «me» встаёт сразу после om. Пропустить его — самая частая ошибка в этом звонке.",
+      },
+      {
+        wrong: "Ik denk dat ik morgen ook niet ben.",
+        right: "Ik denk dat ik er morgen ook niet ben.",
+        why: "«Быть на месте» требует er: ik ben er niet, hij is er wel. Без него получается «меня не существует». Это вторая, местная функция er.",
+      },
+    ],
+    gate: [
+      {
+        word: "bedrijfsarts",
+        focus: "ij = «эй», -fs слитно",
+        tip: "бə-ДРЭЙФС-артс. Три согласных подряд в середине — не вставляйте между ними гласную.",
+      },
+      {
+        word: "hoogte",
+        focus: "oo долгое + харде G",
+        tip: "ХО:Х-тə. Долгое oo и хриплый G подряд. «Op de hoogte houden» — этим вы закончите разговор.",
+      },
+      {
+        word: "vervelend",
+        focus: "v как «ф», ударение на -VE-",
+        tip: "фер-ФЕ:-лəнт. Означает «досадно, неприятно» — первое, что вам ответят.",
+      },
+    ],
+  },
+
+  // ──────────────── ПОВСЕДНЕВНОЕ · вторая пара ────────────────
+  {
+    id: "pakket-bezorger",
+    domain: "dagelijks",
+    level: "A1",
+    title: "Курьер у двери",
+    context: "Доставка посылки: вам или соседям",
+    minutes: 5,
+    openerContext: "informeel",
+    brief: [
+      "Курьер спешит. У вас секунд пятнадцать, и говорит он быстро.",
+      "Спросит, вы ли адресат, и попросит расписаться — на экране или в приложении.",
+      "Часто просят принять посылку для соседей. Это обычная практика, отказываться необязательно.",
+      "Могут попросить документ, если посылка ценная или в ней алкоголь.",
+      "Если дома никого — оставят карточку с адресом пункта выдачи и сроком.",
+    ],
+    lines: [
+      {
+        nl: "Ja, dat ben ik.",
+        ru: "Да, это я.",
+        note: "На «Bent u …?» отвечают именно так. Голое «ja, ik ben» звучит оборванно.",
+      },
+      {
+        nl: "Sorry, kunt u dat herhalen? Voor wie is het pakket?",
+        ru: "Извините, повторите? Для кого посылка?",
+      },
+      {
+        nl: "Ja hoor, ik neem het wel aan voor de buren.",
+        ru: "Да конечно, приму для соседей.",
+        note: "het pakket — значит «het», не «hem». «Wel» здесь означает готовность помочь.",
+      },
+      {
+        nl: "Waar moet ik tekenen?",
+        ru: "Где расписаться?",
+        note: "tekenen — и «расписаться», и «рисовать». Здесь первое.",
+      },
+      {
+        nl: "Kunt u het bij de buren op nummer twaalf afgeven?",
+        ru: "Можете оставить у соседей в двенадцатой?",
+        note: "afgeven — передать, оставить. Отделяемый глагол.",
+      },
+      {
+        nl: "Dank u wel, fijne dag!",
+        ru: "Спасибо, хорошего дня!",
+      },
+    ],
+    replyBank: [
+      { nl: "Goedemiddag, een pakketje voor nummer veertien.", ru: "Добрый день, посылка для четырнадцатой.", key: "pakketje", register: "neutraal" },
+      { nl: "Kunt u even tekenen op het schermpje?", ru: "Распишитесь на экране?", key: "tekenen", register: "neutraal" },
+      { nl: "Wilt u ook even tekenen voor de buren?", ru: "Распишетесь ещё и за соседей?", key: "voor de buren", register: "informeel" },
+      { nl: "Mag ik uw legitimatie zien? Er zit alcohol in.", ru: "Можно ваш документ? Здесь алкоголь.", key: "legitimatie", register: "formeel" },
+      { nl: "Ik kom morgen tussen twee en vier terug.", ru: "Завтра вернусь между двумя и четырьмя.", key: "terugkomen", register: "neutraal" },
+      { nl: "Dan laat ik een kaartje achter in de brievenbus.", ru: "Тогда оставлю карточку в почтовом ящике.", key: "een kaartje achterlaten", register: "neutraal" },
+      { nl: "U kunt het ophalen bij het afhaalpunt om de hoek.", ru: "Забрать можно в пункте выдачи за углом.", key: "afhaalpunt", register: "neutraal" },
+      { nl: "Het ligt daar veertien dagen, daarna gaat het retour.", ru: "Лежит там две недели, потом уходит обратно.", key: "retour gaan", register: "formeel" },
+      { nl: "Sorry, ik heb haast. Even snel tekenen graag.", ru: "Извините, тороплюсь. Распишитесь быстро.", key: "haast hebben", register: "informeel" },
+      { nl: "English? Sorry, I'm in a hurry.", ru: "По-английски? Извините, я тороплюсь.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "spellen", "klopt", "betekent"],
+    traps: [
+      {
+        wrong: "Ja, ik ben.",
+        right: "Ja, dat ben ik.",
+        why: "На вопрос «Bent u …?» отвечают «dat ben ik» — «это я». Глагол zijn не остаётся в конце фразы голым, ему нужно что-то после себя.",
+      },
+      {
+        wrong: "Ik neem hem aan. (о het pakket)",
+        right: "Ik neem het aan.",
+        why: "Местоимение согласуется с артиклем: het pakket → het, de doos → hem. Вот зачем артикль хранится вместе со словом — он определяет ещё и это.",
+      },
+      {
+        wrong: "pakketje — маленькая посылка, pakket — большая",
+        right: "pakketje — обычное бытовое слово для любой посылки",
+        why: "Уменьшительное здесь не про размер: pakketje, kaartje, schermpje — просто обиходные формы. Курьер скажет pakketje и про огромную коробку.",
+      },
+    ],
+    gate: [
+      {
+        word: "pakketje",
+        focus: "двойная kk = короткий гласный",
+        tip: "па-КЕ-тйə. Удвоенная согласная означает, что гласный перед ней короткий. Это общее правило нидерландской орфографии.",
+      },
+      {
+        word: "brievenbus",
+        focus: "ie = долгое «и», u короткое",
+        tip: "БРИ:-фəн-бюс. Почтовый ящик — понадобится в первую же неделю.",
+      },
+      {
+        word: "afhaalpunt",
+        focus: "aa = долгое «а», ударение на AF-",
+        tip: "АФ-ха:л-пюнт. Пункт выдачи. Тяните aa в середине.",
+      },
+    ],
+  },
+  {
+    id: "markt-winkel",
+    domain: "dagelijks",
+    level: "A1",
+    title: "Рынок и магазин: купить и заплатить",
+    context: "Прилавок на рынке, потом касса в супермаркете",
+    minutes: 6,
+    openerContext: "winkel",
+    brief: [
+      "На рынке говорят быстро, громко и сокращениями. Это темп, а не грубость.",
+      "Спросят, сколько вам. Отвечайте числом и единицей: «een pond», «twee ons».",
+      "Старые меры живы: pond — это 500 грамм, ons — 100 грамм.",
+      "Спросят, нужно ли что-то ещё. «Nee, dat was het» закрывает разговор.",
+      "На кассе спросят про карту магазина и способ оплаты. Наличные во многих местах не принимают вовсе.",
+    ],
+    lines: [
+      {
+        nl: "Goedemiddag, mag ik een pond tomaten?",
+        ru: "Добрый день, можно полкило помидоров?",
+        note: "«mag ik» — обычная форма просьбы в магазине, мягче чем «ik wil».",
+      },
+      {
+        nl: "En twee ons oude kaas, alstublieft.",
+        ru: "И двести грамм выдержанного сыра, пожалуйста.",
+        note: "ons = 100 грамм. «Oude kaas» — выдержанный, «jonge kaas» — молодой.",
+      },
+      {
+        nl: "Sorry, hoeveel kost dat samen?",
+        ru: "Извините, сколько всего?",
+        note: "«samen» — вместе, в сумме.",
+      },
+      {
+        nl: "Nee, dat was het, dank u wel.",
+        ru: "Нет, это всё, спасибо.",
+        note: "«dat was het» — «это всё». Прошедшее время, хотя говорят о настоящем моменте.",
+      },
+      {
+        nl: "Kan ik met pin betalen?",
+        ru: "Можно картой?",
+        note: "«pinnen» стало самостоятельным глаголом: платить картой.",
+      },
+      {
+        nl: "Sorry, kunt u dat herhalen? Ik versta u niet goed.",
+        ru: "Извините, повторите? Я вас плохо слышу.",
+      },
+    ],
+    replyBank: [
+      { nl: "Zegt u het maar!", ru: "Слушаю вас!", key: "zegt u het maar", register: "informeel" },
+      { nl: "Hoeveel mag het zijn?", ru: "Сколько вам?", key: "hoeveel mag het zijn", register: "informeel" },
+      { nl: "Een pond, dat is vijf euro twintig.", ru: "Полкило — пять двадцать.", key: "een pond", register: "neutraal" },
+      { nl: "Wilt u er nog iets bij?", ru: "Что-нибудь ещё к этому?", key: "er nog iets bij", register: "informeel" },
+      { nl: "Deze zijn in de aanbieding, twee voor drie euro.", ru: "Эти по акции, два за три евро.", key: "in de aanbieding", register: "informeel" },
+      { nl: "Anders nog iets?", ru: "Ещё что-нибудь?", key: "anders nog iets", register: "informeel" },
+      { nl: "Dat is dan samen acht euro vijfenzeventig.", ru: "Тогда всего восемь семьдесят пять.", key: "vijfenzeventig", register: "neutraal" },
+      { nl: "Heeft u een bonuskaart?", ru: "У вас есть карта магазина?", key: "bonuskaart", register: "neutraal" },
+      { nl: "Contant kan hier helaas niet, alleen pinnen.", ru: "Наличными здесь нельзя, только картой.", key: "contant, pinnen", register: "formeel" },
+      { nl: "You want English? No problem.", ru: "Хотите по-английски? Без проблем.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers", "betekent", "klopt"],
+    traps: [
+      {
+        wrong: "een ons = 10 грамм, een pond = 400 грамм",
+        right: "een ons = 100 г, een pond = 500 г",
+        why: "Старые меры живут и на рынке, и в супермаркете. «Twee ons» — это двести грамм, а не два. Ошибка обходится в лишний пакет сыра или в слишком маленький.",
+      },
+      {
+        wrong: "Ik wil een pond tomaten.",
+        right: "Mag ik een pond tomaten?",
+        why: "«Ik wil» звучит как требование. Просят через «mag ik» или «doet u maar» — та же смягчающая логика, что в русском «можно мне» вместо «я хочу».",
+      },
+      {
+        wrong: "Wilt u nog iets bij?",
+        right: "Wilt u er nog iets bij?",
+        why: "Снова er: пара «er … bij» означает «к этому ещё», и между её частями встаёт всё остальное. В русском такому слову соответствовать нечему, поэтому его теряют.",
+      },
+    ],
+    gate: [
+      {
+        word: "alstublieft",
+        focus: "ie долгое, ударение на -BLIEFT",
+        tip: "алс-тю-БЛИ:ФТ, слитно и быстро. В речи сокращается почти до «астюблиф» — не проговаривайте по буквам.",
+      },
+      {
+        word: "aanbieding",
+        focus: "aa и ie долгие, -ing = «инх»",
+        tip: "А:Н-би-динх. Слово, ради которого стоит прислушиваться: означает скидку.",
+      },
+      {
+        word: "pinnen",
+        focus: "двойная nn = короткий гласный",
+        tip: "ПИ-нəн. То же орфографическое правило, что в pakketje: удвоенная согласная укорачивает гласный.",
+      },
+    ],
+  },
 ];
 
 export const scenarioById = (id: string): Scenario | undefined =>
