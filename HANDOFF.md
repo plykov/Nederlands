@@ -71,9 +71,10 @@ src/               App.tsx · main.tsx · types.ts · styles.css
 
 Content volume: **36 scenarios** (6 per domain — A1 14, A2 12, B1 10 — each with
 exactly one `register: "switch"` reply), 104 nouns, 8 repair moves, 7
-openers/recovery moves, 12 grammar notes, 8 course lessons, 39 CEFR can-do
-statements. The second batch of twelve landed in PR #3; the third in this PR,
-bringing the total to the M12 target range of 30–40.
+openers/recovery moves, 12 grammar notes, 12 course lessons (the `er` module is
+now five gated stages instead of one), 39 CEFR can-do statements. The second
+scenario batch of twelve landed in PR #3, the third in PR #7, bringing the
+total to the M12 target range of 30–40.
 
 Three modules have no Italiano equivalent and were written from the spec:
 
@@ -121,22 +122,21 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 Ordered by value, and none of it is blocking:
 
-1. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
-   note covering all functions at once, where the spec wants each stage gated
-   on the previous.
-2. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
+1. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
    Nothing that advises on a case.
-3. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
+2. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
    Russian. Ship only items with sound etymology; стул, галстук and рюкзак are
    German or Low German and must not appear.
-4. **Audio for the reply bank.** Web Speech quality varies by platform;
+3. **Audio for the reply bank.** Web Speech quality varies by platform;
    pre-recorded native audio would improve the listening trainers most.
-5. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
+4. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
    and keyboard-reachable, but the whole app has not had a proper pass.
 
-Word-order builder and scenario count are no longer on this list: the
-constructor shipped (SPEC §2.3, `#/wordorder`), and thirty-six scenarios, six
-per domain, land inside `BUILD_PLAN.md` M12's 30–40 target. Further scenario
+Word-order builder, scenario count and the staged `er` module are no longer on
+this list: the constructor shipped (SPEC §2.3, `#/wordorder`), thirty-six
+scenarios land inside `BUILD_PLAN.md` M12's 30–40 target, and `er` is now five
+gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in `Грамматический зал`
+instead of one ungated lesson — see `BUILD_PLAN.md` A11. Further scenario
 growth should still come from what testers bring back from real conversations,
 not invented situations.
 

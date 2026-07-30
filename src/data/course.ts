@@ -42,6 +42,12 @@ export interface Lesson {
   rule: string[];
   examples: { nl: string; ru: string }[];
   exercises: Exercise[];
+  /**
+   * id урока, который нужно пройти на 80%+ раньше. Сейчас держит только
+   * ступени «er» (SPEC §2.4): пяти функциям одного слова нужен порядок,
+   * а не единый урок разом.
+   */
+  requires?: string;
 }
 
 export const LESSONS: Lesson[] = [
@@ -287,24 +293,20 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
-    id: "er",
+    id: "er-1-bestaan",
     level: "B1",
-    title: "Слово «er»",
-    gist: "Пустое подлежащее, «там», «об этом», «их столько-то» — всё это одно короткое er.",
+    title: "«Er», ступень 1: пустое подлежащее",
+    gist: "При неопределённом предмете вначале обязателен пустой er.",
     contrast:
-      "Ни одной из функций er в русском не соответствует отдельного слова, поэтому оно теряется системно. Учить его лучше по одной работе за раз, а не всё сразу.",
+      "В русском подлежащее может быть неопределённым без всякой служебной подпорки: «есть проблема», «придёт мастер». В нидерландском в этом месте обязателен er — его нельзя ни опустить, ни угадать по контексту.",
     rule: [
-      "**Пустое подлежащее**: при неопределённом предмете нужно er. «**Er** is een probleem», «**Er** komt iemand».",
-      "**Место**: «Ik ben **er** geweest» — я там был.",
-      "**После предлога** неодушевлённое заменяется на er/daar, а предлог **приклеивается сзади**: over dat → **daarover**, met het → **ermee**.",
-      "**Счётное**: «Hoeveel heeft u? — Ik heb **er** drie». Без er фраза не собирается.",
-      "Приклеенный предлог часто **отрывается**: «**Daar** weet ik niets **van**».",
+      "Если подлежащее **неопределённое** — «een probleem», «iemand», «een monteur» — фраза не может начинаться с него напрямую: впереди встаёт пустое **er**. «**Er** is een probleem», «**Er** komt iemand».",
+      "Если подлежащее уже **определено** — местоимение, имя, «het», «mijn …» — er не нужен вовсе: «Het probleem is opgelost», не «Er is het probleem opgelost».",
+      "Это первая и самая частая из пяти работ er. Следующие ступени открываются по одной — сразу все пять учить не стоит.",
     ],
     examples: [
       { nl: "Er is een probleem met de verwarming.", ru: "С отоплением проблема." },
       { nl: "Er komt morgen een monteur.", ru: "Завтра придёт мастер." },
-      { nl: "Daar maak ik me zorgen over.", ru: "Меня это беспокоит." },
-      { nl: "Ik heb er drie.", ru: "У меня их три." },
     ],
     exercises: [
       {
@@ -324,6 +326,79 @@ export const LESSONS: Lesson[] = [
       },
       {
         kind: "choose",
+        prompt: "Как правильно сказать «Мой паспорт лежит на столе»?",
+        ru: "Проверка на противоположный случай: подлежащее уже определено.",
+        options: [
+          "Mijn paspoort ligt op tafel.",
+          "Er ligt mijn paspoort op tafel.",
+          "Er is mijn paspoort op tafel.",
+        ],
+        answer: 0,
+        why: "«Mijn paspoort» — определённое подлежащее (есть mijn), поэтому er здесь не ставится вообще.",
+      },
+    ],
+  },
+  {
+    id: "er-2-plaats",
+    level: "B1",
+    title: "«Er», ступень 2: место",
+    gist: "Er без ударения значит «там», заменяя уже названное место.",
+    contrast:
+      "Русское «там» — самостоятельное слово с ударением, которое можно поставить куда угодно. Er в этой функции безударно и почти всегда стоит внутри фразы, не в начале — для ударного «там» нидерландский использует другое слово, daar.",
+    rule: [
+      "**Место**: «Ik ben **er** geweest» — я там был. Er заменяет уже упомянутое место, а не вводит новое.",
+      "Если «там» нужно подчеркнуть или поставить в начало фразы, используется **daar**, не er: «**Daar** heb ik nog nooit gewoond» — там я никогда не жил.",
+    ],
+    examples: [
+      { nl: "Ben je weleens in Utrecht geweest? Ja, ik ben er twee keer geweest.", ru: "Ты бывал в Утрехте? Да, я был там дважды." },
+      { nl: "Woont uw moeder nog in Rusland? Nee, ze woont er niet meer.", ru: "Ваша мама всё ещё живёт в России? Нет, она там больше не живёт." },
+    ],
+    exercises: [
+      {
+        kind: "fill",
+        prompt: "Ben je weleens in Utrecht geweest? — Ja, ik ben ___ twee keer geweest.",
+        ru: "Ты бывал в Утрехте? — Да, я был там дважды.",
+        answer: ["er"],
+        why: "Er безударно заменяет уже названное место — Utrecht.",
+      },
+      {
+        kind: "choose",
+        prompt: "Woont uw moeder nog in Rusland? — Nee, ze woont ___ niet meer.",
+        ru: "Ваша мама всё ещё живёт в России? — Нет, она там больше не живёт.",
+        options: ["er", "daar", "het"],
+        answer: 0,
+        why: "Внутри фразы, без ударения на «там» — нужен er, а не daar.",
+      },
+      {
+        kind: "choose",
+        prompt: "___ heb ik nog nooit gewoond.",
+        ru: "Там я никогда не жил.",
+        options: ["Daar", "Er", "Het"],
+        answer: 0,
+        why: "«Там» вынесено в начало и подчёркнуто — здесь нужен ударный daar, а не безударный er.",
+      },
+    ],
+    requires: "er-1-bestaan",
+  },
+  {
+    id: "er-3-voornaamwoord",
+    level: "B1",
+    title: "«Er», ступень 3: er + предлог",
+    gist: "Неодушевлённое после предлога заменяется на er/daar, а предлог приклеивается сзади.",
+    contrast:
+      "В русском предлог и местоимение остаются раздельными: «об этом», «с этим». В нидерландском для неодушевлённых предметов местоимение сливается с предлогом в одно слово, и порядок обратный: предлог оказывается ПОСЛЕ er/daar — daarover, ermee, ervoor.",
+    rule: [
+      "**После предлога** неодушевлённое заменяется на er/daar, а предлог **приклеивается сзади**: over dat → **daarover**, met het → **ermee**.",
+      "Одушевлённое (люди) остаётся с обычным предлогом впереди: «met hem», «over haar» — эта замена работает только для вещей.",
+      "Приклеенный предлог часто **отрывается**, особенно в вопросах и в начале фразы: «**Waar** denk je **aan**?», «**Daar** weet ik niets **van**».",
+    ],
+    examples: [
+      { nl: "Wij praten daarover.", ru: "Мы об этом говорим." },
+      { nl: "Ik ben het ermee eens.", ru: "Я с этим согласен." },
+    ],
+    exercises: [
+      {
+        kind: "choose",
         prompt: "Wij praten ___.",
         ru: "Мы об этом говорим.",
         options: ["daarover", "over dat", "over het"],
@@ -331,11 +406,12 @@ export const LESSONS: Lesson[] = [
         why: "Неодушевлённое после предлога заменяется на daar или er, а предлог приклеивается сзади: daarover, ermee, ervoor.",
       },
       {
-        kind: "fill",
-        prompt: "Hoeveel documenten heeft u? — Ik heb ___ twee.",
-        ru: "Сколько у вас документов? — У меня их два.",
-        answer: ["er"],
-        why: "Счётное «их» — это er. По-русски его можно опустить, по-нидерландски нельзя.",
+        kind: "choose",
+        prompt: "Ik ben het ___ eens.",
+        ru: "Я с этим согласен.",
+        options: ["ermee", "met het", "met dat"],
+        answer: 0,
+        why: "«Het» здесь неодушевлённое (обстоятельство разговора), значит нужно слитное ermee, а не met het.",
       },
       {
         kind: "choose",
@@ -346,6 +422,91 @@ export const LESSONS: Lesson[] = [
         why: "Приклеенный предлог оторвался: daarvan → daar … van. В начале предложения в этой конструкции стоит именно daar.",
       },
     ],
+    requires: "er-2-plaats",
+  },
+  {
+    id: "er-4-hoeveelheid",
+    level: "B1",
+    title: "«Er», ступень 4: счётное «их»",
+    gist: "При числе или количестве без существительного нужен er — «их» без него не собирается.",
+    contrast:
+      "В русском счётное «их» можно опустить: «Сколько у вас детей? — Двое». По-нидерландски пропуск невозможен — фраза без er звучит оборванной, как будто не закончена.",
+    rule: [
+      "**Счётное**: «Hoeveel heeft u? — Ik heb **er** twee». Без er фраза не собирается, даже если число уже названо.",
+      "Работает и без явного числа, при словах вроде «genoeg», «veel», «weinig»: «Heb je genoeg? — Ja, ik heb **er** genoeg.»",
+    ],
+    examples: [
+      { nl: "Heeft u kinderen? — Ik heb er twee.", ru: "У вас есть дети? — У меня их двое." },
+      { nl: "Hoeveel documenten heeft u? — Ik heb er twee.", ru: "Сколько у вас документов? — У меня их два." },
+    ],
+    exercises: [
+      {
+        kind: "fill",
+        prompt: "Hoeveel documenten heeft u? — Ik heb ___ twee.",
+        ru: "Сколько у вас документов? — У меня их два.",
+        answer: ["er"],
+        why: "Счётное «их» — это er. По-русски его можно опустить, по-нидерландски нельзя.",
+      },
+      {
+        kind: "choose",
+        prompt: "Heeft u kinderen? — Ja, ik heb ___ twee.",
+        ru: "У вас есть дети? — Да, у меня их двое.",
+        options: ["er", "ze", "het"],
+        answer: 0,
+        why: "Перед числом без существительного нужен именно er, а не ze или het.",
+      },
+      {
+        kind: "choose",
+        prompt: "Heb je genoeg geld bij je? — Ja, ik heb ___ genoeg.",
+        ru: "У тебя достаточно денег с собой? — Да, у меня достаточно.",
+        options: ["er", "het", "dat"],
+        answer: 0,
+        why: "То же счётное er работает и без числа — перед «genoeg», «veel», «weinig».",
+      },
+    ],
+    requires: "er-3-voornaamwoord",
+  },
+  {
+    id: "er-5-onderwerp",
+    level: "B1",
+    title: "«Er», ступень 5: формальное подлежащее",
+    gist: "В безличных оборотах без реального деятеля роль подлежащего берёт er.",
+    contrast:
+      "В русском безличные обороты обходятся без всякого подлежащего: «работают», «звонят». В нидерландском предложение не может остаться совсем без подлежащего — эту роль берёт формальный er, который исчезает, как только первую позицию занимает что-то другое.",
+    rule: [
+      "В безличных пассивных и некоторых непереходных оборотах без названного деятеля формальным подлежащим служит **er**: «**Er** wordt hard gewerkt» — работают усердно, никто конкретно не назван.",
+      "Er исчезает, если первую позицию занимает что-то другое — обстоятельство места или времени: «**Vanavond** wordt gedanst» — er пропадает, а не остаётся внутри фразы.",
+    ],
+    examples: [
+      { nl: "Er wordt vanavond gedanst.", ru: "Сегодня вечером будут танцевать." },
+      { nl: "Er wordt gebeld.", ru: "Звонят (в дверь)." },
+    ],
+    exercises: [
+      {
+        kind: "fill",
+        prompt: "___ wordt gebeld.",
+        ru: "Звонят (в дверь).",
+        answer: ["Er", "er"],
+        why: "Деятель не назван, первая позиция свободна — формальным подлежащим становится er.",
+      },
+      {
+        kind: "choose",
+        prompt: "Vanavond ___ gedanst.",
+        ru: "Сегодня вечером будут танцевать.",
+        options: ["wordt", "wordt er", "er wordt"],
+        answer: 0,
+        why: "Первую позицию уже занял «vanavond», поэтому формальный er пропадает — он нужен только когда позиция иначе осталась бы пустой.",
+      },
+      {
+        kind: "choose",
+        prompt: "___ wordt hard gewerkt.",
+        ru: "Работают усердно.",
+        options: ["Er", "Het", "Daar"],
+        answer: 0,
+        why: "Пятая и последняя работа er: формальное подлежащее там, где реального деятеля не называют вовсе.",
+      },
+    ],
+    requires: "er-4-hoeveelheid",
   },
   {
     id: "perfectum",

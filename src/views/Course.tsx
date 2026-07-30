@@ -262,9 +262,32 @@ function LessonView({ lesson, onExit }: { lesson: Lesson; onExit: () => void }) 
   );
 }
 
+/** Ступень заблокирована, пока предыдущая не пройдена на 80%+. */
+const isLocked = (l: Lesson, progress: Record<string, number>) =>
+  !!l.requires && (progress[l.requires] ?? 0) < 0.8;
+
 export default function Course({ lessonId }: { lessonId?: string }) {
   const lesson = lessonId ? lessonById(lessonId) : undefined;
   const progress = storage.getCourse();
+
+  if (lesson && isLocked(lesson, progress)) {
+    const required = lessonById(lesson.requires!);
+    return (
+      <div className="center">
+        <h1>Сначала предыдущая ступень</h1>
+        <p className="ru">
+          «{lesson.title}» открывается после 80%+ на уроке «{required?.title}».
+          Пять работ er учатся по одной, а не все разом.
+        </p>
+        <button onClick={() => (location.hash = `#/course/${lesson.requires}`)}>
+          К уроку «{required?.title}»
+        </button>
+        <button className="secondary" onClick={() => (location.hash = "#/course")}>
+          К списку уроков
+        </button>
+      </div>
+    );
+  }
 
   if (lesson) {
     return (
@@ -295,18 +318,24 @@ export default function Course({ lessonId }: { lessonId?: string }) {
 
       {LESSONS.map((l, i) => {
         const score = progress[l.id];
+        const locked = isLocked(l, progress);
         return (
           <div
-            className="card tappable"
+            className={locked ? "card" : "card tappable"}
             key={l.id}
-            onClick={() => (location.hash = `#/course/${l.id}`)}
+            style={locked ? { opacity: 0.5 } : undefined}
+            onClick={() => !locked && (location.hash = `#/course/${l.id}`)}
           >
             <p className="small">
               <span className="pill amber">{l.level}</span>
-              {score !== undefined && (
-                <span className={score >= 0.8 ? "pill" : "pill red"}>
-                  {Math.round(score * 100)}%
-                </span>
+              {locked ? (
+                <span className="pill">🔒</span>
+              ) : (
+                score !== undefined && (
+                  <span className={score >= 0.8 ? "pill" : "pill red"}>
+                    {Math.round(score * 100)}%
+                  </span>
+                )
               )}
             </p>
             <p className="lead">
