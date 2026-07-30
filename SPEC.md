@@ -1,6 +1,11 @@
 # SPEC — Dutch for Russian Speakers
 
-## 1. The loop
+> **Phase 1 is built. Phase 2 is designed and not built.**
+> Sections marked **§P1** describe the shipped client-only PWA. Sections marked
+> **§P2** describe the intended server product and have no code behind them.
+> See `CLAUDE.md` for the stack split and the reason for it.
+
+## 1. The loop — §P1, built
 
 **Rehearse → Do → Debrief.** Seven minutes before a real interaction, five minutes after.
 
@@ -8,30 +13,32 @@ The user's life supplies the interactions: gemeente appointment, huisarts regist
 
 ```
 trigger (scheduled appointment)
-  → rehearse: brief · your lines · reply bank · phoneme gate · anti-switch opener · role-play
+  → rehearse: brief · your lines · reply bank · traps · phoneme gate · anti-switch opener
   → [real world]
   → debrief: stayed in Dutch? · what you didn't understand · what you couldn't say
   → cards generated → FSRS queue → ledger entry
 ```
 
-The debrief is the product. What the user failed to understand yesterday becomes their deck today, and across users it accumulates into a proprietary corpus of what Dutch officialdom actually says.
+The debrief is the product. What the user failed to understand yesterday becomes their deck today. Across users it would accumulate into a proprietary corpus of what Dutch officialdom actually says — but that aggregation needs a server, so in Phase 1 the corpus is collected by hand through the tester survey.
 
 ## 2. Dutch-specific modules
 
 These are what make this not a generic app. Each is a first-class module, not a lesson topic.
 
-### 2.1 Anti-switch trainer
-The highest-value module. Trains the learner to hold an interaction in Dutch.
+### 2.1 Anti-switch trainer — §P1, built
+The highest-value module.
 
-- **Opener drill**: a memorised, fluent first line — `"Sorry, ik leer Nederlands. Mag ik het in het Nederlands proberen?"` — scored on **latency and prosody, not accuracy**. Target: under 1.2s from prompt to speech onset, no mid-phrase hesitation.
-- **Recovery moves**: what to say when they switch anyway (`"Mag ik het toch in het Nederlands doen? Ik moet oefenen."`).
-- **Repair moves** as core A1 content, not politeness garnish: `"Kunt u dat langzamer herhalen?"` · `"Wat betekent ...?"` · `"Kunt u dat opschrijven?"` · `"Dus ik moet ..., klopt dat?"`
-- **Latency scoring**: `speech_onset_ms` from prompt end to first voiced frame, plus a hesitation count from the ASR word timings. Displayed as a speed band, never as a grade.
+- **Opener drill**: a memorised, fluent first line — `"Sorry, ik leer Nederlands. Mag ik het in het Nederlands proberen?"` — scored on **latency, not accuracy**. Target: under 1.2s from prompt to speech onset. Four context variants: `loket`, `telefoon`, `winkel`, `informeel`.
+- **Recovery moves**: what to say when they switch anyway (`"Mag ik het toch in het Nederlands doen? Ik moet oefenen."`). Three variants, always available.
+- **Repair moves** as core A1 content, not politeness garnish. Eight of them, including the four from the original spec: `"Kunt u dat langzamer herhalen?"` · `"Wat betekent ...?"` · `"Kunt u dat opschrijven?"` · `"Dus ik moet ..., klopt dat?"`
+- **Latency scoring**: `onsetMs` measured from recording start to first voiced frame via Web Audio `AnalyserNode`. Displayed as a speed band, never as a grade, never blocking.
 
-### 2.2 de/het trainer
-Nouns are stored, rendered, and drilled **only with their article**. There is no rule view. Cards are `het huurcontract` / `де huurcontract` — never `huurcontract (het)`. Errors feed a dedicated high-frequency sub-deck.
+**Implemented with a known limit:** onset detection is an RMS loudness threshold, not speech recognition — a cough registers as onset. The hesitation count from ASR word timings is **§P2**; it needs a transcriber. The trade bought by the simpler approach is that no audio leaves the device.
 
-### 2.3 Word-order builder
+### 2.2 de/het trainer — §P1, built
+Nouns are stored, rendered, and drilled **only with their article**. There is no rule view. The drill presents two whole forms — `de huurcontract` vs `het huurcontract` — so the noun never appears bare, and the answer is a phrase rather than a principle. Errors feed a dedicated `article` card source in the review deck. 63 nouns, all harvested from scenario content.
+
+### 2.3 Word-order builder — §P2, not built
 Drag-and-drop constructor for the four structures that break Russian speakers:
 1. **V2** in main clauses
 2. **Inversion** after a fronted element (`Morgen ga ik...`)
@@ -40,10 +47,14 @@ Drag-and-drop constructor for the four structures that break Russian speakers:
 
 Scored on correct placement, with the Russian free-word-order contrast shown in the `Разбор` drawer.
 
-### 2.4 "er" module
+**Phase 1 covers the same four structures** through course lessons (`v2`, `verb-final`, `separable`, `bracket`) and grammar notes, but with multiple-choice and fill exercises rather than a constructor.
+
+### 2.4 "er" module — §P1 partial
 Taught in this sequence, not all at once: existential/presentative → locative → pronominal (`erover`, `ermee`) → quantitative → placeholder subject. Each stage gated on the previous.
 
-### 2.5 Phoneme gate
+**Phase 1 ships one B1 lesson and one grammar note covering all five functions at once, ungated.** Staging them is outstanding work.
+
+### 2.5 Phoneme gate — §P1, built
 Narrow by design. Only the sounds that damage **intelligibility** (and therefore trigger the English switch), not accent markers:
 - `/œy/` (ui) — highest measured error rate in Dutch L2 pronunciation research
 - `/øː/` (eu)
@@ -53,17 +64,49 @@ Narrow by design. Only the sounds that damage **intelligibility** (and therefore
 
 **Deprioritised** (accent only, do not gate on): trilled r, palatalised consonants.
 
-**Positive transfer — teach as free wins:** Russian final devoicing already matches Dutch (`hond` → [hont], as `кровь` → [krof']). Russian diminutive and particle systems mean the *concept* of `-je` and of `toch/maar/even/hoor` is already familiar; only the items are new.
+**Positive transfer — taught as free wins:** Russian final devoicing already matches Dutch (`hond` → [hont], as `кровь` → [krof']). Russian diminutive and particle systems mean the *concept* of `-je` and of `toch/maar/even/hoor` is already familiar; only the items are new. Both are flagged in the `Разбор` drawer as "это вы уже умеете".
 
-### 2.6 Loanword hook (onboarding only)
-~500 Dutch loanwords exist in Russian from Peter the Great's maritime era. Onboarding reveals 8–10: матрос/matroos, флаг/vlag, каюта/kajuit, брюки/broek, апельсин/appelsien, зонтик/zondek, гавань/haven, шкипер/schipper.
+Three gate items per scenario, drawn from that scenario's own vocabulary. Record-and-self-compare against a TTS model; **no automated score** — see §6.
 
-Each item in `content/nl/loanwords.json` carries a `source` field (`vasmer` | `van_der_sijs` | `disputed`). **Never ship a word marked `disputed`** — стул, галстук, рюкзак are German or Low German, not Dutch.
+### 2.6 Loanword hook — §P2, not built
+~500 Dutch loanwords exist in Russian from Peter the Great's maritime era. Onboarding would reveal 8–10: матрос/matroos, флаг/vlag, каюта/kajuit, брюки/broek, апельсин/appelsien, гавань/haven, шкипер/schipper.
 
-### 2.7 Inburgering tracker
-Onboarding sets `legal_status` and, if applicable, `inburgering_deadline` (3 years from obligation start). Surfaces: route (B1 / Onderwijs / Z), KNM, MAP, PVT, and Staatsexamen NT2 Programma I (B1) / II (B2). **Displays deadlines and requirements only — never advises on a case.**
+Each item must carry a `source` field (`vasmer` | `van_der_sijs` | `disputed`). **Never ship a word marked `disputed`** — стул, галстук, рюкзак are German or Low German, not Dutch.
 
-## 3. Data model
+### 2.7 Inburgering tracker — §P2, not built
+Would set `legal_status` and, if applicable, `inburgering_deadline` (3 years from obligation start), then surface route (B1 / Onderwijs / Z), KNM, MAP, PVT, and Staatsexamen NT2 Programma I (B1) / II (B2). **Would display deadlines and requirements only — never advise on a case.**
+
+**Phase 1 states the thresholds as static reference copy** in Settings and Progress, with the advice boundary spelled out. The tester survey asks whether an obligation exists, for urgency signal only.
+
+## 3. Data model — §P1
+
+Everything is `localStorage`, namespaced `nv.*`, written through `src/lib/storage.ts`. Types in `src/types.ts`.
+
+```
+nv.ledger.v1        LedgerEntry[]
+  id, dateISO, scenarioId?, text
+  stayedInDutch: boolean | null      -- north star
+  notUnderstood: string[], couldNotSay: string[]
+
+nv.cards.v1         ReviewCard[]
+  id, front, back, createdISO, scenarioId?
+  source: debrief-heard | debrief-say | scenario | trap | article
+  fsrs: serialised ts-fsrs card
+
+nv.appointments.v1  Appointment[]
+  id, scenarioId, dateISO, note, rehearsed, debriefed
+
+nv.onboarded.v1     boolean
+nv.course.v1        Record<lessonId, bestScore 0..1>
+```
+
+Content is compile-time TypeScript in `src/data/`, not rows: `Scenario`, `Reply`, `UserLine`, `Trap`, `GateItem`, `RepairMove`, `Opener`, `Noun`, `CanDo`, `Lesson`, `GrammarNote`.
+
+`storage.wipeAll()` clears every key. That is the entire deletion story, and it is complete.
+
+## 3b. Data model — §P2
+
+The server schema, retained for when there is a server. Unchanged from the original design.
 
 ```
 users
@@ -75,31 +118,19 @@ users
   cefr_self_assessed
   consent_terms_at, consent_voice_at, voice_retention_days (default 90)
 
-scenarios                 seeded from content/nl/scenarios/*.json
+scenarios                 seeded from content JSON
   id, slug, domain, cefr_level, title_ru, brief_ru, order
-
-scenario_lines            what the learner says
-  id, scenario_id, seq, nl_text, ru_gloss, audio_url, note_ru
-
-reply_bank_items          what comes back — the differentiator
-  id, scenario_id, nl_text, ru_gloss, register, frequency_rank
-  audio_url_normal, audio_url_fast
-
-repair_moves              global, not per-scenario
-  id, nl_text, ru_gloss, use_case, audio_url
-
-opener_variants           anti-switch openers
-  id, nl_text, ru_gloss, context, audio_url
-
-traps
-  id, code, title_ru, explanation_ru, examples jsonb
+scenario_lines            id, scenario_id, seq, nl_text, ru_gloss, audio_url, note_ru
+reply_bank_items          id, scenario_id, nl_text, ru_gloss, register, frequency_rank,
+                          audio_url_normal, audio_url_fast
+repair_moves              id, nl_text, ru_gloss, use_case, audio_url
+opener_variants           id, nl_text, ru_gloss, context, audio_url
+traps                     id, code, title_ru, explanation_ru, examples jsonb
   code enum: de_het | v2 | verb_final | bracket | separable | er | aux_hebben_zijn
             | vowel_length | front_rounded | harde_g | diphthong | particle
             | diminutive | prep_government | false_friend
-
 scenario_traps            join
-gate_items
-  id, scenario_id, nl_text, target_feature, ipa_hint, audio_url_native
+gate_items                id, scenario_id, nl_text, target_feature, ipa_hint, audio_url_native
 
 encounters                one per real-world attempt — the core object
   id, user_id, scenario_id
@@ -110,52 +141,54 @@ encounters                one per real-world attempt — the core object
   difficulty_felt         1..5
   not_understood_text, wanted_to_say_text, notes
 
-rehearsal_turns
-  id, encounter_id, seq, role (user|npc), nl_text, audio_url, asr_confidence
-  speech_onset_ms, hesitation_count
-
-gate_attempts
-  id, encounter_id, gate_item_id, audio_url
-  azure_accuracy, azure_fluency, phoneme_scores jsonb, self_compared boolean
-
-review_cards
-  id, user_id, front_nl, back_ru, source_type, source_ref, trap_code
-  fsrs_due, fsrs_stability, fsrs_difficulty, fsrs_state, fsrs_reps, fsrs_lapses, fsrs_last_review
-  suspended, created_at
-
-review_logs
-  id, card_id, rating 1..4, reviewed_at, elapsed_days, scheduled_days, state
-
-ledger_entries            Capability Ledger
-  id, user_id, encounter_id, date, summary_ru, stayed_in_dutch, unresolved_ru, can_do_code
-
-can_do_descriptors        CEFR map, built now, surfaced in Phase 2
-  code, level, domain, text_ru
-
-events
-  id, user_id, type, payload jsonb, created_at
+rehearsal_turns           id, encounter_id, seq, role (user|npc), nl_text, audio_url,
+                          asr_confidence, speech_onset_ms, hesitation_count
+gate_attempts             id, encounter_id, gate_item_id, audio_url,
+                          azure_accuracy, azure_fluency, phoneme_scores jsonb, self_compared
+review_cards              id, user_id, front_nl, back_ru, source_type, source_ref, trap_code,
+                          fsrs_* , suspended, created_at
+review_logs               id, card_id, rating 1..4, reviewed_at, elapsed_days, scheduled_days, state
+ledger_entries            id, user_id, encounter_id, date, summary_ru, stayed_in_dutch,
+                          unresolved_ru, can_do_code
+can_do_descriptors        code, level, domain, text_ru
+events                    id, user_id, type, payload jsonb, created_at
 ```
 
-## 4. Routes
+`switch_trigger` is worth noting as a Phase 1 gap: the debrief records *whether* the conversation stayed in Dutch but not *why* it failed. The tester survey asks it instead.
+
+## 4. Routes — §P1
+
+Hash routing, no router library. `src/App.tsx`.
+
+```
+#/                      today: appointments, review count, module entry points
+#/scenarios             browse by domain
+#/rehearse/:id          the 6-step loop
+#/opener  ·  #/opener/:id      anti-switch latency drill
+#/articles · #/articles/:id    de/het trainer, optionally scenario-scoped
+#/roleplay/:id          listening drill on the reply bank
+#/listening             listening under noise
+#/debrief/:id?appt=     post-interaction
+#/review                FSRS queue
+#/ledger                capability ledger
+#/progress              CEFR can-do map
+#/grammar               Разбор drawer
+#/course · #/course/:id грамматический зал
+#/repair                openers, recovery and repair moves
+#/feedback              Phase 0 tester survey
+#/settings              about, thresholds, delete all data
+```
+
+## 4b. Routes and API — §P2
 
 ```
 /                       landing (ru)
 /login                  magic link
 /onboarding             goal · legal status · arrival · loanword hook · orthography rule
                         · first opener · mic consent + GDPR
-/dashboard              next encounter · review count · ledger tail
-/scenarios              browse by domain
-/s/[slug]               brief
-/s/[slug]/rehearse      the 7-minute loop
-/e/[id]/debrief         post-interaction
-/review                 FSRS queue
-/ledger                 capability ledger
-/settings               export · delete · voice retention
-```
+/dashboard · /scenarios · /s/[slug] · /s/[slug]/rehearse
+/e/[id]/debrief · /review · /ledger · /settings
 
-## 5. API
-
-```
 POST   /api/encounters                      create / schedule
 PATCH  /api/encounters/:id                  state transition
 POST   /api/rehearse/:id/turn               LLM role-play turn (streamed)
@@ -169,14 +202,18 @@ POST   /api/account/export
 DELETE /api/account
 ```
 
-## 6. Scoring logic
+## 5. Scoring logic
 
-**Anti-switch (primary):** `speech_onset_ms` + hesitation count from ASR word timings. Bands: fluent < 1200ms, hesitant 1200–2500ms, slow > 2500ms. Accuracy is reported but does **not** gate progression.
+**Anti-switch — §P1, built.** `onsetMs` from recording start to first voiced frame. Bands: fluent < 1200ms, hesitant 1200–2500ms, slow > 2500ms. Accuracy is not measured at all and never gates progression. Hesitation count from ASR word timings is **§P2**.
 
-**Pronunciation:** Azure `nl-NL` accuracy + fluency, phoneme-level. Presented as guidance beside an A/B self-compare against the native model. Copy must state plainly, in Russian, that it is a rough indicator (`это ориентир, а не оценка`). No hard pass/fail — see the untested-accent warning in CLAUDE.md.
+**Pronunciation — §P1 is self-comparison only.** Record, play back against a TTS model, judge for yourself. There is deliberately **no automated score**, because Azure `nl-NL` assessment is untested on Russian-accented Dutch and a scorer that punishes correct speech destroys trust on first contact. When Phase 2 adds Azure accuracy + fluency, it must be presented as guidance beside the A/B compare, and the copy must state plainly in Russian that it is a rough indicator (`это ориентир, а не оценка`). No hard pass/fail, ever.
 
-**Debrief → cards:** haiku parses `not_understood_text` and `wanted_to_say_text` into ≤5 candidate cards as structured JSON `{front_nl, back_ru, trap_code?}`. **User confirms or edits before anything enters the deck** — protects autonomy and card quality.
+**Debrief → cards — §P1 is verbatim.** What the user types becomes the card front directly; they are already authoring it, so there is nothing to confirm. **§P2**: haiku parses `not_understood_text` and `wanted_to_say_text` into ≤5 candidate cards as structured JSON `{front_nl, back_ru, trap_code?}`, and **the user confirms or edits before anything enters the deck** — that confirmation step is not optional, it protects autonomy and card quality.
 
-## 7. GDPR (Phase 1, not deferred)
+## 6. GDPR
 
-All users are EU-resident and voice is personal data. Required at launch: explicit separate consent for voice; EU data residency (Neon EU, Vercel EU, R2 EU jurisdiction); configurable retention with a 90-day default and a cron purge; full export; hard delete cascading to R2 objects; a processor register for Anthropic, OpenAI, Azure, Resend.
+**§P1 — satisfied by construction.** There is no server, so there is no controller-side personal data. Voice recordings live in page memory and are revoked on unmount; nothing is uploaded. `localStorage` holds only what the user typed. One button in Settings wipes everything. No analytics, no telemetry, no third-party requests at runtime.
+
+**§P2 — required at launch, not deferrable.** All users are EU-resident and voice is personal data. Explicit separate consent for voice; EU data residency (Neon EU, Vercel EU, R2 EU jurisdiction); configurable retention with a 90-day default and a cron purge; full export; hard delete cascading to R2 objects; a processor register covering Anthropic, OpenAI, Azure and Resend.
+
+The Phase 1 posture is not a shortcut around this — it is the reason Phase 1 could ship without it.

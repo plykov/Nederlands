@@ -35,12 +35,13 @@ transfer to it at all, and it cannot be built in one sitting. The client-only
 PWA is buildable now and reuses ~80% of Italiano's engine, matching
 `CLAUDE.md`'s own framing that Dutch and Italian "share ~80% of the engine".
 
-**Consequence:** `CLAUDE.md`/`SPEC.md`/`BUILD_PLAN.md` are aspirational
-Phase-2+ documents, not a description of the code. The user explicitly declined
-the option to rewrite them, so they were left untouched — **the docs contradict
-the code, and that is a known, accepted state, not an oversight.** The
-divergence is called out in `README.md` and in the PR description so a reader
-hits it early. See the open question at the bottom.
+**Consequence, now resolved:** the three docs originally described only the
+server architecture, so they contradicted the code. The user initially declined
+reconciling them and later reversed that. They have since been **restructured
+into Phase 1 (built, binding) and Phase 2 (designed, not built)**. Nothing was
+deleted — the Next.js/Postgres/LLM/Azure design is preserved in full under
+Phase 2, along with the research behind it. A reader now sees which half they
+are in from the header of each file.
 
 ## Correction to the previous revision of this file
 
@@ -138,20 +139,25 @@ The deploy trigger is scoped to `main` (plus manual dispatch). A repository has
 a single live Pages site, so deploying from a feature branch would overwrite
 whatever `main` published.
 
-## Open question for the user
+## Open questions
 
-**Should `CLAUDE.md`/`SPEC.md`/`BUILD_PLAN.md` be reconciled with the
-client-only architecture, or left as long-term ambition documents?**
+None outstanding. The docs question that sat here was decided in favour of
+reconciliation and is done — see "Architecture decision" above.
 
-The user declined this once already, so the current default is "leave them",
-and that default has been respected. But the gap widens with every commit, and
-the docs are the first thing a new contributor reads. Two clean options:
+One operational item is not a question but still needs a human: the GitHub Pages
+source setting, recorded under "Operational note".
 
-- **(a)** Rewrite them so client-only is Phase 1 and DB/Auth/LLM/ASR move to an
-  explicit Phase 2 section. Highest clarity, loses nothing — the ambition is
-  preserved, just relocated.
-- **(b)** Leave as-is and rely on the warnings in `README.md`, this file and the
-  PR description.
+## How to read the docs now
 
-Until this is decided, treat `SPEC.md` as a specification of intent and the code
-as the specification of behaviour.
+- `CLAUDE.md` — rules, stack and conventions. Phase 1 section is binding; the
+  Phase 2 section is intent. Read the header note first.
+- `SPEC.md` — sections tagged **§P1** are built, **§P2** are not. The Postgres
+  schema and the HTTP API live under §P2 and describe nothing that exists.
+- `BUILD_PLAN.md` — Part A is Phase 1, with ✅ on what shipped and an ordered
+  list of what remains. Part B is the untouched server plan, with Phase 1
+  equivalents cross-referenced where one exists.
+- `_SCHEMA.md` and `CONTENT_SOURCES.md` are unchanged and still binding. The
+  content licensing register in particular applies to every phase.
+
+The rule of thumb: **the code is the specification of behaviour; Phase 2 is the
+specification of intent.**
