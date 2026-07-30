@@ -21,9 +21,9 @@ service worker, GitHub Pages via Actions.
 root and on a `/<repo>/` subpath. ✅
 
 ## A1 — Content ✅
-24 scenarios across the six `_SCHEMA.md` domains, 4 each (A1 10 / A2 8 / B1 6).
+36 scenarios across the six `_SCHEMA.md` domains, 6 each (A1 14 / A2 12 / B1 10).
 104 article-attached nouns, 8 repair moves, 7 openers and recovery moves, 12
-grammar notes, 8 course lessons, 27 CEFR can-do statements, tester survey.
+grammar notes, 8 course lessons, 39 CEFR can-do statements, tester survey.
 
 **Done when:** every scenario has 4–8 lines, 6+ reply-bank items, 2+ traps, 2+
 gate items, and **exactly one `register: "switch"` reply**. Every cross-file id
@@ -97,21 +97,20 @@ the last two are enforced by `npm test`.
 
 Ordered by value. None of it blocks the others.
 
-1. **More scenarios.** Twenty-four now, four per domain. Target 30–40 across
-   gemeente · huisarts/apotheek/ziekenhuis · school en kinderen · wonen en
-   verhuurder · werk · winkels en buren. Grow the list from what testers bring
-   back, not from invented situations.
-2. **Stage the `er` module** (SPEC §2.4). Currently one lesson and one grammar
+1. **Stage the `er` module** (SPEC §2.4). Currently one lesson and one grammar
    note covering all five functions at once; the spec wants each gated on the
    previous. The word-order builder now drills `er` incidentally in two
    puzzles, which is not the same as staging it.
-3. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
-4. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
-5. **Native audio** for the reply bank. Web Speech quality varies by platform
+2. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
+3. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
+4. **Native audio** for the reply bank. Web Speech quality varies by platform
    and this is the single biggest quality lever on the listening trainers.
-6. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
+5. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
    word-order chips are `<button>`s and keyboard-reachable, but the whole app
    has not had a proper pass.
+
+Scenarios (36, six per domain, inside the M12 target of 30–40) and the
+word-order builder (A10, above) are both done and no longer on this list.
 
 The "no test setup" item that stood here is done: `npm test` runs
 `scripts/check-content.mjs`. It should have been struck when that landed.

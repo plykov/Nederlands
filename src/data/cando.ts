@@ -221,6 +221,92 @@ export const CAN_DOS: CanDo[] = [
     text: "Пройти собеседование: рассказать о себе и обсудить условия",
     scenarios: ["sollicitatiegesprek"],
   },
+
+  // ── добавлено вместе с третьей партией сценариев ──
+  {
+    id: "a1-loket-vervolg",
+    level: "A1",
+    domain: "bureaucratie",
+    text: "Продлить документ на приёме и уточнить срок и способ оплаты",
+    scenarios: ["paspoort-verlenging"],
+  },
+  {
+    id: "a2-telefoon-support",
+    level: "A2",
+    domain: "bureaucratie",
+    text: "Объяснить техническую проблему по телефону и понять инструкцию в ответ",
+    scenarios: ["digid-activeren"],
+  },
+  {
+    id: "a1-kind-medisch",
+    level: "A1",
+    domain: "gezondheid",
+    text: "Ответить на вопросы о самочувствии ребёнка на плановом медицинском приёме",
+    scenarios: ["ggd-inenting"],
+  },
+  {
+    id: "b1-medisch-plan",
+    level: "B1",
+    domain: "gezondheid",
+    text: "Описать историю жалобы специалисту и обсудить план лечения и страховку",
+    scenarios: ["fysiotherapie-verwijzing"],
+  },
+  {
+    id: "a1-school-logistiek",
+    level: "A1",
+    domain: "school",
+    text: "Договориться о логистике: дни присмотра, оплата, место встречи",
+    scenarios: ["tussenschoolse-opvang"],
+  },
+  {
+    id: "b1-school-advies",
+    level: "B1",
+    domain: "school",
+    text: "Обсудить рекомендацию по уровню образования и отстоять точку зрения ребёнка",
+    scenarios: ["mentor-gesprek-voortgezet"],
+  },
+  {
+    id: "a2-wonen-overdracht",
+    level: "A2",
+    domain: "wonen",
+    text: "Пройти передачу ключей: проверить состояние жилья и зафиксировать замечания",
+    scenarios: ["sleuteloverdracht-makelaar"],
+  },
+  {
+    id: "b1-wonen-vergadering",
+    level: "B1",
+    domain: "wonen",
+    text: "Высказать и обосновать позицию на собрании жильцов и проголосовать осознанно",
+    scenarios: ["vve-vergadering-buren"],
+  },
+  {
+    id: "a2-werk-onboarding",
+    level: "A2",
+    domain: "werk",
+    text: "Пройти оформление в первый рабочий день и уточнить условия контракта",
+    scenarios: ["eerste-werkdag-hr"],
+  },
+  {
+    id: "b1-werk-verzuim",
+    level: "B1",
+    domain: "werk",
+    text: "Обсудить с врачом компании план возвращения на работу после больничного",
+    scenarios: ["verzuim-bedrijfsarts"],
+  },
+  {
+    id: "a1-dagelijks-dienst",
+    level: "A1",
+    domain: "dagelijks",
+    text: "Записаться на бытовую услугу и объяснить, что именно нужно",
+    scenarios: ["kapper-afspraak"],
+  },
+  {
+    id: "a2-dagelijks-reparatie",
+    level: "A2",
+    domain: "dagelijks",
+    text: "Описать неисправность мастеру и понять предложенное решение и цену",
+    scenarios: ["fietsenmaker-reparatie"],
+  },
 ];
 
 export const LEVEL_NOTE: Record<CefrLevel, string> = {
