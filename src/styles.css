@@ -1,0 +1,237 @@
+:root {
+  --bg: #f2f5f8;
+  --card: #ffffff;
+  --ink: #1c2733;
+  --muted: #5c6b7a;
+  --blue: #1e4b7a;
+  --blue-soft: #e4ecf4;
+  --red: #ae1c28;
+  --red-soft: #f8e7e8;
+  --orange: #c2660c;
+  --orange-soft: #faf0e3;
+  --border: #dde3ea;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(28, 39, 51, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 16px 16px 96px;
+}
+
+h1 { font-size: 1.35rem; margin: 8px 0 4px; }
+h2 { font-size: 1.1rem; margin: 20px 0 8px; }
+h3 { font-size: 1rem; margin: 12px 0 6px; }
+p { margin: 6px 0; }
+
+.muted { color: var(--muted); font-size: 0.9rem; }
+.small { font-size: 0.85rem; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin: 10px 0;
+  box-shadow: var(--shadow);
+}
+
+.card.tappable { cursor: pointer; transition: transform 0.06s ease; }
+.card.tappable:active { transform: scale(0.985); }
+
+/*
+ * Кириллица интерфейса и латиница нидерландского должны читаться как разные
+ * слои. Три роли, и путать их нельзя:
+ *   `.nl`   — нидерландский текст: единственное место с засечками;
+ *   `.lead` — русский заголовок карточки, тот же кегль, но своя гарнитура;
+ *   `.ru`   — русский пояснительный текст под ним.
+ * Разведены гарнитурой и начертанием, а не только цветом.
+ */
+.lead {
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+.nl {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+.ru {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--blue-soft);
+  color: var(--blue);
+  margin-right: 6px;
+}
+.pill.red { background: var(--red-soft); color: var(--red); }
+.pill.amber { background: var(--orange-soft); color: var(--orange); }
+
+button {
+  font: inherit;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  cursor: pointer;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 8px;
+}
+button:active { opacity: 0.85; }
+button:disabled { opacity: 0.55; cursor: default; }
+button.secondary {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+button.ghost {
+  background: transparent;
+  color: var(--blue);
+  border: none;
+  padding: 8px;
+  width: auto;
+  font-weight: 600;
+}
+button.danger { background: var(--red); }
+button.inline { width: auto; padding: 8px 14px; margin: 4px 4px 4px 0; font-size: 0.9rem; }
+
+/* Переносим кнопки на новую строку, а не сплющиваем: на 375px ряд из трёх
+   штук иначе рвёт подписи по слогам. */
+.btnrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.btnrow button { margin-top: 8px; flex: 1 1 8rem; }
+
+textarea, input[type="text"], input[type="date"], input[type="datetime-local"], select {
+  font: inherit;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  margin: 4px 0;
+}
+textarea { min-height: 72px; resize: vertical; }
+
+nav.tabs {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 10;
+}
+nav.tabs a {
+  flex: 1;
+  text-align: center;
+  padding: 10px 4px 8px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+nav.tabs a .ico { display: block; font-size: 1.25rem; margin-bottom: 2px; }
+nav.tabs a.active { color: var(--blue); }
+
+.progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+  margin: 8px 0 16px;
+}
+.progress > div { height: 100%; background: var(--blue); transition: width 0.25s ease; }
+
+.trap-wrong { color: var(--red); text-decoration: line-through; font-weight: 600; }
+.trap-right { color: var(--blue); font-weight: 700; }
+
+.badge-count {
+  background: var(--red);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  padding: 0 6px;
+  margin-left: 4px;
+}
+
+.center { text-align: center; }
+.spacer { height: 12px; }
+
+.flashcard {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.ledger-date { font-size: 0.78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+.choice {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+.choice button { margin: 0; }
+.choice button.selected { outline: 3px solid var(--blue); }
+
+/* Тренажёр опенера: полосы скорости. Это ориентир, а не оценка. */
+.band {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 4px 0;
+}
+.band.fluent { color: var(--blue); }
+.band.hesitant { color: var(--orange); }
+.band.slow, .band.silent { color: var(--red); }
+
+.onset-ms {
+  font-variant-numeric: tabular-nums;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.article-de { color: var(--blue); font-weight: 700; }
+.article-het { color: var(--orange); font-weight: 700; }
+
+a { color: var(--blue); }
