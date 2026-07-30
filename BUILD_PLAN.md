@@ -181,8 +181,13 @@ reaching and activating a Home card in the correct order.
 
 Ordered by value. None of it blocks the others.
 
-1. **Native audio** for the reply bank. Web Speech quality varies by platform
-   and this is the single biggest quality lever on the listening trainers.
+Empty. **Native audio for the reply bank was the last item and the user
+decided against it**, confirmed explicitly rather than dropped by default:
+stick with Web Speech, skip pre-recorded audio for now. Web Speech quality
+still varies by platform and remains the single biggest quality lever on the
+listening trainers if this is revisited — see `CLAUDE.md`'s Phase 2 stack for
+the pre-recorded-audio path (`pnpm audio:generate`, normal + fast variants to
+R2) if a backend ever gets built. Nothing here blocks anything else.
 
 Everything else that stood here — scenarios (36, six per domain, inside the
 M12 target of 30–40), the word-order builder (A10), the staged `er` module

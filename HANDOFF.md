@@ -176,12 +176,15 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 ## What is NOT done — remaining scope
 
-Ordered by value, and none of it is blocking:
+Nothing is queued. **Native audio for the reply bank was the last item, and
+the user decided against it** — an explicit call, not an oversight: stick
+with Web Speech, skip pre-recorded audio for now. Web Speech quality still
+varies by platform, so revisit this if listening-trainer quality becomes the
+actual bottleneck; the pre-recorded path (`pnpm audio:generate`, R2, normal +
+fast variants) is preserved in `CLAUDE.md`'s Phase 2 stack for if a backend
+ever gets built.
 
-1. **Audio for the reply bank.** Web Speech quality varies by platform;
-   pre-recorded native audio would improve the listening trainers most.
-
-That is the only item left. Word-order builder, scenario count, the staged
+Word-order builder, scenario count, the staged
 `er` module, the inburgering tracker, the loanword hook and the accessibility
 pass are all off this list: the constructor shipped (SPEC §2.3,
 `#/wordorder`), thirty-six scenarios land inside `BUILD_PLAN.md` M12's 30–40
