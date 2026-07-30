@@ -83,9 +83,10 @@ npm install
 npm run dev        # Vite on :5173
 npm run build      # tsc -b && vite build
 npm run preview
+npm test           # content integrity: ids resolve, _SCHEMA.md shape rules hold
 ```
 
-There is no test runner, no linter and no typecheck script beyond `tsc -b` inside `build`. Adding a test setup is welcome; do not claim `npm test` works until it does.
+`npm test` runs `scripts/check-content.mjs`: every cross-file id must resolve, every scenario must satisfy the `_SCHEMA.md` shape rules (including exactly one `register: "switch"` reply), every scenario must appear in the CEFR map, and course exercises must be answerable. **Run it after any change to `src/data/`** — it exists precisely because nothing else enforces those invariants. There is still no linter and no unit-test runner; type-checking is `tsc -b` inside `build`.
 
 ## Phase 1 conventions
 
