@@ -4770,6 +4770,3374 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
   },
+  // ───────────────────────── ПЯТАЯ ПАРТИЯ: A2 ─────────────────────────
+  {
+    id: "kinderbijslag-aanvragen",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Оформить детское пособие (kinderbijslag)",
+    context: "Звонок в SVB после рождения ребёнка или переезда — оформление kinderbijslag",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят BSN ребёнка и родителя, дату рождения и с какого момента ребёнок живёт с вами.",
+      "Уточнят, получаете ли вы уже пособие от другой страны — двойное не положено.",
+      "Объяснят, что выплата идёт раз в квартал и на какой счёт.",
+      "В конце скажут, когда ждать первое письмо с подтверждением.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil kinderbijslag aanvragen voor mijn zoon.",
+        ru: "Я хочу оформить детское пособие на сына.",
+      },
+      {
+        nl: "Hij is twee maanden geleden geboren.",
+        ru: "Он родился два месяца назад.",
+      },
+      {
+        nl: "Nee, ik ontvang nog geen kinderbijslag uit een ander land.",
+        ru: "Нет, я ещё не получаю пособие из другой страны.",
+      },
+      {
+        nl: "Op welke rekening wordt het overgemaakt?",
+        ru: "На какой счёт это переведут?",
+      },
+      {
+        nl: "Wanneer krijg ik de eerste betaling?",
+        ru: "Когда придёт первая выплата?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is het BSN van uw kind?", ru: "Какой BSN у вашего ребёнка?", key: "BSN kind", register: "formeel" },
+      { nl: "Ontvangt u al kinderbijslag uit een ander land?", ru: "Вы уже получаете пособие из другой страны?", key: "ander land", register: "formeel" },
+      { nl: "De uitkering wordt per kwartaal overgemaakt.", ru: "Выплата переводится раз в квартал.", key: "per kwartaal", register: "formeel" },
+      { nl: "U ontvangt binnen zes weken een schriftelijke bevestiging.", ru: "В течение шести недель придёт письменное подтверждение.", key: "schriftelijke bevestiging", register: "formeel" },
+      { nl: "Wilt u dat ik het bedrag nog even noem?", ru: "Назвать сумму ещё раз?", key: "bedrag", register: "neutraal" },
+      { nl: "Kunt u dat nummer nog een keer herhalen?", ru: "Повторите этот номер ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "We're happy to continue this call in English.", ru: "Мы с радостью продолжим звонок по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers", "spellen"],
+    traps: [
+      {
+        wrong: "Hij was geboren twee maanden geleden.",
+        right: "Hij is twee maanden geleden geboren.",
+        why: "«Родился» в перфекте образуется через zijn, не hebben: изменение состояния берёт zijn. Обстоятельство времени встаёт перед причастием, а не после него.",
+      },
+      {
+        wrong: "de kinderbijslag, het rekening",
+        right: "de kinderbijslag, de rekening",
+        why: "Оба de: de kinderbijslag, de rekening — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "kinderbijslag",
+        focus: "составное слово",
+        tip: "КИН-дер-бэйс-лах. kind(er) + bijslag — надбавка на ребёнка.",
+      },
+      {
+        word: "kwartaal",
+        focus: "долгое aa",
+        tip: "квар-ТА:Л. Квартал — единица времени в большинстве выплат.",
+      },
+    ],
+  },
+  {
+    id: "zorgverzekering-wisselen",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Сменить медицинскую страховку",
+    context: "Звонок в новую страховую компанию в конце года — переход на другую zorgverzekering",
+    minutes: 8,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят, какой пакет вас интересует — базовый или с дополнительным покрытием.",
+      "Уточнят текущую страховую и дату, с которой хотите перейти — обычно с 1 января.",
+      "Расскажут про размер собственного риска (eigen risico) и как он влияет на сумму.",
+      "В конце объяснят, что старую страховку не нужно отменять самим — новая сделает это за вас.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil overstappen naar een andere zorgverzekering.",
+        ru: "Я хочу перейти на другую медицинскую страховку.",
+      },
+      {
+        nl: "Welk pakket past bij mijn situatie?",
+        ru: "Какой пакет подходит для моей ситуации?",
+      },
+      {
+        nl: "Wat is het eigen risico bij dit pakket?",
+        ru: "Какой собственный риск у этого пакета?",
+      },
+      {
+        nl: "Moet ik mijn oude verzekering zelf opzeggen?",
+        ru: "Мне нужно самому отменять старую страховку?",
+      },
+      {
+        nl: "Vanaf wanneer gaat de nieuwe verzekering in?",
+        ru: "С какого числа начнёт действовать новая страховка?",
+      },
+    ],
+    replyBank: [
+      { nl: "Bij welke verzekeraar zit u nu?", ru: "В какой страховой вы сейчас?", key: "verzekeraar", register: "formeel" },
+      { nl: "Het standaardpakket dekt de basiszorg.", ru: "Стандартный пакет покрывает базовую медицину.", key: "standaardpakket", register: "neutraal" },
+      { nl: "Het eigen risico is dit jaar vijfhonderd euro.", ru: "Собственный риск в этом году — пятьсот евро.", key: "vijfhonderd euro", register: "formeel" },
+      { nl: "Wij regelen de opzegging bij uw oude verzekeraar.", ru: "Мы сами оформим отмену у вашей старой страховой.", key: "opzegging", register: "formeel" },
+      { nl: "De nieuwe verzekering gaat in per één januari.", ru: "Новая страховка начнёт действовать с первого января.", key: "één januari", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Можете объяснить ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I can send the package details in English too.", ru: "Могу прислать детали пакета и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik moet opzeggen mijn oude verzekering.",
+        right: "Ik moet mijn oude verzekering opzeggen.",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "het risico, de pakket",
+        right: "het risico, het pakket",
+        why: "Оба het: het risico, het pakket.",
+      },
+    ],
+    gate: [
+      {
+        word: "zorgverzekering",
+        focus: "составное слово, харде G",
+        tip: "ЗОРХ-фер-зе:-кə-ринх. zorg + verzekering — медицинская страховка.",
+      },
+      {
+        word: "eigen risico",
+        focus: "ei = дифтонг «эй»",
+        tip: "ЭЙ-хен ри-СИ:-ко. Собственный риск — сумма, которую платите сами до начала покрытия.",
+      },
+    ],
+  },
+  {
+    id: "parkeervergunning-aanvragen",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Оформить парковочное разрешение жильца",
+    context: "Визит или онлайн-заявка в gemeente на парковочное разрешение для своей улицы",
+    minutes: 6,
+    openerContext: "loket",
+    brief: [
+      "Спросят адрес и подтверждение регистрации по этому адресу в BRP.",
+      "Уточнят номер и марку автомобиля.",
+      "Объяснят, что в некоторых зонах есть лист ожидания.",
+      "В конце скажут стоимость за год и способ оплаты.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil een parkeervergunning aanvragen voor mijn straat.",
+        ru: "Я хочу оформить парковочное разрешение для своей улицы.",
+      },
+      {
+        nl: "Mijn kenteken is...",
+        ru: "Номер моей машины...",
+      },
+      {
+        nl: "Staat er een wachtlijst voor deze zone?",
+        ru: "Есть лист ожидания для этой зоны?",
+      },
+      {
+        nl: "Hoeveel kost dit per jaar?",
+        ru: "Сколько это стоит в год?",
+      },
+    ],
+    replyBank: [
+      { nl: "Staat u ingeschreven op dit adres?", ru: "Вы зарегистрированы по этому адресу?", key: "ingeschreven", register: "formeel" },
+      { nl: "Wat is uw kenteken?", ru: "Ваш номер машины?", key: "kenteken", register: "neutraal" },
+      { nl: "Voor deze zone geldt helaas een wachtlijst.", ru: "К сожалению, для этой зоны есть лист ожидания.", key: "wachtlijst", register: "formeel" },
+      { nl: "Dat kost honderdtwintig euro per jaar.", ru: "Это стоит сто двадцать евро в год.", key: "honderdtwintig", register: "neutraal" },
+      { nl: "U kunt digitaal of aan de balie betalen.", ru: "Оплатить можно онлайн или на стойке.", key: "digitaal", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer spellen?", ru: "Продиктуйте по буквам ещё раз?", key: "spellen", register: "informeel" },
+      { nl: "Happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["spellen", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik wil aanvragen een parkeervergunning.",
+        right: "Ik wil een parkeervergunning aanvragen.",
+        why: "Дополнение перед инфинитивом, не после него.",
+      },
+      {
+        wrong: "het wachtlijst, de kenteken",
+        right: "de wachtlijst, het kenteken",
+        why: "de wachtlijst, het kenteken — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "parkeervergunning",
+        focus: "составное слово",
+        tip: "пар-КЕ:Р-фер-хюн-нинх. parkeer + vergunning — разрешение на парковку.",
+      },
+      {
+        word: "kenteken",
+        focus: "ударение на -TEken",
+        tip: "КЕН-те:-кен. Номерной знак — спрашивают в любом разговоре про машину.",
+      },
+    ],
+  },
+  {
+    id: "naturalisatie-informatie",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Спросить про требования к натурализации",
+    context: "Визит в gemeente за информацией о процедуре натурализации — только справочно",
+    minutes: 6,
+    openerContext: "loket",
+    brief: [
+      "Спросят, сколько лет вы уже проживаете в Нидерландах непрерывно.",
+      "Расскажут про требуемый языковой уровень и какие экзамены его подтверждают.",
+      "Объяснят список документов и сроки рассмотрения — это справочная информация, не консультация по вашему делу.",
+      "В конце дадут ссылку на сайт IND с точным списком требований.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil informatie over naturalisatie.",
+        ru: "Мне нужна информация о натурализации.",
+      },
+      {
+        nl: "Ik woon hier nu vijf jaar.",
+        ru: "Я живу здесь уже пять лет.",
+      },
+      {
+        nl: "Welk taalniveau heb ik hiervoor nodig?",
+        ru: "Какой уровень языка мне для этого нужен?",
+      },
+      {
+        nl: "Welke documenten moet ik meenemen?",
+        ru: "Какие документы мне взять с собой?",
+      },
+    ],
+    replyBank: [
+      { nl: "Hoe lang woont u al onafgebroken in Nederland?", ru: "Сколько вы уже непрерывно живёте в Нидерландах?", key: "onafgebroken", register: "formeel" },
+      { nl: "U heeft minimaal taalniveau A2 nodig.", ru: "Вам нужен минимум уровень A2.", key: "taalniveau A2", register: "formeel" },
+      { nl: "Neemt u uw paspoort en verblijfsvergunning mee.", ru: "Возьмите с собой паспорт и вид на жительство.", key: "verblijfsvergunning", register: "formeel" },
+      { nl: "Voor uw specifieke situatie verwijs ik u naar de IND.", ru: "По вашей конкретной ситуации обращайтесь в IND.", key: "verwijs ik u", register: "formeel" },
+      { nl: "Hier is de link met de volledige lijst.", ru: "Вот ссылка с полным списком.", key: "volledige lijst", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I can point you to the English page too.", ru: "Могу показать и англоязычную страницу.", register: "switch" },
+    ],
+    repairIds: ["betekent", "opschrijven"],
+    traps: [
+      {
+        wrong: "Ik woon hier al vijf jaar sinds.",
+        right: "Ik woon hier nu vijf jaar.",
+        why: "Продолжительность до настоящего момента передаётся через nu/al + период, без лишнего sinds в конце — sinds требует точку отсчёта, а не длительность.",
+      },
+      {
+        wrong: "het taalniveau, de document",
+        right: "het taalniveau, het document",
+        why: "Оба het: het taalniveau, het document.",
+      },
+    ],
+    gate: [
+      {
+        word: "naturalisatie",
+        focus: "ударение на -SA-",
+        tip: "на-тю-ра-ли-ЗА-си. Натурализация — длинное слово, произносите по частям.",
+      },
+      {
+        word: "onafgebroken",
+        focus: "составное слово",
+        tip: "он-АФ-хə-бро:-кен. «Непрерывно» — важное слово для любого срокового вопроса.",
+      },
+    ],
+  },
+  {
+    id: "digid-machtiging",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Оформить доверенность через DigiD",
+    context: "Звонок в поддержку DigiD — оформление machtiging, чтобы кто-то другой мог действовать от вашего имени",
+    minutes: 6,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят, для какого ведомства нужна доверенность — у каждого своя форма machtiging.",
+      "Уточнят данные того, кого вы уполномочиваете — BSN и полное имя.",
+      "Объяснят, что доверенность нужно подписать обеим сторонам.",
+      "В конце скажут, как долго доверенность действует и как её отозвать.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil iemand machtigen om zaken voor mij te regelen.",
+        ru: "Я хочу уполномочить кого-то решать за меня дела.",
+      },
+      {
+        nl: "Het gaat om de Belastingdienst.",
+        ru: "Речь о налоговой службе.",
+      },
+      {
+        nl: "Moeten wij dit allebei ondertekenen?",
+        ru: "Нам обоим нужно это подписать?",
+      },
+      {
+        nl: "Hoe lang blijft deze machtiging geldig?",
+        ru: "Как долго действует эта доверенность?",
+      },
+      {
+        nl: "Hoe kan ik de machtiging weer intrekken?",
+        ru: "Как отозвать эту доверенность?",
+      },
+    ],
+    replyBank: [
+      { nl: "Voor welke instantie heeft u de machtiging nodig?", ru: "Для какого ведомства вам нужна доверенность?", key: "instantie", register: "formeel" },
+      { nl: "Beide partijen moeten het formulier ondertekenen.", ru: "Обе стороны должны подписать форму.", key: "ondertekenen", register: "formeel" },
+      { nl: "De machtiging blijft geldig tot u hem intrekt.", ru: "Доверенность действует, пока вы её не отзовёте.", key: "intrekt", register: "formeel" },
+      { nl: "U kunt dit online intrekken via uw account.", ru: "Отозвать можно онлайн через ваш аккаунт.", key: "online intrekken", register: "neutraal" },
+      { nl: "Kunt u het BSN van de andere persoon geven?", ru: "Можете дать BSN другого человека?", key: "BSN", register: "formeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "We can explain this process in English too.", ru: "Можем объяснить этот процесс и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "betekent"],
+    traps: [
+      {
+        wrong: "Ik wil machtigen iemand.",
+        right: "Ik wil iemand machtigen.",
+        why: "Дополнение перед инфинитивом, не после него.",
+      },
+      {
+        wrong: "de machtiging, het instantie",
+        right: "de machtiging, de instantie",
+        why: "Оба de: de machtiging, de instantie.",
+      },
+    ],
+    gate: [
+      {
+        word: "machtiging",
+        focus: "харде G, ударение на MACH-",
+        tip: "МАХ-ти-хинх. Доверенность — слово, встречающееся во всех формальных инстанциях.",
+      },
+      {
+        word: "intrekken",
+        focus: "отделяемый глагол",
+        tip: "ИН-тре-кен. Отзывать — ik trek in.",
+      },
+    ],
+  },
+  {
+    id: "verklaring-omtrent-gedrag",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Заказать справку о несудимости (VOG)",
+    context: "Заявка на VOG (Verklaring Omtrent Gedrag) для нового рабочего места",
+    minutes: 6,
+    openerContext: "loket",
+    brief: [
+      "Спросят, для какой должности и какого работодателя нужна справка.",
+      "Уточнят, есть ли у вас код работодателя (screeningsprofiel) — обычно его даёт сам работодатель.",
+      "Объяснят срок рассмотрения — обычно несколько недель.",
+      "В конце скажут стоимость и что делать, если справку отклонят.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil een VOG aanvragen voor mijn nieuwe baan.",
+        ru: "Я хочу заказать VOG для новой работы.",
+      },
+      {
+        nl: "Mijn werkgever heeft mij een screeningsprofiel gegeven.",
+        ru: "Работодатель дал мне код профиля проверки.",
+      },
+      {
+        nl: "Hoe lang duurt de aanvraag?",
+        ru: "Сколько занимает рассмотрение?",
+      },
+      {
+        nl: "Wat gebeurt er als de VOG wordt afgewezen?",
+        ru: "Что будет, если справку отклонят?",
+      },
+    ],
+    replyBank: [
+      { nl: "Heeft u het screeningsprofiel van uw werkgever?", ru: "У вас есть код профиля от работодателя?", key: "screeningsprofiel", register: "formeel" },
+      { nl: "De aanvraag duurt meestal vier weken.", ru: "Рассмотрение занимает обычно четыре недели.", key: "vier weken", register: "neutraal" },
+      { nl: "Bij afwijzing krijgt u een schriftelijke motivering.", ru: "При отказе вам придёт письменное обоснование.", key: "afwijzing", register: "formeel" },
+      { nl: "U kunt bezwaar maken tegen een afwijzing.", ru: "На отказ можно подать возражение.", key: "bezwaar", register: "formeel" },
+      { nl: "Dat kost eenenveertig euro vijftig.", ru: "Это стоит сорок один пятьдесят.", key: "eenenveertig", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I can walk you through this in English too.", ru: "Могу разобрать это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Wat gebeurt er als de VOG afgewezen wordt als?",
+        right: "Wat gebeurt er als de VOG wordt afgewezen?",
+        why: "Придаточное условия с «als» уводит спрягаемый глагол wordt в конец, после причастия afgewezen — а не сохраняет прямой порядок главного предложения.",
+      },
+      {
+        wrong: "de aanvraag, het bezwaar",
+        right: "de aanvraag, het bezwaar",
+        why: "de aanvraag, het bezwaar — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "screeningsprofiel",
+        focus: "заимствование, ударение на SCREE-",
+        tip: "СКРИ:-нинхс-про-фи:л. Заимствовано из английского, с нидерландским окончанием -s.",
+      },
+      {
+        word: "afwijzing",
+        focus: "ij = «эй»",
+        tip: "АФ-вэй-зинх. Отказ — от глагола afwijzen.",
+      },
+    ],
+  },
+  {
+    id: "kentekenbewijs-overschrijven",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Переоформить машину на своё имя",
+    context: "Визит к дилеру или в RDW-пункт для переоформления купленной подержанной машины",
+    minutes: 7,
+    openerContext: "loket",
+    brief: [
+      "Спросят документы обеих сторон — продавца и покупателя.",
+      "Проверят техосмотр (APK) — если он просрочен, машину нельзя переоформить.",
+      "Объяснят, что старая страховка перестаёт действовать сразу, новую нужно оформить заранее.",
+      "В конце выдадут новое свидетельство о регистрации.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil dit kenteken op mijn naam overschrijven.",
+        ru: "Я хочу переоформить эту машину на своё имя.",
+      },
+      {
+        nl: "Is de APK nog geldig?",
+        ru: "Техосмотр ещё действителен?",
+      },
+      {
+        nl: "Ik heb al een nieuwe verzekering geregeld.",
+        ru: "Я уже оформил новую страховку.",
+      },
+      {
+        nl: "Wanneer krijg ik het nieuwe kentekenbewijs?",
+        ru: "Когда я получу новое свидетельство о регистрации?",
+      },
+    ],
+    replyBank: [
+      { nl: "Zijn beide partijen hier aanwezig?", ru: "Обе стороны присутствуют?", key: "beide partijen", register: "formeel" },
+      { nl: "De APK is nog drie maanden geldig.", ru: "Техосмотр действителен ещё три месяца.", key: "APK geldig", register: "neutraal" },
+      { nl: "Heeft u al een verzekering voor deze auto?", ru: "У вас уже есть страховка на эту машину?", key: "verzekering", register: "formeel" },
+      { nl: "U krijgt het nieuwe kentekenbewijs per post.", ru: "Новое свидетельство придёт по почте.", key: "per post", register: "formeel" },
+      { nl: "Dat duurt ongeveer vijf werkdagen.", ru: "Это займёт примерно пять рабочих дней.", key: "vijf werkdagen", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "Happy to go through this in English too.", ru: "С радостью разберу это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "klopt"],
+    traps: [
+      {
+        wrong: "Ik heb geregeld al een nieuwe verzekering.",
+        right: "Ik heb al een nieuwe verzekering geregeld.",
+        why: "Рамочная конструкция: причастие geregeld уходит в самый конец, обстоятельство al — перед дополнением.",
+      },
+      {
+        wrong: "het kenteken, de kentekenbewijs",
+        right: "het kenteken, het kentekenbewijs",
+        why: "Оба het: het kenteken, het kentekenbewijs.",
+      },
+    ],
+    gate: [
+      {
+        word: "kentekenbewijs",
+        focus: "составное слово",
+        tip: "КЕН-те:-кен-бə-вэйс. kenteken + bewijs — свидетельство о регистрации.",
+      },
+      {
+        word: "overschrijven",
+        focus: "sch = s + харде G",
+        tip: "О:-вер-схрэй-вен. Переоформлять — тот же глагол, что и «переписывать».",
+      },
+    ],
+  },
+  {
+    id: "paspoort-kind-aanvragen",
+    domain: "bureaucratie",
+    level: "A2",
+    title: "Оформить паспорт ребёнку",
+    context: "Визит в gemeente для оформления первого паспорта ребёнку — нужны оба родителя или их согласие",
+    minutes: 7,
+    openerContext: "loket",
+    brief: [
+      "Спросят, присутствуют ли оба родителя — если нет, нужно письменное согласие отсутствующего.",
+      "Уточнят гражданство ребёнка и родителей, если оно отличается.",
+      "Сфотографируют ребёнка — для маленьких детей может понадобиться несколько попыток.",
+      "В конце скажут срок изготовления и стоимость, которая зависит от возраста ребёнка.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil een paspoort aanvragen voor mijn dochter.",
+        ru: "Я хочу оформить паспорт своей дочери.",
+      },
+      {
+        nl: "Haar vader kon vandaag helaas niet mee.",
+        ru: "Её отец, к сожалению, не смог прийти сегодня.",
+      },
+      {
+        nl: "Is schriftelijke toestemming dan voldoende?",
+        ru: "Письменного согласия тогда достаточно?",
+      },
+      {
+        nl: "Hoe lang duurt het voordat het klaar is?",
+        ru: "Сколько времени займёт, прежде чем будет готово?",
+      },
+    ],
+    replyBank: [
+      { nl: "Zijn beide ouders vandaag aanwezig?", ru: "Оба родителя присутствуют сегодня?", key: "beide ouders", register: "formeel" },
+      { nl: "Bij afwezigheid is schriftelijke toestemming verplicht.", ru: "При отсутствии обязательно письменное согласие.", key: "schriftelijke toestemming", register: "formeel" },
+      { nl: "Voor kinderen onder achttien gelden andere kosten.", ru: "Для детей до восемнадцати действует другая цена.", key: "andere kosten", register: "neutraal" },
+      { nl: "Het paspoort is over ongeveer een week klaar.", ru: "Паспорт будет готов примерно через неделю.", key: "een week", register: "neutraal" },
+      { nl: "Kijk rechtdoor voor de foto, alstublieft.", ru: "Смотрите прямо для фото, пожалуйста.", key: "rechtdoor", register: "informeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "I'm happy to explain the requirements in English too.", ru: "С радостью объясню требования и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers"],
+    traps: [
+      {
+        wrong: "Haar vader kon niet mee vandaag.",
+        right: "Haar vader kon vandaag helaas niet mee.",
+        why: "Обстоятельство времени vandaag встаёт сразу после спрягаемого глагола, а не в самом конце — отделяемая частица mee всё равно уходит последней.",
+      },
+      {
+        wrong: "het toestemming, de paspoort",
+        right: "de toestemming, het paspoort",
+        why: "de toestemming, het paspoort — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "toestemming",
+        focus: "ударение на -STEM-",
+        tip: "ту-СТЕ-минх. Согласие — уже знакомое слово из школьного сценария, здесь в паспортном контексте.",
+      },
+      {
+        word: "afwezigheid",
+        focus: "ударение на -WE-",
+        tip: "аф-ВЕ:-зех-хэйт. Отсутствие — от wezig (присутствующий) с приставкой af-.",
+      },
+    ],
+  },
+  {
+    id: "ggd-jeugdgezondheidszorg-controle",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Плановый медосмотр школьника в GGD",
+    context: "Плановый осмотр ребёнка школьного возраста в GGD (jeugdgezondheidszorg)",
+    minutes: 7,
+    openerContext: "loket",
+    brief: [
+      "Медсестра спросит про рост, зрение, слух и общее самочувствие ребёнка.",
+      "Могут спросить про питание, сон и активность — стандартные вопросы для этого возраста.",
+      "Проверят прививочный статус по карте.",
+      "В конце дадут рекомендации и скажут, когда следующий осмотр.",
+    ],
+    lines: [
+      {
+        nl: "Mijn dochter groeit goed, denk ik.",
+        ru: "Моя дочь, кажется, хорошо растёт.",
+      },
+      {
+        nl: "Ze slaapt de laatste tijd wat onrustig.",
+        ru: "Последнее время она спит немного беспокойно.",
+      },
+      {
+        nl: "Zijn haar ogen en oren in orde?",
+        ru: "С её глазами и ушами всё в порядке?",
+      },
+      {
+        nl: "Zit ze op schema met de vaccinaties?",
+        ru: "Она идёт по графику прививок?",
+      },
+      {
+        nl: "Wanneer is de volgende controle?",
+        ru: "Когда следующий осмотр?",
+      },
+    ],
+    replyBank: [
+      { nl: "Hoe eet en slaapt ze over het algemeen?", ru: "Как в целом она ест и спит?", key: "over het algemeen", register: "neutraal" },
+      { nl: "Haar gehoor en zicht zijn beide goed.", ru: "Слух и зрение у неё в порядке.", key: "gehoor en zicht", register: "neutraal" },
+      { nl: "Ze loopt keurig op schema met de prikken.", ru: "Она отлично идёт по графику прививок.", key: "op schema", register: "informeel" },
+      { nl: "De volgende controle is over een jaar.", ru: "Следующий осмотр через год.", key: "over een jaar", register: "formeel" },
+      { nl: "Let u de komende tijd op haar slaapritme.", ru: "Понаблюдайте ближайшее время за режимом сна.", key: "slaapritme", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to go through this in English too.", ru: "С радостью разберу это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen"],
+    traps: [
+      {
+        wrong: "Ze slaapt onrustig de laatste tijd.",
+        right: "Ze slaapt de laatste tijd wat onrustig.",
+        why: "Обстоятельство времени «de laatste tijd» тяготеет к середине фразы, перед прилагательным-наречием, а не к самому концу.",
+      },
+      {
+        wrong: "het gehoor, de zicht",
+        right: "het gehoor, het zicht",
+        why: "Оба het: het gehoor, het zicht.",
+      },
+    ],
+    gate: [
+      {
+        word: "slaapritme",
+        focus: "составное слово",
+        tip: "СЛА:П-рит-мə. slaap + ritme — режим сна.",
+      },
+      {
+        word: "gehoor",
+        focus: "долгое oo",
+        tip: "хə-ХО:Р. Слух — от глагола horen.",
+      },
+    ],
+  },
+  {
+    id: "huisarts-uitslag-bespreken",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Обсудить результаты анализов с терапевтом",
+    context: "Телефонный разговор с huisarts об уже готовых результатах анализов",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Врач сначала спросит, как вы себя чувствуете сейчас.",
+      "Расскажет результаты по одному показателю за раз — переспрашивайте, если не поняли термин.",
+      "Может предложить план: подождать, повторить анализ или направить к специалисту.",
+      "В конце уточнит, есть ли у вас вопросы прямо сейчас.",
+    ],
+    lines: [
+      {
+        nl: "Ik bel voor de uitslag van mijn bloedonderzoek.",
+        ru: "Я звоню по поводу результата анализа крови.",
+      },
+      {
+        nl: "Wat betekent deze waarde precies?",
+        ru: "Что именно означает это значение?",
+      },
+      {
+        nl: "Moet ik me ergens zorgen om maken?",
+        ru: "Мне стоит из-за чего-то беспокоиться?",
+      },
+      {
+        nl: "Wat is de volgende stap?",
+        ru: "Какой следующий шаг?",
+      },
+    ],
+    replyBank: [
+      { nl: "Uw uitslagen zien er over het algemeen goed uit.", ru: "Ваши результаты в целом выглядят хорошо.", key: "over het algemeen goed", register: "neutraal" },
+      { nl: "Deze waarde is net iets aan de hoge kant.", ru: "Это значение чуть выше нормы.", key: "aan de hoge kant", register: "neutraal" },
+      { nl: "Ik stel voor dat we het over drie maanden herhalen.", ru: "Предлагаю повторить анализ через три месяца.", key: "herhalen", register: "formeel" },
+      { nl: "Dit hoeft u niet ongerust te maken.", ru: "Из-за этого не стоит волноваться.", key: "ongerust", register: "formeel" },
+      { nl: "Heeft u nog vragen hierover?", ru: "У вас есть ещё вопросы по этому поводу?", key: "vragen", register: "neutraal" },
+      { nl: "Kunt u dat wat eenvoudiger uitleggen?", ru: "Можете объяснить попроще?", key: "eenvoudiger", register: "informeel" },
+      { nl: "We can go through this in English if you prefer.", ru: "Можем разобрать это по-английски, если хотите.", register: "switch" },
+    ],
+    repairIds: ["betekent", "momentje"],
+    traps: [
+      {
+        wrong: "Ik moet me zorgen maken ergens om?",
+        right: "Moet ik me ergens zorgen om maken?",
+        why: "Вопрос без вопросительного слова начинается с глагола: Moet ik…? — а не с подлежащего, как в утвердительном порядке слов.",
+      },
+      {
+        wrong: "de uitslag, het waarde",
+        right: "de uitslag, de waarde",
+        why: "Оба de: de uitslag, de waarde.",
+      },
+    ],
+    gate: [
+      {
+        word: "bloedonderzoek",
+        focus: "составное слово",
+        tip: "БЛУТ-он-дер-зу:к. bloed + onderzoek — анализ крови.",
+      },
+      {
+        word: "ongerust",
+        focus: "ударение на -RUST",
+        tip: "он-хə-РЮСТ. Обеспокоенный — отрицание от gerust (спокойный).",
+      },
+    ],
+  },
+  {
+    id: "tandarts-wortelkanaalbehandeling",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Обсудить лечение корневого канала",
+    context: "Разговор с дантистом о необходимости лечения корневого канала после осмотра",
+    minutes: 7,
+    openerContext: "loket",
+    brief: [
+      "Дантист объяснит, почему нужно именно такое лечение, а не просто пломба.",
+      "Расскажет, сколько визитов потребуется и сколько времени займёт каждый.",
+      "Уточнит, какая часть стоимости покрывается страховкой.",
+      "В конце предложит записаться на первый визит.",
+    ],
+    lines: [
+      {
+        nl: "Waarom is een wortelkanaalbehandeling nodig?",
+        ru: "Почему нужно лечение корневого канала?",
+      },
+      {
+        nl: "Hoeveel afspraken kost dit ongeveer?",
+        ru: "Сколько визитов это займёт примерно?",
+      },
+      {
+        nl: "Wordt dit vergoed door mijn verzekering?",
+        ru: "Это покрывается моей страховкой?",
+      },
+      {
+        nl: "Kan ik meteen een afspraak maken?",
+        ru: "Могу я сразу записаться?",
+      },
+    ],
+    replyBank: [
+      { nl: "De wortel is ontstoken, een vulling is niet genoeg.", ru: "Корень воспалён, пломбы недостаточно.", key: "ontstoken", register: "neutraal" },
+      { nl: "Dit kost meestal twee tot drie afspraken.", ru: "Обычно это занимает два-три визита.", key: "twee tot drie", register: "neutraal" },
+      { nl: "Uw basisverzekering vergoedt dit gedeeltelijk.", ru: "Ваша базовая страховка покрывает это частично.", key: "gedeeltelijk", register: "formeel" },
+      { nl: "Ik plan de eerste afspraak volgende week in.", ru: "Запишу вас на первый визит на следующую неделю.", key: "eerste afspraak", register: "neutraal" },
+      { nl: "Heeft u nog vragen over de behandeling?", ru: "Есть ещё вопросы по лечению?", key: "behandeling", register: "neutraal" },
+      { nl: "Kunt u dat wat langzamer uitleggen?", ru: "Объясните чуть помедленнее?", key: "langzamer", register: "informeel" },
+      { nl: "I'm happy to explain the procedure in English too.", ru: "С радостью объясню процедуру и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen"],
+    traps: [
+      {
+        wrong: "Is dit vergoed door mijn verzekering?",
+        right: "Wordt dit vergoed door mijn verzekering?",
+        why: "Регулярный процесс возмещения описывается страдательным залогом с worden, а не с zijn.",
+      },
+      {
+        wrong: "de wortel, het vulling",
+        right: "de wortel, de vulling",
+        why: "Оба de: de wortel, de vulling.",
+      },
+    ],
+    gate: [
+      {
+        word: "wortelkanaalbehandeling",
+        focus: "составное слово",
+        tip: "ВОР-тел-ка-НА:Л-бə-хан-де-линх. wortel + kanaal + behandeling — самое длинное слово в этом сценарии.",
+      },
+      {
+        word: "ontstoken",
+        focus: "ударение на -STO-",
+        tip: "онт-СТО:-кен. Воспалённый — причастие от ontsteken.",
+      },
+    ],
+  },
+  {
+    id: "apotheek-bijwerkingen-melden",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Сообщить о побочных эффектах лекарства",
+    context: "Визит в аптеку — сообщить о неприятных побочных эффектах назначенного лекарства",
+    minutes: 6,
+    openerContext: "winkel",
+    brief: [
+      "Фармацевт спросит, какие именно симптомы и когда они начались.",
+      "Уточнит, принимаете ли вы другие лекарства одновременно.",
+      "Может предложить альтернативу или посоветует обратиться к врачу.",
+      "В конце объяснит, как сообщить об этом официально (bijwerking melden).",
+    ],
+    lines: [
+      {
+        nl: "Ik heb last van bijwerkingen van dit medicijn.",
+        ru: "У меня побочные эффекты от этого лекарства.",
+      },
+      {
+        nl: "Ik voel me al twee dagen duizelig.",
+        ru: "Уже два дня у меня кружится голова.",
+      },
+      {
+        nl: "Ik gebruik verder geen andere medicijnen.",
+        ru: "Больше никаких других лекарств я не принимаю.",
+      },
+      {
+        nl: "Moet ik hiermee naar de huisarts?",
+        ru: "Мне с этим нужно к терапевту?",
+      },
+    ],
+    replyBank: [
+      { nl: "Welke klachten heeft u precies?", ru: "Какие именно жалобы у вас?", key: "klachten precies", register: "formeel" },
+      { nl: "Gebruikt u nog andere medicijnen ernaast?", ru: "Принимаете ли ещё какие-то лекарства помимо этого?", key: "ernaast", register: "neutraal" },
+      { nl: "Dit komt helaas vaker voor bij dit medicijn.", ru: "Это, к сожалению, случается с этим лекарством нередко.", key: "komt vaker voor", register: "neutraal" },
+      { nl: "Neem contact op met uw huisarts hierover.", ru: "Свяжитесь по этому поводу с терапевтом.", key: "contact op", register: "formeel" },
+      { nl: "U kunt dit ook officieel melden bij het meldpunt.", ru: "Об этом можно также официально сообщить в специальную службу.", key: "meldpunt", register: "formeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "I'm happy to note this down in English too.", ru: "С радостью запишу это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "betekent"],
+    traps: [
+      {
+        wrong: "Ik ben duizelig al twee dagen.",
+        right: "Ik voel me al twee dagen duizelig.",
+        why: "Самочувствие выражается через «voelen me + прилагательное», а не через «zijn + прилагательное» отдельно — а обстоятельство длительности встаёт перед прилагательным.",
+      },
+      {
+        wrong: "de bijwerking, het meldpunt",
+        right: "de bijwerking, het meldpunt",
+        why: "de bijwerking, het meldpunt — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "bijwerkingen",
+        focus: "ij = «эй»",
+        tip: "БЭЙ-вер-кин-хен. Побочные эффекты — множественное число, встречается на каждой листовке-вкладыше.",
+      },
+      {
+        word: "duizelig",
+        focus: "ui = /œy/",
+        tip: "ДЁЙ-зə-лех. Голова кружится — один из самых частых симптомов в аптеке.",
+      },
+    ],
+  },
+  {
+    id: "ggz-verwijzing-gesprek",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Разговор о направлении к психологу",
+    context: "Разговор с huisarts о направлении к психологу (GGZ) — только про сам процесс, не про суть проблемы",
+    minutes: 7,
+    openerContext: "loket",
+    brief: [
+      "Врач спросит, как долго вы себя так чувствуете и мешает ли это повседневной жизни.",
+      "Объяснит разницу между базовой и специализированной GGZ-помощью.",
+      "Скажет, что направление действует определённый срок и что делать, если лист ожидания длинный.",
+      "В конце уточнит, готовы ли вы получить направление сейчас.",
+    ],
+    lines: [
+      {
+        nl: "Ik voel me al een tijd niet goed en wil hulp.",
+        ru: "Я уже некоторое время плохо себя чувствую и хочу помощи.",
+      },
+      {
+        nl: "Het beïnvloedt mijn werk en slaap.",
+        ru: "Это влияет на мою работу и сон.",
+      },
+      {
+        nl: "Wat is het verschil tussen de opties?",
+        ru: "В чём разница между вариантами?",
+      },
+      {
+        nl: "Hoe lang is de wachtlijst ongeveer?",
+        ru: "Какой примерно лист ожидания?",
+      },
+    ],
+    replyBank: [
+      { nl: "Sinds wanneer voelt u zich zo?", ru: "С каких пор вы так себя чувствуете?", key: "sinds wanneer", register: "formeel" },
+      { nl: "Ik schrijf u een verwijzing naar de basis-GGZ.", ru: "Я выпишу вам направление в базовую GGZ.", key: "basis-GGZ", register: "formeel" },
+      { nl: "De wachtlijst verschilt per praktijk.", ru: "Лист ожидания отличается по практикам.", key: "wachtlijst", register: "neutraal" },
+      { nl: "Deze verwijzing is een jaar geldig.", ru: "Это направление действительно год.", key: "een jaar geldig", register: "formeel" },
+      { nl: "Neem gerust weer contact op als het nodig is.", ru: "Обращайтесь снова, если понадобится.", key: "contact op", register: "informeel" },
+      { nl: "Kunt u dat rustig nog een keer zeggen?", ru: "Скажите это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can talk this through in English if that helps.", ru: "Можем обсудить это по-английски, если так легче.", register: "switch" },
+    ],
+    repairIds: ["momentje", "herhalen"],
+    traps: [
+      {
+        wrong: "Het beïnvloedt mijn werk en slaap sinds een tijd.",
+        right: "Ik voel me al een tijd niet goed en wil hulp.",
+        why: "«al een tijd» — длительность до сейчас — встаёт сразу после подлежащего и глагола, а не выносится в конец через sinds без даты.",
+      },
+      {
+        wrong: "de wachtlijst, het verwijzing",
+        right: "de wachtlijst, de verwijzing",
+        why: "Оба de: de wachtlijst, de verwijzing.",
+      },
+    ],
+    gate: [
+      {
+        word: "beïnvloedt",
+        focus: "ë с тремой — раздельное произношение",
+        tip: "бə-ЪЙН-флут. Тrema над ë означает, что гласные произносятся раздельно, не как дифтонг.",
+      },
+      {
+        word: "verwijzing",
+        focus: "ij = «эй»",
+        tip: "вер-ВЭЙ-зинх. Направление — уже знакомое слово из других медицинских сценариев.",
+      },
+    ],
+  },
+  {
+    id: "verloskundige-eerste-afspraak",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Первый приём у акушерки",
+    context: "Первая встреча с verloskundige после подтверждения беременности",
+    minutes: 8,
+    openerContext: "loket",
+    brief: [
+      "Акушерка спросит дату последней менструации, чтобы рассчитать срок родов.",
+      "Расскажет про график последующих визитов и какие анализы понадобятся.",
+      "Спросит про хронические заболевания и предыдущие беременности.",
+      "В конце объяснит, куда звонить в экстренном случае вне рабочих часов.",
+    ],
+    lines: [
+      {
+        nl: "Dit is mijn eerste zwangerschap.",
+        ru: "Это моя первая беременность.",
+      },
+      {
+        nl: "Mijn laatste menstruatie was op...",
+        ru: "Моя последняя менструация была...",
+      },
+      {
+        nl: "Hoe vaak heb ik een afspraak nodig?",
+        ru: "Как часто мне нужно приходить на приём?",
+      },
+      {
+        nl: "Wie bel ik buiten kantooruren?",
+        ru: "Кому звонить в нерабочее время?",
+      },
+    ],
+    replyBank: [
+      { nl: "Is dit uw eerste zwangerschap?", ru: "Это ваша первая беременность?", key: "eerste zwangerschap", register: "formeel" },
+      { nl: "Wat was de eerste dag van uw laatste menstruatie?", ru: "Какой был первый день последней менструации?", key: "laatste menstruatie", register: "formeel" },
+      { nl: "De eerste maanden komt u eens per vier weken.", ru: "Первые месяцы вы будете приходить раз в четыре недели.", key: "eens per vier weken", register: "neutraal" },
+      { nl: "Buiten kantooruren belt u dit alarmnummer.", ru: "Вне рабочих часов звоните по этому экстренному номеру.", key: "alarmnummer", register: "formeel" },
+      { nl: "Heeft u chronische aandoeningen?", ru: "У вас есть хронические заболевания?", key: "chronische aandoeningen", register: "formeel" },
+      { nl: "Kunt u dat nog een keer rustig herhalen?", ru: "Повторите это ещё раз спокойно?", key: "rustig herhalen", register: "informeel" },
+      { nl: "I'm happy to go through this in English too.", ru: "С радостью разберу это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["momentje", "herhalen", "cijfers"],
+    traps: [
+      {
+        wrong: "Hoe vaak ik heb een afspraak nodig?",
+        right: "Hoe vaak heb ik een afspraak nodig?",
+        why: "После вопросительного слова сразу глагол heb, подлежащее ik — третьим.",
+      },
+      {
+        wrong: "de zwangerschap, het aandoening",
+        right: "de zwangerschap, de aandoening",
+        why: "Оба de: de zwangerschap, de aandoening.",
+      },
+    ],
+    gate: [
+      {
+        word: "zwangerschap",
+        focus: "ударение на -SCHAP",
+        tip: "ЗВАНХ-хер-схап. Беременность — слово, встречающееся во всех разговорах этого цикла.",
+      },
+      {
+        word: "verloskundige",
+        focus: "ударение на -KUN-",
+        tip: "вер-ЛОС-кюн-ди-хə. Акушерка — независимая профессия в нидерландской системе, не то же самое, что врач.",
+      },
+    ],
+  },
+  {
+    id: "opticien-bril-aanpassen",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Подгонка новых очков у оптика",
+    context: "Визит к оптику через несколько дней после покупки очков — жалоба на дискомфорт",
+    minutes: 5,
+    openerContext: "winkel",
+    brief: [
+      "Оптик спросит, что именно неудобно — давит за ушами, съезжают, размыто видно.",
+      "Проверит посадку и, если нужно, подкорректирует дужки на месте.",
+      "Может предложить перепроверить рецепт, если размытость не проходит.",
+      "В конце спросит, всё ли теперь удобно.",
+    ],
+    lines: [
+      {
+        nl: "Deze bril knelt achter mijn oren.",
+        ru: "Эти очки давят мне за ушами.",
+      },
+      {
+        nl: "Ik zie ook nog steeds een beetje wazig.",
+        ru: "У меня всё ещё немного размыто видно.",
+      },
+      {
+        nl: "Kunt u de pootjes aanpassen?",
+        ru: "Можете подкорректировать дужки?",
+      },
+      {
+        nl: "Moet mijn recept opnieuw gecontroleerd worden?",
+        ru: "Нужно ли перепроверить мой рецепт?",
+      },
+    ],
+    replyBank: [
+      { nl: "Waar knelt de bril precies?", ru: "Где именно жмут очки?", key: "knelt", register: "informeel" },
+      { nl: "Ik pas de pootjes even voor u aan.", ru: "Сейчас подкорректирую дужки для вас.", key: "pas aan", register: "informeel" },
+      { nl: "Ziet u overal wazig, of alleen in de verte?", ru: "Размыто видно везде, или только вдали?", key: "wazig", register: "neutraal" },
+      { nl: "Laten we uw ogen nog een keer meten.", ru: "Давайте ещё раз измерим ваше зрение.", key: "meten", register: "informeel" },
+      { nl: "Zit de bril nu comfortabeler?", ru: "Теперь очки удобнее сидят?", key: "comfortabeler", register: "informeel" },
+      { nl: "Kunt u dat nog een keer laten zien?", ru: "Можете показать это ещё раз?", key: "laten zien", register: "informeel" },
+      { nl: "I'm happy to sort this out in English too.", ru: "С радостью разберусь с этим и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "betekent"],
+    traps: [
+      {
+        wrong: "Ik zie nog steeds wazig een beetje.",
+        right: "Ik zie ook nog steeds een beetje wazig.",
+        why: "«een beetje» встаёт перед прилагательным-наречием wazig, а не после него в самом конце.",
+      },
+      {
+        wrong: "de bril, het pootje",
+        right: "de bril, het pootje",
+        why: "de bril, het pootje (уменьшительное — всегда het) — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "wazig",
+        focus: "долгое aa",
+        tip: "ВА:-зех. Размыто — про зрение, не путать с moe (усталый).",
+      },
+      {
+        word: "pootjes",
+        focus: "уменьшительное -jes",
+        tip: "ПО:Т-йəс. Дужки очков — от poot с уменьшительным.",
+      },
+    ],
+  },
+  {
+    id: "ziekenhuis-opname-voorbereiding",
+    domain: "gezondheid",
+    level: "A2",
+    title: "Подготовка к плановой госпитализации",
+    context: "Телефонный разговор с больницей перед плановой процедурой — организационные вопросы",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят, принимаете ли вы лекарства, которые нужно временно отменить перед процедурой.",
+      "Уточнят, есть ли аллергии на лекарства или материалы.",
+      "Объяснят, во сколько приходить и что взять с собой.",
+      "В конце скажут, сколько примерно продлится пребывание.",
+    ],
+    lines: [
+      {
+        nl: "Ik bel over mijn opname volgende week.",
+        ru: "Я звоню по поводу моей госпитализации на следующей неделе.",
+      },
+      {
+        nl: "Moet ik met bepaalde medicijnen stoppen?",
+        ru: "Мне нужно прекратить приём каких-то лекарств?",
+      },
+      {
+        nl: "Ik heb een allergie voor penicilline.",
+        ru: "У меня аллергия на пенициллин.",
+      },
+      {
+        nl: "Wat moet ik meenemen naar het ziekenhuis?",
+        ru: "Что мне взять с собой в больницу?",
+      },
+    ],
+    replyBank: [
+      { nl: "Gebruikt u bloedverdunners?", ru: "Вы принимаете разжижающие кровь препараты?", key: "bloedverdunners", register: "formeel" },
+      { nl: "Heeft u allergieën voor medicijnen?", ru: "У вас есть аллергии на лекарства?", key: "allergieën", register: "formeel" },
+      { nl: "Neemt u een identiteitsbewijs en pyjama mee.", ru: "Возьмите с собой документ и пижаму.", key: "pyjama", register: "formeel" },
+      { nl: "U wordt de avond ervoor verwacht om zeven uur.", ru: "Вас ждут вечером накануне в семь часов.", key: "de avond ervoor", register: "formeel" },
+      { nl: "De opname duurt meestal twee dagen.", ru: "Госпитализация обычно длится два дня.", key: "twee dagen", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "We can go through the details in English too.", ru: "Можем разобрать детали и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik heb allergie voor penicilline.",
+        right: "Ik heb een allergie voor penicilline.",
+        why: "Исчисляемое существительное allergie требует неопределённый артикль een — в русском «у меня аллергия» без артикля вообще, что и подталкивает его пропустить.",
+      },
+      {
+        wrong: "de opname, het pyjama",
+        right: "de opname, de pyjama",
+        why: "Оба de: de opname, de pyjama.",
+      },
+    ],
+    gate: [
+      {
+        word: "bloedverdunners",
+        focus: "составное слово",
+        tip: "БЛУТ-фер-дюн-нерс. bloed + verdunners — разжижающие кровь препараты.",
+      },
+      {
+        word: "opname",
+        focus: "ударение на OP-",
+        tip: "ОП-на:-мə. Госпитализация — от глагола opnemen.",
+      },
+    ],
+  },
+  {
+    id: "schoolkeuze-voortgezet-onderwijs",
+    domain: "school",
+    level: "A2",
+    title: "День открытых дверей средней школы",
+    context: "Разговор с представителем школы на дне открытых дверей при выборе средней школы для ребёнка",
+    minutes: 7,
+    openerContext: "informeel",
+    brief: [
+      "Представитель школы расскажет про уровни обучения и профили (havo, vwo, vmbo).",
+      "Спросят про интересы и сильные стороны ребёнка.",
+      "Расскажут про иностранные языки, кружки и расписание.",
+      "В конце объяснят, как и до какого срока подать заявку.",
+    ],
+    lines: [
+      {
+        nl: "Welke niveaus biedt deze school aan?",
+        ru: "Какие уровни предлагает эта школа?",
+      },
+      {
+        nl: "Mijn zoon is sterk in taal, minder in rekenen.",
+        ru: "Мой сын силён в языках, слабее в математике.",
+      },
+      {
+        nl: "Welke talen kan hij hier leren?",
+        ru: "Какие языки он может здесь изучать?",
+      },
+      {
+        nl: "Tot wanneer kunnen we hem aanmelden?",
+        ru: "До какого срока можно подать заявку?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wij bieden havo en vwo aan.", ru: "Мы предлагаем havo и vwo.", key: "havo en vwo", register: "formeel" },
+      { nl: "Waar liggen zijn interesses?", ru: "В чём его интересы?", key: "interesses", register: "neutraal" },
+      { nl: "Naast Engels bieden we Duits en Frans aan.", ru: "Кроме английского, предлагаем немецкий и французский.", key: "Duits en Frans", register: "neutraal" },
+      { nl: "De aanmelding sluit half maart.", ru: "Приём заявок закрывается в середине марта.", key: "half maart", register: "formeel" },
+      { nl: "U kunt ook een proefles inplannen.", ru: "Можно также записаться на пробный урок.", key: "proefles", register: "informeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "opschrijven"],
+    traps: [
+      {
+        wrong: "Mijn zoon is sterk in taal, in rekenen minder.",
+        right: "Mijn zoon is sterk in taal, minder in rekenen.",
+        why: "«minder» встаёт перед предлогом, к которому относится, а не после существительного — порядок фиксирован иначе, чем в русском.",
+      },
+      {
+        wrong: "de niveau, het interesse",
+        right: "het niveau, de interesse",
+        why: "het niveau, de interesse — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "aanmelding",
+        focus: "харде G перед -ing",
+        tip: "А:Н-мел-динх. Подача заявки — слово встречается в каждом школьном разговоре.",
+      },
+      {
+        word: "proefles",
+        focus: "долгое oe",
+        tip: "ПРУ:Ф-лес. Пробный урок — от proberen.",
+      },
+    ],
+  },
+  {
+    id: "leerplichtambtenaar-gesprek",
+    domain: "school",
+    level: "A2",
+    title: "Разговор с инспектором по посещаемости",
+    context: "Разговор с leerplichtambtenaar после нескольких пропусков ребёнка в школе",
+    minutes: 8,
+    openerContext: "loket",
+    brief: [
+      "Инспектор объяснит, сколько именно пропусков зафиксировано и за какой период.",
+      "Спросит причину отсутствий — важно объяснить честно, без оправданий сверх необходимого.",
+      "Может предложить план: справка от врача, договор о посещаемости.",
+      "В конце объяснит последствия, если пропуски продолжатся.",
+    ],
+    lines: [
+      {
+        nl: "Ik begrijp dat er zorgen zijn over de aanwezigheid.",
+        ru: "Я понимаю, что есть опасения по поводу посещаемости.",
+      },
+      {
+        nl: "Mijn dochter was regelmatig ziek deze maand.",
+        ru: "Моя дочь часто болела в этом месяце.",
+      },
+      {
+        nl: "Moet ik hiervoor een doktersverklaring hebben?",
+        ru: "Мне нужна для этого справка от врача?",
+      },
+      {
+        nl: "Wat gebeurt er als dit zo doorgaat?",
+        ru: "Что будет, если так продолжится?",
+      },
+    ],
+    replyBank: [
+      { nl: "Uw dochter heeft dit schooljaar acht keer verzuimd.", ru: "Ваша дочь пропустила восемь раз в этом учебном году.", key: "acht keer", register: "formeel" },
+      { nl: "Wat is de reden van de afwezigheid geweest?", ru: "Какова была причина отсутствий?", key: "reden", register: "formeel" },
+      { nl: "Een doktersverklaring zou helpen.", ru: "Справка от врача помогла бы.", key: "doktersverklaring", register: "formeel" },
+      { nl: "Bij herhaling moeten wij dit melden.", ru: "При повторении мы обязаны об этом сообщить.", key: "melden", register: "formeel" },
+      { nl: "Laten we samen een plan opstellen.", ru: "Давайте вместе составим план.", key: "plan opstellen", register: "neutraal" },
+      { nl: "Kunt u dat rustig nog een keer zeggen?", ru: "Скажите это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can continue this conversation in English if easier.", ru: "Можем продолжить разговор по-английски, если так легче.", register: "switch" },
+    ],
+    repairIds: ["momentje", "herhalen", "betekent"],
+    traps: [
+      {
+        wrong: "Wat gebeurt er als dit doorgaat zo?",
+        right: "Wat gebeurt er als dit zo doorgaat?",
+        why: "В придаточном с als «zo» встаёт перед отделяемым глаголом в конце фразы, не после него.",
+      },
+      {
+        wrong: "de verzuim, het reden",
+        right: "het verzuim, de reden",
+        why: "het verzuim, de reden — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "leerplichtambtenaar",
+        focus: "составное слово, самое длинное в сценарии",
+        tip: "ЛЕ:Р-плихт-амб-тə-НА:Р. leerplicht + ambtenaar — инспектор по обязательному образованию.",
+      },
+      {
+        word: "doktersverklaring",
+        focus: "составное слово",
+        tip: "ДОК-терс-фер-КЛА:-ринх. dokters + verklaring — справка от врача.",
+      },
+    ],
+  },
+  {
+    id: "ouderbijdrage-vraag",
+    domain: "school",
+    level: "A2",
+    title: "Вопрос о добровольном родительском взносе",
+    context: "Разговор с администрацией школы о добровольном родительском взносе (vrijwillige ouderbijdrage)",
+    minutes: 5,
+    openerContext: "informeel",
+    brief: [
+      "Объяснят, на что идёт взнос — экскурсии, праздники, дополнительные материалы.",
+      "Подтвердят, что взнос действительно добровольный и отказ не влияет на участие ребёнка.",
+      "Могут предложить рассрочку, если сумма для вас велика.",
+      "В конце скажут срок оплаты и способ.",
+    ],
+    lines: [
+      {
+        nl: "Waar wordt de ouderbijdrage precies voor gebruikt?",
+        ru: "На что именно идёт родительский взнос?",
+      },
+      {
+        nl: "Is deze bijdrage echt vrijwillig?",
+        ru: "Этот взнос действительно добровольный?",
+      },
+      {
+        nl: "Kan ik in termijnen betalen?",
+        ru: "Можно оплатить в рассрочку?",
+      },
+      {
+        nl: "Wat als ik niet betaal?",
+        ru: "Что будет, если я не заплачу?",
+      },
+    ],
+    replyBank: [
+      { nl: "Het gaat naar excursies en schoolfeesten.", ru: "Это идёт на экскурсии и школьные праздники.", key: "excursies", register: "neutraal" },
+      { nl: "De bijdrage is inderdaad volledig vrijwillig.", ru: "Взнос действительно полностью добровольный.", key: "vrijwillig", register: "formeel" },
+      { nl: "Uw kind wordt nooit uitgesloten van activiteiten.", ru: "Ваш ребёнок никогда не будет исключён из мероприятий.", key: "uitgesloten", register: "formeel" },
+      { nl: "Gespreid betalen kan altijd in overleg.", ru: "Оплату в рассрочку всегда можно согласовать.", key: "gespreid betalen", register: "neutraal" },
+      { nl: "U betaalt via de schoolapp of per factuur.", ru: "Оплата через школьное приложение или по счёту.", key: "factuur", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Uw kind wordt nooit uitgesloten nooit van activiteiten.",
+        right: "Uw kind wordt nooit uitgesloten van activiteiten.",
+        why: "Одно отрицание — nooit — а не два, как иногда напрашивается по аналогии с усилением в русском.",
+      },
+      {
+        wrong: "de bijdrage, het factuur",
+        right: "de bijdrage, de factuur",
+        why: "Оба de: de bijdrage, de factuur.",
+      },
+    ],
+    gate: [
+      {
+        word: "ouderbijdrage",
+        focus: "составное слово",
+        tip: "О:У-дер-бэй-дра:-хə. ouder + bijdrage — родительский взнос.",
+      },
+      {
+        word: "uitgesloten",
+        focus: "ui = /œy/",
+        tip: "ЁЙТ-хə-сло:-тен. Исключённый — причастие от uitsluiten.",
+      },
+    ],
+  },
+  {
+    id: "dyslexie-onderzoek-gesprek",
+    domain: "school",
+    level: "A2",
+    title: "Разговор про обследование на дислексию",
+    context: "Разговор с внутришкольным специалистом (intern begeleider) о направлении ребёнка на обследование дислексии",
+    minutes: 7,
+    openerContext: "informeel",
+    brief: [
+      "Специалист объяснит, какие сложности заметили учителя и почему предлагают обследование.",
+      "Расскажет, как проходит процесс и сколько он занимает.",
+      "Уточнит, есть ли похожие сложности у других членов семьи.",
+      "В конце объяснит, что происходит после подтверждения диагноза — какая поддержка положена.",
+    ],
+    lines: [
+      {
+        nl: "Wat merken de leerkrachten precies op?",
+        ru: "Что именно замечают учителя?",
+      },
+      {
+        nl: "Komt dit vaker voor in onze familie.",
+        ru: "Это встречается в нашей семье чаще.",
+        note: "Это не вопрос, а подтверждение факта: «Ja, dit komt vaker voor in onze familie».",
+      },
+      {
+        nl: "Hoe lang duurt het onderzoek?",
+        ru: "Сколько занимает обследование?",
+      },
+      {
+        nl: "Welke ondersteuning krijgt hij als het bevestigd wordt?",
+        ru: "Какую поддержку он получит, если диагноз подтвердится?",
+      },
+    ],
+    replyBank: [
+      { nl: "Hij heeft moeite met het herkennen van letters.", ru: "Ему трудно распознавать буквы.", key: "herkennen", register: "neutraal" },
+      { nl: "Komt dyslexie voor in de familie?", ru: "Дислексия встречается в семье?", key: "in de familie", register: "formeel" },
+      { nl: "Het onderzoek duurt meestal enkele weken.", ru: "Обследование обычно занимает несколько недель.", key: "enkele weken", register: "neutraal" },
+      { nl: "Bij bevestiging krijgt hij extra begeleiding.", ru: "При подтверждении он получит дополнительное сопровождение.", key: "extra begeleiding", register: "formeel" },
+      { nl: "We houden u steeds op de hoogte.", ru: "Мы будем вас постоянно информировать.", key: "op de hoogte", register: "formeel" },
+      { nl: "Kunt u dat rustig nog een keer uitleggen?", ru: "Объясните это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can go through this in English if that's easier.", ru: "Можем разобрать это по-английски, если так легче.", register: "switch" },
+    ],
+    repairIds: ["momentje", "betekent"],
+    traps: [
+      {
+        wrong: "Hij heeft moeite herkennen van letters.",
+        right: "Hij heeft moeite met het herkennen van letters.",
+        why: "«moeite hebben met» — застывшее сочетание, требующее met и артикль перед отглагольным существительным het herkennen.",
+      },
+      {
+        wrong: "de onderzoek, het begeleiding",
+        right: "het onderzoek, de begeleiding",
+        why: "het onderzoek, de begeleiding — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "dyslexie",
+        focus: "ударение на -LEK-",
+        tip: "дис-ЛЕК-си:. Дислексия — заимствовано почти без изменений.",
+      },
+      {
+        word: "begeleiding",
+        focus: "ei = «эй»",
+        tip: "бə-хə-ЛЭЙ-динх. Сопровождение — от глагола begeleiden.",
+      },
+    ],
+  },
+  {
+    id: "schoolreis-betaling-regelen",
+    domain: "school",
+    level: "A2",
+    title: "Оплата школьной экскурсии",
+    context: "Короткий разговор в школе об оплате многодневной школьной поездки (schoolreis/kamp)",
+    minutes: 5,
+    openerContext: "informeel",
+    brief: [
+      "Спросят, оплачиваете ли вы сразу всю сумму или частями.",
+      "Объяснят, что входит в стоимость — транспорт, проживание, питание.",
+      "Могут упомянуть, что есть фонд поддержки для семей с трудным финансовым положением.",
+      "В конце скажут крайний срок оплаты.",
+    ],
+    lines: [
+      {
+        nl: "Wat zit er allemaal bij de prijs inbegrepen?",
+        ru: "Что всё включено в цену?",
+      },
+      {
+        nl: "Kan ik in delen betalen?",
+        ru: "Можно оплатить частями?",
+      },
+      {
+        nl: "Is er ondersteuning als het bedrag lastig is?",
+        ru: "Есть ли поддержка, если сумма затруднительна?",
+      },
+      {
+        nl: "Wat is de uiterste betaaldatum?",
+        ru: "Какой крайний срок оплаты?",
+      },
+    ],
+    replyBank: [
+      { nl: "Vervoer, overnachting en eten zijn inbegrepen.", ru: "Транспорт, ночлег и еда включены.", key: "inbegrepen", register: "neutraal" },
+      { nl: "Gespreid betalen in twee termijnen kan.", ru: "Можно оплатить двумя частями.", key: "twee termijnen", register: "neutraal" },
+      { nl: "Er is een schoolfonds voor wie het nodig heeft.", ru: "Есть школьный фонд для тех, кому это нужно.", key: "schoolfonds", register: "formeel" },
+      { nl: "De uiterste betaaldatum is over drie weken.", ru: "Крайний срок оплаты — через три недели.", key: "uiterste betaaldatum", register: "formeel" },
+      { nl: "Neem gerust contact op als er iets onduidelijk is.", ru: "Обращайтесь, если что-то непонятно.", key: "onduidelijk", register: "informeel" },
+      { nl: "Kunt u dat nog een keer opschrijven?", ru: "Можете записать это ещё раз?", key: "opschrijven", register: "informeel" },
+      { nl: "I'm happy to send the details in English too.", ru: "С радостью пришлю детали и по-английски.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "cijfers"],
+    traps: [
+      {
+        wrong: "Wat zit er bij de prijs allemaal inbegrepen?",
+        right: "Wat zit er allemaal bij de prijs inbegrepen?",
+        why: "«allemaal» тяготеет к позиции сразу после er, а не в середине фразы перед предлогом.",
+      },
+      {
+        wrong: "het schoolfonds, de termijn",
+        right: "het schoolfonds, de termijn",
+        why: "het schoolfonds, de termijn — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "inbegrepen",
+        focus: "ударение на -GRE-",
+        tip: "ин-бə-ХРЕ:-пен. Включено — причастие от inbegrijpen.",
+      },
+      {
+        word: "uiterste",
+        focus: "ui = /œy/",
+        tip: "ЁЙ-тер-стə. Крайний/предельный — прилагательное превосходной степени.",
+      },
+    ],
+  },
+  {
+    id: "tussenrapport-gesprek",
+    domain: "school",
+    level: "A2",
+    title: "Разговор о промежуточном табеле",
+    context: "Короткий разговор с учителем о промежуточных оценках ребёнка (tussenrapport)",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Учитель кратко пройдётся по основным предметам.",
+      "Отметит, что идёт хорошо, а что требует внимания.",
+      "Может предложить дополнительную практику дома по одному предмету.",
+      "В конце спросит, есть ли у вас вопросы или наблюдения со своей стороны.",
+    ],
+    lines: [
+      {
+        nl: "Hoe gaat het met haar over het algemeen?",
+        ru: "Как у неё дела в целом?",
+      },
+      {
+        nl: "Waar kan ik haar thuis het beste bij helpen?",
+        ru: "В чём мне лучше всего помочь ей дома?",
+      },
+      {
+        nl: "Merkt u nog iets anders op dat ik moet weten?",
+        ru: "Замечаете ли вы что-то ещё, что мне следует знать?",
+      },
+      {
+        nl: "Ik zal er thuis extra op letten.",
+        ru: "Я обращу на это дома особое внимание.",
+      },
+    ],
+    replyBank: [
+      { nl: "Ze doet het goed bij taal en rekenen.", ru: "У неё хорошо получается язык и математика.", key: "doet het goed", register: "informeel" },
+      { nl: "Bij spelling kan nog wat extra oefening.", ru: "По орфографии не помешает ещё немного практики.", key: "extra oefening", register: "neutraal" },
+      { nl: "Ze is soms wat afgeleid tijdens de les.", ru: "Иногда она немного отвлекается на уроке.", key: "afgeleid", register: "neutraal" },
+      { nl: "Thuis lezen zou al veel helpen.", ru: "Чтение дома уже сильно помогло бы.", key: "lezen", register: "informeel" },
+      { nl: "Ik ben hier positief over gestemd.", ru: "Я настроен по этому поводу положительно.", key: "positief gestemd", register: "formeel" },
+      { nl: "Kunt u dat nog een keer opschrijven?", ru: "Можете записать это ещё раз?", key: "opschrijven", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "betekent"],
+    traps: [
+      {
+        wrong: "Ik zal extra op letten er thuis.",
+        right: "Ik zal er thuis extra op letten.",
+        why: "«letten op» + er: er встаёт сразу после спрягаемого глагола, обстоятельство thuis — перед предлогом op, а не в конце.",
+      },
+      {
+        wrong: "de rapport, het spelling",
+        right: "het rapport, de spelling",
+        why: "het rapport, de spelling — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "afgeleid",
+        focus: "ei = «эй»",
+        tip: "АФ-хə-лэйт. Отвлечённый — причастие от afleiden.",
+      },
+      {
+        word: "tussenrapport",
+        focus: "составное слово",
+        tip: "ТЮ-сен-ра-ПОРТ. tussen + rapport — промежуточный табель.",
+      },
+    ],
+  },
+  {
+    id: "kind-pesten-melden",
+    domain: "school",
+    level: "A2",
+    title: "Сообщить учителю о буллинге",
+    context: "Серьёзный, но спокойный разговор с учителем о том, что ребёнка дразнят одноклассники",
+    minutes: 8,
+    openerContext: "informeel",
+    brief: [
+      "Начните спокойно и конкретно — что именно происходит и как долго.",
+      "Учитель спросит детали: кто, когда, как часто.",
+      "Обсудят план действий — разговор с классом, наблюдение, встреча с другими родителями.",
+      "В конце договоритесь о повторном разговоре через определённое время.",
+    ],
+    lines: [
+      {
+        nl: "Ik maak me zorgen, mijn zoon wordt gepest.",
+        ru: "Я беспокоюсь, моего сына дразнят.",
+      },
+      {
+        nl: "Het gebeurt al een paar weken tijdens de pauze.",
+        ru: "Это происходит уже пару недель на перемене.",
+      },
+      {
+        nl: "Wat gaat de school hieraan doen?",
+        ru: "Что школа собирается с этим делать?",
+      },
+      {
+        nl: "Kunnen we hier over twee weken op terugkomen?",
+        ru: "Можем вернуться к этому через две недели?",
+      },
+    ],
+    replyBank: [
+      { nl: "Kunt u vertellen wat er precies gebeurt?", ru: "Можете рассказать, что именно происходит?", key: "precies gebeurt", register: "formeel" },
+      { nl: "Ik ga hier zeker mee aan de slag.", ru: "Я обязательно этим займусь.", key: "aan de slag", register: "informeel" },
+      { nl: "Ik praat eerst met de klas hierover.", ru: "Сначала я поговорю об этом с классом.", key: "praat met de klas", register: "neutraal" },
+      { nl: "We houden dit de komende weken goed in de gaten.", ru: "Мы будем внимательно следить за этим ближайшие недели.", key: "in de gaten", register: "formeel" },
+      { nl: "Laten we over twee weken opnieuw afspreken.", ru: "Давайте договоримся снова через две недели.", key: "opnieuw afspreken", register: "neutraal" },
+      { nl: "Kunt u dat rustig nog een keer zeggen?", ru: "Скажите это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can talk this through in English if that helps.", ru: "Можем обсудить это по-английски, если так легче.", register: "switch" },
+    ],
+    repairIds: ["momentje", "herhalen"],
+    traps: [
+      {
+        wrong: "Mijn zoon wordt gepest wordt.",
+        right: "Mijn zoon wordt gepest.",
+        why: "Пассив собирается одним wordt + причастием, без дублирования вспомогательного глагола в конце.",
+      },
+      {
+        wrong: "de pauze, het klas",
+        right: "de pauze, de klas",
+        why: "Оба de: de pauze, de klas.",
+      },
+    ],
+    gate: [
+      {
+        word: "gepest",
+        focus: "короткая e",
+        tip: "хə-ПЕСТ. Причастие от pesten — дразнить/травить.",
+      },
+      {
+        word: "in de gaten houden",
+        focus: "устойчивое сочетание",
+        tip: "ИН де ХА:-тен ХАУ-ден. «Держать в поле зрения» — следить за ситуацией.",
+      },
+    ],
+  },
+  {
+    id: "mbo-open-dag",
+    domain: "school",
+    level: "A2",
+    title: "День открытых дверей в колледже (mbo)",
+    context: "Разговор с представителем mbo (профессионального образования) на дне открытых дверей для подростка",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Представитель расскажет про уровни mbo (niveau 1–4) и на какой ваш ребёнок может претендовать.",
+      "Спросит про интересы — техника, уход, торговля и так далее.",
+      "Расскажет про стажировку (stage) как часть программы.",
+      "В конце объяснит сроки подачи заявки и требования по документам.",
+    ],
+    lines: [
+      {
+        nl: "Welk niveau past bij het diploma van mijn zoon?",
+        ru: "Какой уровень подходит для диплома моего сына?",
+      },
+      {
+        nl: "Hij is geïnteresseerd in techniek.",
+        ru: "Он интересуется техникой.",
+      },
+      {
+        nl: "Hoe werkt de stage binnen deze opleiding?",
+        ru: "Как устроена стажировка в этой программе?",
+      },
+      {
+        nl: "Wanneer moeten we hem aanmelden?",
+        ru: "Когда нам нужно его записать?",
+      },
+    ],
+    replyBank: [
+      { nl: "Met zijn diploma kan hij op niveau drie instromen.", ru: "С его дипломом он может поступить на третий уровень.", key: "niveau drie", register: "formeel" },
+      { nl: "Waar liggen zijn interesses precies?", ru: "В чём именно его интересы?", key: "interesses", register: "neutraal" },
+      { nl: "De stage begint meestal in het tweede jaar.", ru: "Стажировка обычно начинается на втором году.", key: "tweede jaar", register: "neutraal" },
+      { nl: "Aanmelden kan tot één april.", ru: "Записаться можно до первого апреля.", key: "één april", register: "formeel" },
+      { nl: "Neem zijn diploma en cijferlijst mee.", ru: "Возьмите с собой его диплом и ведомость оценок.", key: "cijferlijst", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Hij is geïnteresseerd voor techniek.",
+        right: "Hij is geïnteresseerd in techniek.",
+        why: "«geïnteresseerd» управляет предлогом in, а не voor — устойчивое сочетание запоминается целиком.",
+      },
+      {
+        wrong: "het niveau, de stage",
+        right: "het niveau, de stage",
+        why: "het niveau, de stage — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "geïnteresseerd",
+        focus: "трема над ë внутри слова — нет, здесь просто ie после i",
+        tip: "хə-ин-те-ре-СЕ:РТ. Заинтересованный — длинное причастие, произносите по частям.",
+      },
+      {
+        word: "cijferlijst",
+        focus: "ij = «эй»",
+        tip: "СЭЙ-фер-лэйст. cijfer + lijst — ведомость оценок.",
+      },
+    ],
+  },
+  {
+    id: "huurcontract-opzeggen",
+    domain: "wonen",
+    level: "A2",
+    title: "Расторгнуть договор аренды",
+    context: "Звонок или письмо арендодателю — уведомление о расторжении договора аренды",
+    minutes: 6,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят дату, с которой вы хотите съехать, и уточнят срок уведомления по договору.",
+      "Могут напомнить про финальный осмотр квартиры перед выездом.",
+      "Объяснят, когда и как вернут залог.",
+      "В конце попросят подтвердить расторжение письменно.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil mijn huurcontract opzeggen.",
+        ru: "Я хочу расторгнуть договор аренды.",
+      },
+      {
+        nl: "Ik wil per de eerste van volgende maand vertrekken.",
+        ru: "Я хочу выехать с первого числа следующего месяца.",
+      },
+      {
+        nl: "Wat is de opzegtermijn precies?",
+        ru: "Какой именно срок уведомления?",
+      },
+      {
+        nl: "Wanneer krijg ik mijn borg terug?",
+        ru: "Когда мне вернут залог?",
+      },
+    ],
+    replyBank: [
+      { nl: "Per wanneer wilt u vertrekken?", ru: "С какого числа хотите съехать?", key: "per wanneer", register: "formeel" },
+      { nl: "De opzegtermijn is één kalendermaand.", ru: "Срок уведомления — один календарный месяц.", key: "opzegtermijn", register: "formeel" },
+      { nl: "We plannen een eindinspectie in.", ru: "Мы назначим финальный осмотр.", key: "eindinspectie", register: "formeel" },
+      { nl: "De borg wordt binnen een maand teruggestort.", ru: "Залог вернут в течение месяца.", key: "teruggestort", register: "formeel" },
+      { nl: "Kunt u dit ook schriftelijk bevestigen?", ru: "Можете подтвердить это письменно?", key: "schriftelijk", register: "formeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "We can confirm this in English by email too.", ru: "Можем подтвердить это по-английски по почте.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "herhalen"],
+    traps: [
+      {
+        wrong: "Ik wil opzeggen mijn huurcontract.",
+        right: "Ik wil mijn huurcontract opzeggen.",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "de borg, het opzegtermijn",
+        right: "de borg, de opzegtermijn",
+        why: "Оба de: de borg, de opzegtermijn.",
+      },
+    ],
+    gate: [
+      {
+        word: "opzegtermijn",
+        focus: "составное слово",
+        tip: "ОП-зех-тер-мэйн. opzeggen + termijn — срок уведомления при расторжении.",
+      },
+      {
+        word: "eindinspectie",
+        focus: "составное слово",
+        tip: "ЭЙНТ-ин-спек-си:. eind + inspectie — финальный осмотр перед выездом.",
+      },
+    ],
+  },
+  {
+    id: "buren-overlast-formeel-klagen",
+    domain: "wonen",
+    level: "A2",
+    title: "Формальная жалоба на шум от соседей",
+    context: "Звонок в жилищную корпорацию (woningcorporatie) — формальная жалоба после многократных разговоров с соседом напрямую",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят, пробовали ли вы уже поговорить с соседом напрямую и когда.",
+      "Попросят описать конкретно, что и когда происходит — с датами, если возможно.",
+      "Объяснят дальнейшие шаги — письмо соседу, медиация, в крайнем случае суд.",
+      "В конце попросят вести дневник инцидентов.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil een officiële klacht indienen over geluidsoverlast.",
+        ru: "Я хочу подать официальную жалобу на шумовое беспокойство.",
+      },
+      {
+        nl: "Ik heb al meerdere keren met de buren gesproken.",
+        ru: "Я уже несколько раз разговаривал с соседями.",
+      },
+      {
+        nl: "Het gebeurt meestal 's avonds laat.",
+        ru: "Это происходит обычно поздно вечером.",
+      },
+      {
+        nl: "Wat zijn de volgende stappen?",
+        ru: "Какие дальнейшие шаги?",
+      },
+    ],
+    replyBank: [
+      { nl: "Heeft u al zelf met de buren gesproken?", ru: "Вы уже сами разговаривали с соседями?", key: "zelf gesproken", register: "formeel" },
+      { nl: "Kunt u de data van de overlast noteren?", ru: "Можете записывать даты беспокойства?", key: "noteren", register: "formeel" },
+      { nl: "Wij sturen de buren een officiële brief.", ru: "Мы отправим соседям официальное письмо.", key: "officiële brief", register: "formeel" },
+      { nl: "Bij herhaling bieden we mediation aan.", ru: "При повторении предложим медиацию.", key: "mediation", register: "formeel" },
+      { nl: "Houdt u een logboek bij van de incidenten.", ru: "Ведите дневник инцидентов.", key: "logboek", register: "formeel" },
+      { nl: "Kunt u dat nog een keer rustig herhalen?", ru: "Повторите это ещё раз спокойно?", key: "rustig herhalen", register: "informeel" },
+      { nl: "We can handle this by email in English too.", ru: "Можем решить это по почте и на английском.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "momentje"],
+    traps: [
+      {
+        wrong: "Het gebeurt laat meestal 's avonds.",
+        right: "Het gebeurt meestal 's avonds laat.",
+        why: "«meestal» встаёт ближе к глаголу, а обстоятельство времени «'s avonds laat» — цельным блоком в конце.",
+      },
+      {
+        wrong: "de klacht, het logboek",
+        right: "de klacht, het logboek",
+        why: "de klacht, het logboek — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "geluidsoverlast",
+        focus: "составное слово",
+        tip: "хə-ЛЁЙТС-о:-вер-ласт. geluid + overlast — шумовое беспокойство.",
+      },
+      {
+        word: "logboek",
+        focus: "долгое oe",
+        tip: "ЛОХ-бу:к. Дневник учёта — из английского log + голландское boek.",
+      },
+    ],
+  },
+  {
+    id: "woningcorporatie-inschrijven",
+    domain: "wonen",
+    level: "A2",
+    title: "Встать на очередь в жилищную корпорацию",
+    context: "Регистрация в системе жилищной корпорации для получения социального жилья — постановка в очередь",
+    minutes: 6,
+    openerContext: "loket",
+    brief: [
+      "Спросят состав семьи и текущий доход — это влияет, на какое жильё вы можете претендовать.",
+      "Объяснят, как накапливаются «годы ожидания» (wachttijd) и как их использовать при подаче заявки.",
+      "Расскажут, как часто нужно продлевать регистрацию.",
+      "В конце покажут, как пользоваться сайтом для подачи заявок на конкретные квартиры.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil me inschrijven voor een sociale huurwoning.",
+        ru: "Я хочу зарегистрироваться на социальное жильё.",
+      },
+      {
+        nl: "Hoe werkt de wachttijd precies?",
+        ru: "Как именно работает срок ожидания?",
+      },
+      {
+        nl: "Moet ik mijn inschrijving jaarlijks verlengen?",
+        ru: "Мне нужно ежегодно продлевать регистрацию?",
+      },
+      {
+        nl: "Hoe reageer ik op een woning die mij aanspreekt?",
+        ru: "Как отреагировать на квартиру, которая мне понравилась?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is de samenstelling van uw huishouden?", ru: "Какой состав вашей семьи?", key: "huishouden", register: "formeel" },
+      { nl: "Uw wachttijd loopt vanaf de inschrijfdatum.", ru: "Срок ожидания идёт с даты регистрации.", key: "wachttijd", register: "formeel" },
+      { nl: "U moet dit elk jaar opnieuw bevestigen.", ru: "Это нужно подтверждать заново каждый год.", key: "elk jaar", register: "formeel" },
+      { nl: "U reageert eenvoudig via de website.", ru: "Отреагировать можно просто через сайт.", key: "reageert", register: "informeel" },
+      { nl: "Hoe hoger uw wachttijd, hoe hoger uw kans.", ru: "Чем больше срок ожидания, тем выше шанс.", key: "hoe hoger", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain the system in English too.", ru: "С радостью объясню систему и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen"],
+    traps: [
+      {
+        wrong: "Ik moet verlengen mijn inschrijving jaarlijks.",
+        right: "Ik moet mijn inschrijving jaarlijks verlengen.",
+        why: "Дополнение и обстоятельство перед инфинитивом, не после него.",
+      },
+      {
+        wrong: "de wachttijd, het huishouden",
+        right: "de wachttijd, het huishouden",
+        why: "de wachttijd, het huishouden — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "wachttijd",
+        focus: "составное слово",
+        tip: "ВАХТ-тэйт. wacht + tijd — срок ожидания.",
+      },
+      {
+        word: "huishouden",
+        focus: "ui = /œy/",
+        tip: "ХЁЙС-хау-ден. Домохозяйство — состав семьи, живущей вместе.",
+      },
+    ],
+  },
+  {
+    id: "cv-ketel-onderhoud",
+    domain: "wonen",
+    level: "A2",
+    title: "Плановое обслуживание отопительного котла",
+    context: "Визит мастера для ежегодного планового обслуживания CV-ketel (отопительного котла)",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Мастер спросит, были ли за год какие-то проблемы с отоплением или горячей водой.",
+      "Проверит давление в системе и объяснит, если оно слишком низкое.",
+      "Может предложить заменить деталь, если что-то изношено.",
+      "В конце расскажет, когда следующее плановое обслуживание.",
+    ],
+    lines: [
+      {
+        nl: "Zijn er dit jaar problemen geweest met de verwarming?",
+        ru: "Были ли в этом году проблемы с отоплением?",
+      },
+      {
+        nl: "De druk leek me laatst wat laag.",
+        ru: "Давление в последнее время казалось мне низковатым.",
+      },
+      {
+        nl: "Moet er iets vervangen worden?",
+        ru: "Нужно ли что-то заменить?",
+      },
+      {
+        nl: "Wanneer is de volgende onderhoudsbeurt?",
+        ru: "Когда следующее плановое обслуживание?",
+      },
+    ],
+    replyBank: [
+      { nl: "De druk staat inderdaad iets te laag.", ru: "Давление действительно немного низковато.", key: "te laag", register: "neutraal" },
+      { nl: "Ik vul het systeem even bij.", ru: "Сейчас подолью воды в систему.", key: "vul bij", register: "informeel" },
+      { nl: "Dit onderdeel is aan vervanging toe.", ru: "Эту деталь пора заменить.", key: "toe aan vervanging", register: "neutraal" },
+      { nl: "De volgende beurt is over een jaar.", ru: "Следующее обслуживание через год.", key: "over een jaar", register: "neutraal" },
+      { nl: "Alles werkt verder prima.", ru: "Всё остальное работает отлично.", key: "prima", register: "informeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "betekent"],
+    traps: [
+      {
+        wrong: "De druk leek me wat laag laatst.",
+        right: "De druk leek me laatst wat laag.",
+        why: "Обстоятельство времени laatst встаёт перед прилагательным, а не после него в самом конце.",
+      },
+      {
+        wrong: "de druk, het onderhoud",
+        right: "de druk, het onderhoud",
+        why: "de druk, het onderhoud — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "onderhoudsbeurt",
+        focus: "составное слово",
+        tip: "ОН-дер-хаутс-бёрт. onderhoud + beurt — плановое обслуживание.",
+      },
+      {
+        word: "vervanging",
+        focus: "харде G перед -ing",
+        tip: "фер-ФАН-хинх. Замена — от глагола vervangen.",
+      },
+    ],
+  },
+  {
+    id: "verhuisbericht-instanties",
+    domain: "wonen",
+    level: "A2",
+    title: "Сообщить о переезде разным инстанциям",
+    context: "Серия коротких звонков после переезда — банк, страховая, работодатель",
+    minutes: 6,
+    openerContext: "telefoon",
+    brief: [
+      "В каждом звонке спросят номер клиента и подтверждение личности.",
+      "Попросят старый и новый адрес и дату переезда.",
+      "Могут уточнить, изменился ли ещё и номер телефона.",
+      "В конце каждый раз скажут, когда изменение вступит в силу.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil mijn adreswijziging doorgeven.",
+        ru: "Я хочу сообщить об изменении адреса.",
+      },
+      {
+        nl: "Mijn klantnummer is...",
+        ru: "Мой номер клиента...",
+      },
+      {
+        nl: "Mijn telefoonnummer blijft hetzelfde.",
+        ru: "Мой номер телефона остаётся тем же.",
+      },
+      {
+        nl: "Vanaf wanneer geldt het nieuwe adres?",
+        ru: "С какого числа действует новый адрес?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is uw klantnummer?", ru: "Ваш номер клиента?", key: "klantnummer", register: "formeel" },
+      { nl: "Wat is uw nieuwe adres?", ru: "Ваш новый адрес?", key: "nieuwe adres", register: "formeel" },
+      { nl: "Blijven uw overige gegevens hetzelfde?", ru: "Остальные данные остаются прежними?", key: "overige gegevens", register: "formeel" },
+      { nl: "Dit gaat per direct in.", ru: "Это вступает в силу немедленно.", key: "per direct", register: "formeel" },
+      { nl: "U ontvangt hiervan een bevestiging per e-mail.", ru: "Вам придёт подтверждение по почте.", key: "bevestiging", register: "formeel" },
+      { nl: "Kunt u dat nog een keer spellen?", ru: "Продиктуйте по буквам ещё раз?", key: "spellen", register: "informeel" },
+      { nl: "I can take this information in English too.", ru: "Могу принять эту информацию и по-английски.", register: "switch" },
+    ],
+    repairIds: ["spellen", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik wil doorgeven mijn adreswijziging.",
+        right: "Ik wil mijn adreswijziging doorgeven.",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "het adreswijziging, de klantnummer",
+        right: "de adreswijziging, het klantnummer",
+        why: "de adreswijziging, het klantnummer — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "adreswijziging",
+        focus: "составное слово",
+        tip: "а-ДРЕС-вэй-зи-хинх. adres + wijziging — изменение адреса.",
+      },
+      {
+        word: "overige",
+        focus: "ударение на O-",
+        tip: "О:-вə-рих-хə. Остальной/прочий — часто встречается в формальных звонках.",
+      },
+    ],
+  },
+  {
+    id: "vve-onderhoudsfonds-vraag",
+    domain: "wonen",
+    level: "A2",
+    title: "Вопрос про фонд обслуживания VvE",
+    context: "Разговор с управляющим VvE (объединения собственников) о размере взноса в фонд обслуживания",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Спросят, о каком именно взносе идёт речь — ежемесячном или разовом на конкретный ремонт.",
+      "Объяснят, как рассчитывается сумма — по доле в здании.",
+      "Могут показать последний отчёт фонда, если попросить.",
+      "В конце скажут, когда следующее собрание, где можно обсудить подробнее.",
+    ],
+    lines: [
+      {
+        nl: "Ik heb een vraag over de bijdrage aan het onderhoudsfonds.",
+        ru: "У меня вопрос о взносе в фонд обслуживания.",
+      },
+      {
+        nl: "Hoe wordt dit bedrag precies berekend?",
+        ru: "Как именно рассчитывается эта сумма?",
+      },
+      {
+        nl: "Mag ik het laatste jaarverslag inzien?",
+        ru: "Могу я посмотреть последний годовой отчёт?",
+      },
+      {
+        nl: "Wanneer is de volgende vergadering?",
+        ru: "Когда следующее собрание?",
+      },
+    ],
+    replyBank: [
+      { nl: "Het bedrag wordt berekend op basis van uw aandeel.", ru: "Сумма рассчитывается на основе вашей доли.", key: "aandeel", register: "formeel" },
+      { nl: "Ik stuur u het jaarverslag per e-mail.", ru: "Пришлю вам годовой отчёт по почте.", key: "jaarverslag", register: "formeel" },
+      { nl: "De volgende vergadering is over zes weken.", ru: "Следующее собрание через шесть недель.", key: "zes weken", register: "neutraal" },
+      { nl: "U kunt vragen ook schriftelijk indienen.", ru: "Вопросы можно также подать письменно.", key: "schriftelijk", register: "formeel" },
+      { nl: "Het fonds staat er financieel gezond voor.", ru: "Фонд в хорошем финансовом состоянии.", key: "financieel gezond", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "We could send the report in English too.", ru: "Можем прислать отчёт и на английском.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Mag ik inzien het laatste jaarverslag?",
+        right: "Mag ik het laatste jaarverslag inzien?",
+        why: "Дополнение перед инфинитивом, не после него.",
+      },
+      {
+        wrong: "het aandeel, de fonds",
+        right: "het aandeel, het fonds",
+        why: "Оба het: het aandeel, het fonds.",
+      },
+    ],
+    gate: [
+      {
+        word: "onderhoudsfonds",
+        focus: "составное слово",
+        tip: "ОН-дер-хаутс-фонс. onderhoud + fonds — фонд обслуживания.",
+      },
+      {
+        word: "jaarverslag",
+        focus: "долгое aa",
+        tip: "ЯР-фер-слах. Годовой отчёт — jaar + verslag.",
+      },
+    ],
+  },
+  {
+    id: "huurtoeslag-aanvragen",
+    domain: "wonen",
+    level: "A2",
+    title: "Оформить жилищную субсидию (huurtoeslag)",
+    context: "Оформление huurtoeslag через Belastingdienst — субсидии на аренду жилья",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят ваш доход, состав семьи и размер арендной платы.",
+      "Объяснят пороги, при которых субсидия ещё положена.",
+      "Уточнят, есть ли у вас уже DigiD для подачи заявки онлайн.",
+      "В конце скажут, когда ждать первую выплату.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil huurtoeslag aanvragen.",
+        ru: "Я хочу оформить жилищную субсидию.",
+      },
+      {
+        nl: "Mijn huur is driehonderd euro per maand.",
+        ru: "Моя аренда — триста евро в месяц.",
+      },
+      {
+        nl: "Kom ik in aanmerking met mijn inkomen?",
+        ru: "Подхожу ли я по своему доходу?",
+      },
+      {
+        nl: "Hoe vraag ik dit online aan?",
+        ru: "Как мне подать заявку онлайн?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is uw bruto jaarinkomen?", ru: "Какой у вас годовой доход брутто?", key: "jaarinkomen", register: "formeel" },
+      { nl: "Uw huur valt binnen de grens.", ru: "Ваша аренда в пределах лимита.", key: "binnen de grens", register: "formeel" },
+      { nl: "U vraagt dit aan met uw DigiD.", ru: "Заявку подаёте через DigiD.", key: "DigiD", register: "neutraal" },
+      { nl: "De eerste betaling volgt binnen zes weken.", ru: "Первая выплата придёт в течение шести недель.", key: "zes weken", register: "formeel" },
+      { nl: "Wijzigingen in inkomen moet u zelf doorgeven.", ru: "Об изменениях дохода нужно сообщать самому.", key: "wijzigingen", register: "formeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "We can go through this in English too.", ru: "Можем разобрать это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["cijfers", "herhalen"],
+    traps: [
+      {
+        wrong: "Ik wil aanvragen huurtoeslag.",
+        right: "Ik wil huurtoeslag aanvragen.",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "de huurtoeslag, het inkomen",
+        right: "de huurtoeslag, het inkomen",
+        why: "de huurtoeslag, het inkomen — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "huurtoeslag",
+        focus: "составное слово",
+        tip: "ХЮ:Р-ту:с-лах. huur + toeslag — субсидия на аренду.",
+      },
+      {
+        word: "jaarinkomen",
+        focus: "составное слово, долгое aa",
+        tip: "ЯР-ин-ко:-мен. jaar + inkomen — годовой доход.",
+      },
+    ],
+  },
+  {
+    id: "inbraak-melden-politie",
+    domain: "wonen",
+    level: "A2",
+    title: "Сообщить полиции о взломе",
+    context: "Звонок в полицию (не экстренную линию) — сообщить о взломе квартиры, обнаруженном по возвращении домой",
+    minutes: 7,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят, находитесь ли вы сейчас в безопасности и есть ли злоумышленник поблизости.",
+      "Попросят не трогать вещи до приезда полиции.",
+      "Уточнят, что пропало и что повреждено.",
+      "В конце дадут номер заявления (aangifte) для страховки.",
+    ],
+    lines: [
+      {
+        nl: "Ik denk dat er bij mij is ingebroken.",
+        ru: "Мне кажется, ко мне взломали дом.",
+      },
+      {
+        nl: "Ik ben nu weer thuis, ik voel me veilig.",
+        ru: "Я сейчас снова дома, чувствую себя в безопасности.",
+      },
+      {
+        nl: "Er lijkt een laptop te ontbreken.",
+        ru: "Похоже, пропал ноутбук.",
+      },
+      {
+        nl: "Moet ik hier aangifte van doen?",
+        ru: "Мне нужно подать заявление?",
+      },
+    ],
+    replyBank: [
+      { nl: "Bent u op dit moment veilig?", ru: "Вы сейчас в безопасности?", key: "veilig", register: "formeel" },
+      { nl: "Raak alstublieft niets aan tot wij er zijn.", ru: "Пожалуйста, ничего не трогайте до нашего приезда.", key: "raak niets aan", register: "formeel" },
+      { nl: "Wat mist u precies?", ru: "Что именно пропало?", key: "mist", register: "formeel" },
+      { nl: "Wij komen dit ter plaatse opnemen.", ru: "Мы приедем и всё зафиксируем на месте.", key: "ter plaatse", register: "formeel" },
+      { nl: "U krijgt een aangiftenummer voor uw verzekering.", ru: "Вы получите номер заявления для страховки.", key: "aangiftenummer", register: "formeel" },
+      { nl: "Kunt u dat rustig nog een keer zeggen?", ru: "Скажите это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can send an officer who speaks English if needed.", ru: "Можем прислать сотрудника, говорящего по-английски, если нужно.", register: "switch" },
+    ],
+    repairIds: ["momentje", "herhalen"],
+    traps: [
+      {
+        wrong: "Ik denk dat er is ingebroken bij mij.",
+        right: "Ik denk dat er bij mij is ingebroken.",
+        why: "В придаточном is уходит в конец, а обстоятельство bij mij встаёт перед ним, а не после.",
+      },
+      {
+        wrong: "de aangifte, het laptop",
+        right: "de aangifte, de laptop",
+        why: "Оба de: de aangifte, de laptop.",
+      },
+    ],
+    gate: [
+      {
+        word: "ingebroken",
+        focus: "ударение на -BRO-",
+        tip: "ИН-хə-бро:-кен. Причастие от inbreken — взломать.",
+      },
+      {
+        word: "aangifte",
+        focus: "долгое aa",
+        tip: "А:Н-хиф-тə. Заявление в полицию — ключевое слово для страховки.",
+      },
+    ],
+  },
+  {
+    id: "glasvezel-aansluiting",
+    domain: "wonen",
+    level: "A2",
+    title: "Подключение оптоволоконного интернета",
+    context: "Визит техника для подключения glasvezel (оптоволоконного интернета) в новой квартире",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Техник спросит, где удобнее разместить роутер.",
+      "Объяснит, что часть работы — прокладка кабеля от улицы до квартиры.",
+      "Может предупредить о коротком отключении на время переключения.",
+      "В конце проверит скорость соединения вместе с вами.",
+    ],
+    lines: [
+      {
+        nl: "Waar kan de router het beste komen te staan?",
+        ru: "Где лучше всего разместить роутер?",
+      },
+      {
+        nl: "Hoe lang duurt de installatie ongeveer?",
+        ru: "Сколько примерно занимает установка?",
+      },
+      {
+        nl: "Valt de verbinding straks helemaal weg?",
+        ru: "Соединение потом полностью пропадёт?",
+      },
+      {
+        nl: "Kunnen we samen de snelheid testen?",
+        ru: "Можем вместе проверить скорость?",
+      },
+    ],
+    replyBank: [
+      { nl: "Het liefst dicht bij de meterkast.", ru: "Лучше всего рядом со счётчиковым шкафом.", key: "meterkast", register: "informeel" },
+      { nl: "De installatie duurt ongeveer een uur.", ru: "Установка занимает примерно час.", key: "een uur", register: "neutraal" },
+      { nl: "U bent kort offline tijdens het omzetten.", ru: "Во время переключения вы ненадолго будете офлайн.", key: "offline", register: "informeel" },
+      { nl: "Laten we samen even de snelheid checken.", ru: "Давайте вместе проверим скорость.", key: "checken", register: "informeel" },
+      { nl: "Alles staat nu goed ingesteld.", ru: "Всё теперь настроено правильно.", key: "ingesteld", register: "informeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain the setup in English too.", ru: "С радостью объясню настройку и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen"],
+    traps: [
+      {
+        wrong: "Valt de verbinding weg helemaal straks?",
+        right: "Valt de verbinding straks helemaal weg?",
+        why: "Отделяемая частица weg уходит в конец фразы, а обстоятельство времени straks и наречие helemaal встают перед ней.",
+      },
+      {
+        wrong: "de router, het verbinding",
+        right: "de router, de verbinding",
+        why: "Оба de: de router, de verbinding.",
+      },
+    ],
+    gate: [
+      {
+        word: "glasvezel",
+        focus: "составное слово",
+        tip: "ХЛАС-фе:-зел. glas + vezel — оптоволокно, буквально «стеклянное волокно».",
+      },
+      {
+        word: "meterkast",
+        focus: "составное слово",
+        tip: "МЕ:-тер-каст. meter + kast — щиток со счётчиками.",
+      },
+    ],
+  },
+  {
+    id: "contract-verlenging-gesprek",
+    domain: "werk",
+    level: "A2",
+    title: "Разговор о продлении трудового контракта",
+    context: "Разговор с руководителем за месяц до окончания срочного трудового контракта",
+    minutes: 8,
+    openerContext: "informeel",
+    brief: [
+      "Руководитель начнёт с общей оценки вашей работы за период.",
+      "Может сразу предложить продление или сказать, что решение будет позже.",
+      "Обсудят, меняются ли условия — часы, зарплата, обязанности.",
+      "В конце договорятся, когда прозвучит окончательный ответ.",
+    ],
+    lines: [
+      {
+        nl: "Ik hoor graag hoe het verdergaat met mijn contract.",
+        ru: "Хотел бы узнать, как обстоят дела с моим контрактом.",
+      },
+      {
+        nl: "Zijn er wijzigingen in de voorwaarden?",
+        ru: "Есть ли изменения в условиях?",
+      },
+      {
+        nl: "Wanneer hoor ik het definitieve antwoord?",
+        ru: "Когда я узнаю окончательный ответ?",
+      },
+      {
+        nl: "Ik sta open voor een gesprek hierover.",
+        ru: "Я открыт для разговора об этом.",
+      },
+    ],
+    replyBank: [
+      { nl: "We zijn erg tevreden over je werk.", ru: "Мы очень довольны твоей работой.", key: "tevreden", register: "informeel" },
+      { nl: "We willen je contract graag verlengen.", ru: "Мы хотели бы продлить твой контракт.", key: "verlengen", register: "informeel" },
+      { nl: "De voorwaarden blijven verder hetzelfde.", ru: "Остальные условия остаются прежними.", key: "hetzelfde", register: "neutraal" },
+      { nl: "Je hoort dit uiterlijk volgende week definitief.", ru: "Окончательно ты узнаешь об этом не позднее следующей недели.", key: "uiterlijk", register: "formeel" },
+      { nl: "Heb je zelf nog wensen hierover?", ru: "У тебя самого есть пожелания на этот счёт?", key: "wensen", register: "informeel" },
+      { nl: "Kun je dat nog een keer zeggen?", ru: "Можешь повторить?", key: "nog een keer", register: "informeel" },
+      { nl: "We can discuss this in English if you prefer.", ru: "Можем обсудить это по-английски, если предпочитаешь.", register: "switch" },
+    ],
+    repairIds: ["momentje", "herhalen"],
+    traps: [
+      {
+        wrong: "Ik hoor graag hoe verdergaat het met mijn contract.",
+        right: "Ik hoor graag hoe het verdergaat met mijn contract.",
+        why: "В придаточном, вводимом «hoe», подлежащее het встаёт перед глаголом verdergaat, а не после — как в главном предложении.",
+      },
+      {
+        wrong: "het contract, de voorwaarde",
+        right: "het contract, de voorwaarde",
+        why: "het contract, de voorwaarde — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "verlengen",
+        focus: "ударение на -LEN-",
+        tip: "вер-ЛЕНХ-ен. Продлевать — уже знакомый глагол из других сценариев.",
+      },
+      {
+        word: "definitief",
+        focus: "ударение на -TIEF",
+        tip: "де-фи-ни-ТИ:Ф. Окончательный — прилагательное с ударением на последний слог.",
+      },
+    ],
+  },
+  {
+    id: "uwv-ww-aanvragen",
+    domain: "werk",
+    level: "A2",
+    title: "Оформить пособие по безработице (WW)",
+    context: "Звонок или визит в UWV после потери работы — оформление WW-uitkering",
+    minutes: 8,
+    openerContext: "loket",
+    brief: [
+      "Спросят дату последнего рабочего дня и причину увольнения.",
+      "Уточнят трудовой стаж — от него зависит длительность выплат.",
+      "Объяснят обязанность искать работу и подавать отчёты (sollicitatieplicht).",
+      "В конце скажут, когда придёт первая выплата.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil een WW-uitkering aanvragen.",
+        ru: "Я хочу оформить пособие по безработице.",
+      },
+      {
+        nl: "Mijn laatste werkdag was vorige week.",
+        ru: "Мой последний рабочий день был на прошлой неделе.",
+      },
+      {
+        nl: "Hoe lang duurt mijn uitkering ongeveer?",
+        ru: "Сколько примерно будет длиться моё пособие?",
+      },
+      {
+        nl: "Wat moet ik doen om aan mijn sollicitatieplicht te voldoen?",
+        ru: "Что мне делать, чтобы выполнить обязанность по поиску работы?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat was de reden van uw ontslag?", ru: "Какова была причина увольнения?", key: "ontslag", register: "formeel" },
+      { nl: "Hoeveel jaar heeft u aaneengesloten gewerkt?", ru: "Сколько лет вы непрерывно работали?", key: "aaneengesloten", register: "formeel" },
+      { nl: "U moet minimaal één keer per week solliciteren.", ru: "Вам нужно подавать заявки минимум раз в неделю.", key: "solliciteren", register: "formeel" },
+      { nl: "De eerste betaling volgt binnen vier weken.", ru: "Первая выплата придёт в течение четырёх недель.", key: "vier weken", register: "formeel" },
+      { nl: "U moet dit maandelijks bij ons doorgeven.", ru: "Это нужно ежемесячно нам сообщать.", key: "maandelijks", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "We can explain this process in English too.", ru: "Можем объяснить этот процесс и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Wat ik moet doen om te voldoen aan mijn sollicitatieplicht?",
+        right: "Wat moet ik doen om aan mijn sollicitatieplicht te voldoen?",
+        why: "После вопросительного слова сразу глагол moet, подлежащее ik — третьим; в обороте «om … te» глагол в инфинитиве уходит в самый конец.",
+      },
+      {
+        wrong: "de uitkering, het ontslag",
+        right: "de uitkering, het ontslag",
+        why: "de uitkering, het ontslag — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "sollicitatieplicht",
+        focus: "составное слово",
+        tip: "со-ли-си-ТА:-си-плихт. sollicitatie + plicht — обязанность искать работу.",
+      },
+      {
+        word: "aaneengesloten",
+        focus: "составное слово",
+        tip: "А:-не:н-хə-сло:-тен. Непрерывно — важно для расчёта стажа.",
+      },
+    ],
+  },
+  {
+    id: "loondienst-belastingaangifte",
+    domain: "werk",
+    level: "A2",
+    title: "Спросить у HR про годовую справку для налоговой",
+    context: "Короткий разговор с HR-отделом про jaaropgave — годовую справку о доходах для налоговой декларации",
+    minutes: 5,
+    openerContext: "informeel",
+    brief: [
+      "Спросите, когда обычно рассылают jaaropgave — обычно в начале года.",
+      "Уточните, куда обращаться, если документ не пришёл или в нём ошибка.",
+      "HR может объяснить, что документ также доступен в личном кабинете сотрудника.",
+      "В конце уточните срок подачи налоговой декларации.",
+    ],
+    lines: [
+      {
+        nl: "Wanneer ontvang ik mijn jaaropgave?",
+        ru: "Когда я получу свою годовую справку?",
+      },
+      {
+        nl: "Ik heb hem nog niet gezien in mijn inbox.",
+        ru: "Я ещё не видел её в своей почте.",
+      },
+      {
+        nl: "Kan ik hem ook via het personeelsportaal vinden?",
+        ru: "Могу я найти её также через портал сотрудника?",
+      },
+      {
+        nl: "Tot wanneer moet ik mijn aangifte indienen?",
+        ru: "До какого срока мне нужно подать декларацию?",
+      },
+    ],
+    replyBank: [
+      { nl: "De jaaropgave gaat begin februari de deur uit.", ru: "Годовая справка рассылается в начале февраля.", key: "begin februari", register: "neutraal" },
+      { nl: "U kunt hem ook downloaden via het portaal.", ru: "Можете также скачать её через портал.", key: "portaal", register: "neutraal" },
+      { nl: "De aangifte moet meestal voor één mei binnen zijn.", ru: "Декларацию обычно нужно подать до первого мая.", key: "één mei", register: "formeel" },
+      { nl: "Als er iets ontbreekt, mailt u de salarisadministratie.", ru: "Если чего-то не хватает, напишите в отдел зарплат.", key: "salarisadministratie", register: "formeel" },
+      { nl: "Wilt u dat ik het nu voor u opzoek?", ru: "Хотите, я сейчас это для вас найду?", key: "opzoek", register: "informeel" },
+      { nl: "Kunt u dat nog een keer opschrijven?", ru: "Можете это записать ещё раз?", key: "opschrijven", register: "informeel" },
+      { nl: "I'm happy to send this in English too.", ru: "С радостью пришлю это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik heb hem gezien nog niet in mijn inbox.",
+        right: "Ik heb hem nog niet gezien in mijn inbox.",
+        why: "«nog niet» встаёт перед причастием, а не после него.",
+      },
+      {
+        wrong: "de jaaropgave, het portaal",
+        right: "de jaaropgave, het portaal",
+        why: "de jaaropgave, het portaal — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "jaaropgave",
+        focus: "составное слово, долгое aa",
+        tip: "ЯР-оп-ха:-вə. jaar + opgave — годовая справка о доходах.",
+      },
+      {
+        word: "salarisadministratie",
+        focus: "самое длинное слово в сценарии",
+        tip: "са-ЛА:-рис-ад-ми-нис-тра:-си. Отдел, занимающийся расчётом зарплаты.",
+      },
+    ],
+  },
+  {
+    id: "functioneringsgesprek",
+    domain: "werk",
+    level: "A2",
+    title: "Ежегодная беседа по итогам работы",
+    context: "Плановая ежегодная беседа с руководителем — functioneringsgesprek",
+    minutes: 8,
+    openerContext: "informeel",
+    brief: [
+      "Руководитель спросит вашу собственную оценку года — что получилось, что нет.",
+      "Обсудят конкретные примеры, а не только общие впечатления.",
+      "Могут предложить цели на следующий год или курс обучения.",
+      "В конце вместе запишут договорённости в форму.",
+    ],
+    lines: [
+      {
+        nl: "Ik ben over het algemeen tevreden met dit jaar.",
+        ru: "В целом я доволен этим годом.",
+      },
+      {
+        nl: "Dit project vond ik het meest uitdagend.",
+        ru: "Этот проект показался мне самым сложным.",
+      },
+      {
+        nl: "Welke doelen stellen we voor volgend jaar?",
+        ru: "Какие цели поставим на следующий год?",
+      },
+      {
+        nl: "Is er een cursus die hierbij zou helpen?",
+        ru: "Есть ли курс, который в этом помог бы?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat vond je zelf het meest geslaagd dit jaar?", ru: "Что тебе самому показалось наиболее удачным в этом году?", key: "geslaagd", register: "informeel" },
+      { nl: "Laten we concrete doelen afspreken.", ru: "Давай договоримся о конкретных целях.", key: "concrete doelen", register: "informeel" },
+      { nl: "Een training zou hier zeker bij helpen.", ru: "Тренинг здесь точно помог бы.", key: "training", register: "informeel" },
+      { nl: "Ik zet dit even op papier voor ons beiden.", ru: "Я это сейчас запишу для нас обоих.", key: "op papier", register: "informeel" },
+      { nl: "Hoe voel je je verder in je rol?", ru: "Как ты вообще себя чувствуешь в своей роли?", key: "in je rol", register: "informeel" },
+      { nl: "Kun je dat nog een keer uitleggen?", ru: "Можешь объяснить ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "We can do this review in English if you prefer.", ru: "Можем провести эту беседу по-английски, если предпочитаешь.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "momentje"],
+    traps: [
+      {
+        wrong: "Dit project ik vond het meest uitdagend.",
+        right: "Dit project vond ik het meest uitdagend.",
+        why: "Первым стоит обстоятельство/дополнение dit project — глагол vond остаётся на втором месте, подлежащее ik уходит за него.",
+      },
+      {
+        wrong: "het doel, de cursus",
+        right: "het doel, de cursus",
+        why: "het doel, de cursus — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "functioneringsgesprek",
+        focus: "составное слово, самое длинное",
+        tip: "функ-ци-о-НЕ:-рингс-хə-спрек. functioneren + gesprek — беседа по итогам работы.",
+      },
+      {
+        word: "uitdagend",
+        focus: "ui = /œy/",
+        tip: "ЁЙТ-да:-хент. Сложный/бросающий вызов — от uitdagen.",
+      },
+    ],
+  },
+  {
+    id: "arbeidsconflict-mediation",
+    domain: "werk",
+    level: "A2",
+    title: "Медиация при конфликте на работе",
+    context: "Первая встреча с медиатором по поводу конфликта с коллегой",
+    minutes: 8,
+    openerContext: "informeel",
+    brief: [
+      "Медиатор объяснит правила разговора — по очереди, без перебиваний, конфиденциально.",
+      "Попросит описать ситуацию со своей стороны, без обвинений.",
+      "Поможет сформулировать, что именно вы хотели бы изменить.",
+      "В конце договорятся о следующем шаге — совместной встрече или отдельных беседах.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil graag mijn kant van het verhaal vertellen.",
+        ru: "Я хотел бы рассказать свою сторону истории.",
+      },
+      {
+        nl: "Het probleem begon na een misverstand vorige maand.",
+        ru: "Проблема началась после недоразумения в прошлом месяце.",
+      },
+      {
+        nl: "Ik wil vooral weer normaal kunnen samenwerken.",
+        ru: "Я хочу прежде всего снова нормально работать вместе.",
+      },
+      {
+        nl: "Wat is de volgende stap in dit proces?",
+        ru: "Какой следующий шаг в этом процессе?",
+      },
+    ],
+    replyBank: [
+      { nl: "We houden ons allebei aan een paar regels.", ru: "Мы оба будем придерживаться нескольких правил.", key: "regels", register: "formeel" },
+      { nl: "Vertel rustig wat er volgens u is gebeurd.", ru: "Расскажите спокойно, что, по-вашему, произошло.", key: "volgens u", register: "formeel" },
+      { nl: "Wat zou u concreet anders willen zien?", ru: "Что бы вы хотели видеть по-другому конкретно?", key: "concreet", register: "formeel" },
+      { nl: "We plannen een gezamenlijk gesprek in.", ru: "Мы назначим совместную встречу.", key: "gezamenlijk", register: "formeel" },
+      { nl: "Alles wat hier gezegd wordt, blijft vertrouwelijk.", ru: "Всё, что здесь сказано, остаётся конфиденциальным.", key: "vertrouwelijk", register: "formeel" },
+      { nl: "Kunt u dat rustig nog een keer zeggen?", ru: "Скажите это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can continue in English if that's more comfortable.", ru: "Можем продолжить по-английски, если так удобнее.", register: "switch" },
+    ],
+    repairIds: ["momentje", "betekent"],
+    traps: [
+      {
+        wrong: "Ik wil vooral kunnen samenwerken weer normaal.",
+        right: "Ik wil vooral weer normaal kunnen samenwerken.",
+        why: "«weer normaal» встаёт перед закрывающим инфинитивом kunnen samenwerken, а не после него.",
+      },
+      {
+        wrong: "het conflict, de regel",
+        right: "het conflict, de regel",
+        why: "het conflict, de regel — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "vertrouwelijk",
+        focus: "ударение на -TROU-",
+        tip: "фер-ТРАУ-вə-лек. Конфиденциальный — от vertrouwen (доверие).",
+      },
+      {
+        word: "gezamenlijk",
+        focus: "ударение на -ZA-",
+        tip: "хə-ЗА:-мен-лек. Совместный — часто встречается в рабочих разговорах.",
+      },
+    ],
+  },
+  {
+    id: "reiskostenvergoeding-vraag",
+    domain: "werk",
+    level: "A2",
+    title: "Вопрос о компенсации транспортных расходов",
+    context: "Разговор с HR о правилах компенсации транспортных расходов до работы",
+    minutes: 5,
+    openerContext: "informeel",
+    brief: [
+      "Спросят, каким транспортом вы добираетесь — своим или общественным.",
+      "Объяснят формулу расчёта — за километр или по фактическим билетам.",
+      "Уточнят, нужно ли сохранять чеки или билеты.",
+      "В конце скажут, когда компенсация приходит вместе с зарплатой.",
+    ],
+    lines: [
+      {
+        nl: "Hoe wordt de reiskostenvergoeding berekend?",
+        ru: "Как рассчитывается компенсация транспортных расходов?",
+      },
+      {
+        nl: "Ik reis met het openbaar vervoer.",
+        ru: "Я езжу на общественном транспорте.",
+      },
+      {
+        nl: "Moet ik mijn kaartjes bewaren?",
+        ru: "Мне нужно сохранять билеты?",
+      },
+      {
+        nl: "Wanneer wordt dit uitbetaald?",
+        ru: "Когда это выплачивается?",
+      },
+    ],
+    replyBank: [
+      { nl: "Reist u met eigen vervoer of het OV?", ru: "Вы добираетесь на своём транспорте или на общественном?", key: "eigen vervoer", register: "formeel" },
+      { nl: "Bij het OV vergoeden we de daadwerkelijke kosten.", ru: "При общественном транспорте мы возмещаем фактические расходы.", key: "daadwerkelijke kosten", register: "formeel" },
+      { nl: "Bewaar uw kaartjes voor de zekerheid.", ru: "Сохраняйте билеты на всякий случай.", key: "voor de zekerheid", register: "informeel" },
+      { nl: "Dit wordt samen met uw salaris uitbetaald.", ru: "Это выплачивается вместе с зарплатой.", key: "uitbetaald", register: "formeel" },
+      { nl: "Declareer dit maandelijks via het systeem.", ru: "Заявляйте это ежемесячно через систему.", key: "declareer", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "opschrijven"],
+    traps: [
+      {
+        wrong: "Ik reis met het vervoer openbaar.",
+        right: "Ik reis met het openbaar vervoer.",
+        why: "Прилагательное openbaar стоит перед существительным vervoer, порядок фиксирован, как во всех устойчивых сочетаниях.",
+      },
+      {
+        wrong: "de vergoeding, het kosten",
+        right: "de vergoeding, de kosten",
+        why: "de vergoeding, de kosten — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "reiskostenvergoeding",
+        focus: "составное слово, самое длинное",
+        tip: "РЭЙС-кос-тен-фер-ХУ:-динх. reis + kosten + vergoeding — компенсация транспортных расходов.",
+      },
+      {
+        word: "declareer",
+        focus: "ударение на -REER",
+        tip: "де-кла-РЕ:Р. Заявлять расходы на возмещение.",
+      },
+    ],
+  },
+  {
+    id: "thuiswerken-afspraken",
+    domain: "werk",
+    level: "A2",
+    title: "Договориться об удалённой работе",
+    context: "Разговор с руководителем о постоянных днях удалённой работы",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Спросите, сколько дней в неделю можно работать из дома.",
+      "Руководитель может уточнить, какие дни обязательно быть в офисе для встреч команды.",
+      "Обсудят, как это отразится на оценке результатов работы.",
+      "В конце договорятся, кто и как это зафиксирует официально.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil graag twee dagen per week thuiswerken.",
+        ru: "Я хотел бы работать из дома два дня в неделю.",
+      },
+      {
+        nl: "Welke dagen moet ik zeker op kantoor zijn?",
+        ru: "В какие дни мне обязательно нужно быть в офисе?",
+      },
+      {
+        nl: "Verandert er iets aan de beoordeling van mijn werk?",
+        ru: "Изменится ли что-то в оценке моей работы?",
+      },
+      {
+        nl: "Kunnen we dit schriftelijk vastleggen?",
+        ru: "Можем зафиксировать это письменно?",
+      },
+    ],
+    replyBank: [
+      { nl: "Twee dagen thuiswerken is prima bespreekbaar.", ru: "Два дня удалённой работы вполне обсуждаемо.", key: "bespreekbaar", register: "informeel" },
+      { nl: "Op dinsdag en donderdag hebben we teamoverleg.", ru: "По вторникам и четвергам у нас командные встречи.", key: "teamoverleg", register: "neutraal" },
+      { nl: "De beoordeling blijft gebaseerd op resultaten.", ru: "Оценка по-прежнему строится на результатах.", key: "resultaten", register: "formeel" },
+      { nl: "Ik leg dit vast in een korte afspraak.", ru: "Я зафиксирую это в коротком соглашении.", key: "afspraak", register: "informeel" },
+      { nl: "Laten we dit over drie maanden evalueren.", ru: "Давай оценим это через три месяца.", key: "evalueren", register: "informeel" },
+      { nl: "Kun je dat nog een keer zeggen?", ru: "Можешь повторить?", key: "nog een keer", register: "informeel" },
+      { nl: "We can discuss this in English if easier.", ru: "Можем обсудить это по-английски, если так легче.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "herhalen"],
+    traps: [
+      {
+        wrong: "Verandert iets er aan de beoordeling?",
+        right: "Verandert er iets aan de beoordeling van mijn werk?",
+        why: "Безличное er встаёт сразу после глагола, перед подлежащим iets — порядок фиксирован.",
+      },
+      {
+        wrong: "het overleg, de resultaat",
+        right: "het overleg, het resultaat",
+        why: "het overleg, het resultaat — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "thuiswerken",
+        focus: "составное слово",
+        tip: "ТЁЙС-вер-кен. thuis + werken — работать из дома.",
+      },
+      {
+        word: "teamoverleg",
+        focus: "составное слово",
+        tip: "ТИ:М-о:-вер-лех. team + overleg — командная встреча.",
+      },
+    ],
+  },
+  {
+    id: "pensioenfonds-vraag",
+    domain: "werk",
+    level: "A2",
+    title: "Вопрос про пенсионный фонд",
+    context: "Звонок в пенсионный фонд компании — вопрос про накопления и отчисления",
+    minutes: 6,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят номер полиса или BSN для идентификации.",
+      "Объяснят, как читать годовой обзор пенсионных накоплений.",
+      "Могут рассказать про возможность дополнительных добровольных взносов.",
+      "В конце скажут, где посмотреть актуальный баланс онлайн.",
+    ],
+    lines: [
+      {
+        nl: "Ik heb een vraag over mijn pensioenopbouw.",
+        ru: "У меня вопрос про мои пенсионные накопления.",
+      },
+      {
+        nl: "Kunt u het overzicht voor mij uitleggen?",
+        ru: "Можете объяснить мне этот обзор?",
+      },
+      {
+        nl: "Kan ik vrijwillig extra bijdragen?",
+        ru: "Могу я вносить дополнительные добровольные взносы?",
+      },
+      {
+        nl: "Waar zie ik mijn actuele saldo?",
+        ru: "Где мне посмотреть актуальный баланс?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is uw polisnummer of BSN?", ru: "Ваш номер полиса или BSN?", key: "polisnummer", register: "formeel" },
+      { nl: "Dit bedrag toont uw huidige opbouw.", ru: "Эта сумма показывает ваши текущие накопления.", key: "huidige opbouw", register: "neutraal" },
+      { nl: "Extra bijstorten kan altijd, binnen bepaalde grenzen.", ru: "Дополнительные взносы возможны всегда, в определённых пределах.", key: "bijstorten", register: "formeel" },
+      { nl: "Uw saldo staat altijd in het online portaal.", ru: "Ваш баланс всегда доступен в онлайн-портале.", key: "saldo", register: "neutraal" },
+      { nl: "Ik stuur u de link per e-mail.", ru: "Пришлю вам ссылку по почте.", key: "link", register: "informeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "cijfers"],
+    traps: [
+      {
+        wrong: "Kan ik bijdragen extra vrijwillig?",
+        right: "Kan ik vrijwillig extra bijdragen?",
+        why: "Наречия vrijwillig и extra встают перед инфинитивом bijdragen в этом порядке, а не после него.",
+      },
+      {
+        wrong: "het pensioen, de saldo",
+        right: "het pensioen, het saldo",
+        why: "het pensioen, het saldo — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "pensioenopbouw",
+        focus: "составное слово",
+        tip: "пен-си-У:Н-оп-бау. pensioen + opbouw — накопление пенсии.",
+      },
+      {
+        word: "bijstorten",
+        focus: "отделяемый глагол",
+        tip: "БЭЙ-стор-тен. Довносить — ik stort bij.",
+      },
+    ],
+  },
+  {
+    id: "opzegtermijn-bespreken",
+    domain: "werk",
+    level: "A2",
+    title: "Обсудить срок уведомления при увольнении",
+    context: "Разговор с HR при подаче заявления об уходе — обсуждение срока отработки",
+    minutes: 6,
+    openerContext: "informeel",
+    brief: [
+      "Сообщите о своём решении уйти и предполагаемую дату последнего дня.",
+      "HR уточнит срок уведомления по контракту — обычно месяц.",
+      "Обсудят передачу дел и возможный отпуск, который нужно использовать.",
+      "В конце попросят подтвердить увольнение письменно.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil mijn ontslag aankondigen.",
+        ru: "Я хочу объявить об уходе.",
+      },
+      {
+        nl: "Mijn laatste werkdag zou over een maand zijn.",
+        ru: "Мой последний рабочий день был бы через месяц.",
+      },
+      {
+        nl: "Moet ik nog vakantiedagen opnemen?",
+        ru: "Мне нужно ещё использовать отпускные дни?",
+      },
+      {
+        nl: "Kunt u dit schriftelijk bevestigen?",
+        ru: "Можете подтвердить это письменно?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is uw beoogde laatste werkdag?", ru: "Какой у вас предполагаемый последний рабочий день?", key: "laatste werkdag", register: "formeel" },
+      { nl: "De opzegtermijn in uw contract is één maand.", ru: "Срок уведомления в вашем контракте — один месяц.", key: "opzegtermijn", register: "formeel" },
+      { nl: "U heeft nog vijf vakantiedagen openstaan.", ru: "У вас ещё осталось пять неиспользованных отпускных дней.", key: "openstaan", register: "formeel" },
+      { nl: "We sturen u een schriftelijke bevestiging.", ru: "Мы отправим вам письменное подтверждение.", key: "bevestiging", register: "formeel" },
+      { nl: "Laten we samen de overdracht plannen.", ru: "Давайте вместе спланируем передачу дел.", key: "overdracht", register: "neutraal" },
+      { nl: "Kunt u dat rustig nog een keer zeggen?", ru: "Скажите это спокойно ещё раз?", key: "rustig", register: "informeel" },
+      { nl: "We can arrange the paperwork in English too.", ru: "Можем оформить документы и на английском.", register: "switch" },
+    ],
+    repairIds: ["momentje", "opschrijven"],
+    traps: [
+      {
+        wrong: "Ik wil aankondigen mijn ontslag.",
+        right: "Ik wil mijn ontslag aankondigen.",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "het ontslag, de overdracht",
+        right: "het ontslag, de overdracht",
+        why: "het ontslag, de overdracht — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "opzegtermijn",
+        focus: "составное слово",
+        tip: "ОП-зех-тер-мэйн. Уже встречалось в разговоре про аренду — здесь про работу.",
+      },
+      {
+        word: "overdracht",
+        focus: "ударение на -DRACHT",
+        tip: "О:-вер-драхт. Передача дел — от глагола overdragen.",
+      },
+    ],
+  },
+  {
+    id: "autokeuring-apk",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Пройти техосмотр автомобиля (APK)",
+    context: "Визит в гараж на ежегодный технический осмотр автомобиля (APK-keuring)",
+    minutes: 6,
+    openerContext: "winkel",
+    brief: [
+      "На стойке спросят номер машины и последний пробег.",
+      "Объяснят, сколько времени займёт проверка и можно ли подождать на месте.",
+      "Если найдут проблему, объяснят, критична ли она для прохождения осмотра.",
+      "В конце выдадут сертификат или назначат срок на устранение недостатков.",
+    ],
+    lines: [
+      {
+        nl: "Ik kom voor de jaarlijkse APK-keuring.",
+        ru: "Я пришёл на ежегодный техосмотр.",
+      },
+      {
+        nl: "Hoeveel kilometer staat er nu op de teller?",
+        ru: "Сколько сейчас на счётчике?",
+      },
+      {
+        nl: "Kan ik hier wachten tot het klaar is?",
+        ru: "Могу я подождать здесь, пока не будет готово?",
+      },
+      {
+        nl: "Is dit een probleem waarmee ik hem niet mag laten rijden?",
+        ru: "Это проблема, из-за которой мне нельзя ездить дальше?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is het kenteken van uw auto?", ru: "Номер вашей машины?", key: "kenteken", register: "formeel" },
+      { nl: "De keuring duurt ongeveer drie kwartier.", ru: "Осмотр занимает примерно три четверти часа.", key: "drie kwartier", register: "neutraal" },
+      { nl: "U kunt hier gerust wachten.", ru: "Можете спокойно подождать здесь.", key: "wachten", register: "informeel" },
+      { nl: "Dit is een licht mankement, geen probleem.", ru: "Это небольшой недостаток, не проблема.", key: "licht mankement", register: "neutraal" },
+      { nl: "Dit moet u binnen twee maanden laten repareren.", ru: "Это нужно исправить в течение двух месяцев.", key: "twee maanden", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain the results in English too.", ru: "С радостью объясню результаты и по-английски.", register: "switch" },
+    ],
+    repairIds: ["cijfers", "betekent"],
+    traps: [
+      {
+        wrong: "Is dit een probleem waarmee ik niet mag laten hem rijden?",
+        right: "Is dit een probleem waarmee ik hem niet mag laten rijden?",
+        why: "Дополнение hem встаёт перед закрывающими глаголами mag laten rijden, а не разрывает их порядок посередине.",
+      },
+      {
+        wrong: "de keuring, het mankement",
+        right: "de keuring, het mankement",
+        why: "de keuring, het mankement — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "keuring",
+        focus: "ударение на KEU-",
+        tip: "КЁ:-ринх. Осмотр/проверка — базовое слово для техосмотра.",
+      },
+      {
+        word: "mankement",
+        focus: "ударение на -MENT",
+        tip: "ман-кə-МЕНТ. Небольшая неисправность — не так серьёзно, как storing.",
+      },
+    ],
+  },
+  {
+    id: "sportschool-lidmaatschap",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Оформить абонемент в спортзал",
+    context: "Визит в спортзал для оформления абонемента и уточнения условий отмены",
+    minutes: 6,
+    openerContext: "winkel",
+    brief: [
+      "Спросят, какой тип абонемента интересует — месячный или годовой, со скидкой при годовой оплате.",
+      "Расскажут про минимальный срок обязательства и условия расторжения.",
+      "Могут предложить бесплатное вводное занятие.",
+      "В конце оформят абонемент и покажут, как работает вход по карте.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil me graag inschrijven voor een lidmaatschap.",
+        ru: "Я хотел бы оформить абонемент.",
+      },
+      {
+        nl: "Wat is de minimale looptijd van het contract?",
+        ru: "Какой минимальный срок обязательства по контракту?",
+      },
+      {
+        nl: "Hoe kan ik dit later weer opzeggen?",
+        ru: "Как потом можно это отменить?",
+      },
+      {
+        nl: "Is er een gratis proefles?",
+        ru: "Есть бесплатное пробное занятие?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wilt u een maand- of jaarabonnement?", ru: "Хотите месячный или годовой абонемент?", key: "jaarabonnement", register: "neutraal" },
+      { nl: "De minimale looptijd is drie maanden.", ru: "Минимальный срок — три месяца.", key: "drie maanden", register: "formeel" },
+      { nl: "Opzeggen kan met één maand opzegtermijn.", ru: "Отменить можно с уведомлением за месяц.", key: "opzegtermijn", register: "formeel" },
+      { nl: "De eerste les is altijd gratis.", ru: "Первое занятие всегда бесплатное.", key: "gratis", register: "informeel" },
+      { nl: "U betaalt automatisch via incasso.", ru: "Оплата автоматически через прямое дебетование.", key: "incasso", register: "formeel" },
+      { nl: "Kunt u dat nog een keer uitleggen?", ru: "Объясните ещё раз?", key: "uitleggen", register: "informeel" },
+      { nl: "I'm happy to explain the plans in English too.", ru: "С радостью объясню тарифы и по-английски.", register: "switch" },
+    ],
+    repairIds: ["cijfers", "betekent"],
+    traps: [
+      {
+        wrong: "Ik wil inschrijven me voor een lidmaatschap.",
+        right: "Ik wil me graag inschrijven voor een lidmaatschap.",
+        why: "Возвратное местоимение me встаёт сразу после подлежащего/глагола, не после отделяемого инфинитива.",
+      },
+      {
+        wrong: "het abonnement, de looptijd",
+        right: "het abonnement, de looptijd",
+        why: "het abonnement, de looptijd — заучивать со словом.",
+      },
+    ],
+    gate: [
+      {
+        word: "lidmaatschap",
+        focus: "составное слово",
+        tip: "ЛИТ-ма:т-сха-п. lid + maatschap — членство/абонемент.",
+      },
+      {
+        word: "incasso",
+        focus: "ударение на -CAS-",
+        tip: "ин-КА-со. Прямое дебетование — регулярное автоматическое списание.",
+      },
+    ],
+  },
+  {
+    id: "dierenarts-huisdier",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Приём у ветеринара",
+    context: "Визит к ветеринару с домашним питомцем — плановый осмотр или лёгкое недомогание",
+    minutes: 6,
+    openerContext: "loket",
+    brief: [
+      "Ветеринар спросит, что именно беспокоит и как долго.",
+      "Уточнит вес, возраст и последние прививки животного.",
+      "Может предложить анализы или просто наблюдение дома.",
+      "В конце назначит дату следующего визита, если нужно.",
+    ],
+    lines: [
+      {
+        nl: "Mijn kat eet al twee dagen minder.",
+        ru: "Моя кошка уже два дня ест меньше.",
+      },
+      {
+        nl: "Ze is verder wel actief zoals altijd.",
+        ru: "В остальном она активна, как обычно.",
+      },
+      {
+        nl: "Zijn haar vaccinaties nog up-to-date?",
+        ru: "Её прививки ещё актуальны?",
+      },
+      {
+        nl: "Moet ik me hier zorgen om maken?",
+        ru: "Мне стоит из-за этого беспокоиться?",
+      },
+    ],
+    replyBank: [
+      { nl: "Sinds wanneer eet ze minder precies?", ru: "С каких пор именно она ест меньше?", key: "sinds wanneer", register: "formeel" },
+      { nl: "Haar vaccinaties zijn nog volledig up-to-date.", ru: "Её прививки полностью актуальны.", key: "up-to-date", register: "neutraal" },
+      { nl: "Laten we haar even wegen en voelen.", ru: "Давайте её взвесим и осмотрим.", key: "wegen", register: "informeel" },
+      { nl: "Dit hoeft u niet meteen ongerust te maken.", ru: "Из-за этого не стоит сразу волноваться.", key: "ongerust", register: "formeel" },
+      { nl: "Kom over een week terug als het niet beter gaat.", ru: "Возвращайтесь через неделю, если лучше не станет.", key: "over een week", register: "neutraal" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["betekent", "herhalen"],
+    traps: [
+      {
+        wrong: "Ze is actief wel zoals altijd verder.",
+        right: "Ze is verder wel actief zoals altijd.",
+        why: "«verder» и подтверждающее «wel» встают в начале смыслового блока, а не разбрасываются по концу фразы.",
+      },
+      {
+        wrong: "de kat, het vaccinatie",
+        right: "de kat, de vaccinatie",
+        why: "Оба de: de kat, de vaccinatie.",
+      },
+    ],
+    gate: [
+      {
+        word: "dierenarts",
+        focus: "составное слово",
+        tip: "ДИ:-рен-артс. dieren + arts — ветеринар.",
+      },
+      {
+        word: "ongerust",
+        focus: "ударение на -RUST",
+        tip: "он-хə-РЮСТ. Уже знакомое слово из медицинских сценариев — здесь про питомца.",
+      },
+    ],
+  },
+  {
+    id: "kledingwinkel-omruilen",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Обменять одежду в магазине",
+    context: "Возврат в магазин одежды — обмен купленной вещи на другой размер",
+    minutes: 5,
+    openerContext: "winkel",
+    brief: [
+      "На кассе спросят чек и причину обмена.",
+      "Проверят, что вещь не ношена и с бирками.",
+      "Могут предложить обмен на другой размер или возврат денег на карту.",
+      "В конце уточнят, устраивает ли вас найденная замена.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil deze trui graag omruilen voor een andere maat.",
+        ru: "Я хотел бы обменять этот свитер на другой размер.",
+      },
+      {
+        nl: "Hier is mijn bonnetje.",
+        ru: "Вот мой чек.",
+      },
+      {
+        nl: "Kan ik ook gewoon mijn geld terugkrijgen?",
+        ru: "Могу я просто вернуть деньги?",
+      },
+      {
+        nl: "Hebben jullie deze maat nog op voorraad?",
+        ru: "У вас есть этот размер в наличии?",
+      },
+    ],
+    replyBank: [
+      { nl: "Heeft u hier uw aankoopbon bij?", ru: "У вас с собой чек о покупке?", key: "aankoopbon", register: "formeel" },
+      { nl: "Zitten de kaartjes er nog aan?", ru: "Бирки ещё на месте?", key: "kaartjes", register: "informeel" },
+      { nl: "Terugbetaling kan alleen op dezelfde kaart.", ru: "Возврат денег возможен только на ту же карту.", key: "terugbetaling", register: "formeel" },
+      { nl: "Deze maat is helaas niet meer op voorraad.", ru: "К сожалению, этого размера больше нет в наличии.", key: "op voorraad", register: "neutraal" },
+      { nl: "Wilt u een andere kleur proberen?", ru: "Хотите попробовать другой цвет?", key: "andere kleur", register: "informeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "I'm happy to help in English too.", ru: "С радостью помогу и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "klopt"],
+    traps: [
+      {
+        wrong: "Kan ik ook gewoon terugkrijgen mijn geld?",
+        right: "Kan ik ook gewoon mijn geld terugkrijgen?",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "de bonnetje, het maat",
+        right: "het bonnetje, de maat",
+        why: "het bonnetje (уменьшительное — всегда het), de maat.",
+      },
+    ],
+    gate: [
+      {
+        word: "omruilen",
+        focus: "ударение на RUI-",
+        tip: "ОМ-рёй-лен. Обменивать — om + ruilen.",
+      },
+      {
+        word: "voorraad",
+        focus: "долгое aa",
+        tip: "ВО:Р-ра:т. Наличие/запас на складе.",
+      },
+    ],
+  },
+  {
+    id: "taxi-bestellen-telefonisch",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Заказать такси по телефону",
+    context: "Звонок в таксомоторную компанию — заказ такси на определённое время и адрес",
+    minutes: 5,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят адрес отправления и назначения.",
+      "Уточнят точное время, к которому нужна машина.",
+      "Могут спросить, нужно ли детское кресло или место для багажа.",
+      "В конце назовут примерную стоимость и время ожидания.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil graag een taxi bestellen.",
+        ru: "Я хотел бы заказать такси.",
+      },
+      {
+        nl: "Ik moet om acht uur bij het station zijn.",
+        ru: "Мне нужно быть на вокзале в восемь.",
+      },
+      {
+        nl: "Ik heb best veel bagage bij me.",
+        ru: "У меня довольно много багажа.",
+      },
+      {
+        nl: "Hoeveel gaat de rit ongeveer kosten?",
+        ru: "Сколько примерно будет стоить поездка?",
+      },
+    ],
+    replyBank: [
+      { nl: "Wat is uw ophaaladres?", ru: "Ваш адрес, откуда забрать?", key: "ophaaladres", register: "formeel" },
+      { nl: "Hoe laat moet de taxi er zijn?", ru: "Во сколько такси должно приехать?", key: "hoe laat", register: "neutraal" },
+      { nl: "We sturen een grotere auto voor de bagage.", ru: "Мы пришлём машину побольше для багажа.", key: "grotere auto", register: "informeel" },
+      { nl: "De rit kost ongeveer twintig euro.", ru: "Поездка стоит примерно двадцать евро.", key: "twintig euro", register: "neutraal" },
+      { nl: "De taxi is over tien minuten bij u.", ru: "Такси будет у вас через десять минут.", key: "tien minuten", register: "neutraal" },
+      { nl: "Kunt u dat adres nog een keer herhalen?", ru: "Повторите этот адрес ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "I can take this booking in English too.", ru: "Могу принять этот заказ и по-английски.", register: "switch" },
+    ],
+    repairIds: ["cijfers", "herhalen", "spellen"],
+    traps: [
+      {
+        wrong: "Ik heb bagage bij me best veel.",
+        right: "Ik heb best veel bagage bij me.",
+        why: "«best veel» встаёт перед существительным bagage, а не после дополнения — как усилительное сочетание, оно всегда стоит перед словом, к которому относится.",
+      },
+      {
+        wrong: "de taxi, het bagage",
+        right: "de taxi, de bagage",
+        why: "Оба de: de taxi, de bagage.",
+      },
+    ],
+    gate: [
+      {
+        word: "ophaaladres",
+        focus: "составное слово",
+        tip: "ОП-ха:л-а-дрес. ophalen + adres — адрес, откуда забрать пассажира.",
+      },
+      {
+        word: "bagage",
+        focus: "заимствование из французского",
+        tip: "ба-ХА:-жə. Багаж — произносится почти как во французском, с мягким «ж».",
+      },
+    ],
+  },
+  {
+    id: "verzekering-fiets-diefstal",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Сообщить страховой о краже велосипеда",
+    context: "Звонок в страховую компанию после кражи велосипеда — вместе с уже поданным заявлением в полицию",
+    minutes: 6,
+    openerContext: "telefoon",
+    brief: [
+      "Спросят номер заявления в полиции (aangiftenummer) — оформите его заранее.",
+      "Уточнят, где и когда именно украли велосипед.",
+      "Попросят чек или другое доказательство покупки, если оно есть.",
+      "В конце скажут, сколько времени займёт рассмотрение и как придёт компенсация.",
+    ],
+    lines: [
+      {
+        nl: "Mijn fiets is gisteren gestolen.",
+        ru: "Мой велосипед украли вчера.",
+      },
+      {
+        nl: "Ik heb al aangifte gedaan bij de politie.",
+        ru: "Я уже подал заявление в полицию.",
+      },
+      {
+        nl: "Ik heb helaas geen aankoopbon meer.",
+        ru: "У меня, к сожалению, больше нет чека о покупке.",
+      },
+      {
+        nl: "Hoe lang duurt de afhandeling ongeveer?",
+        ru: "Сколько примерно займёт рассмотрение?",
+      },
+    ],
+    replyBank: [
+      { nl: "Heeft u het aangiftenummer bij de hand?", ru: "У вас под рукой номер заявления?", key: "aangiftenummer", register: "formeel" },
+      { nl: "Waar en wanneer is de fiets gestolen?", ru: "Где и когда украли велосипед?", key: "gestolen", register: "formeel" },
+      { nl: "Een foto van de fiets is ook voldoende bewijs.", ru: "Фото велосипеда тоже достаточное доказательство.", key: "bewijs", register: "neutraal" },
+      { nl: "De afhandeling duurt meestal twee weken.", ru: "Рассмотрение обычно занимает две недели.", key: "twee weken", register: "formeel" },
+      { nl: "U ontvangt het bedrag op uw rekening.", ru: "Сумма придёт вам на счёт.", key: "op uw rekening", register: "formeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "We can handle this claim in English too.", ru: "Можем обработать эту заявку и на английском.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "spellen"],
+    traps: [
+      {
+        wrong: "Mijn fiets was gestolen gisteren.",
+        right: "Mijn fiets is gisteren gestolen.",
+        why: "Кража — событие, а не длящееся состояние: перфект образуется через is, обстоятельство времени встаёт перед причастием, а не после него.",
+      },
+      {
+        wrong: "de aangifte, het bewijs",
+        right: "de aangifte, het bewijs",
+        why: "de aangifte, het bewijs — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "gestolen",
+        focus: "ударение на -STO-",
+        tip: "хə-СТО:-лен. Украдено — причастие от stelen.",
+      },
+      {
+        word: "afhandeling",
+        focus: "харде G перед -ing",
+        tip: "АФ-хан-дə-линх. Обработка/рассмотрение заявки.",
+      },
+    ],
+  },
+  {
+    id: "buurthuis-cursus-aanmelden",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Записаться на курс в общественном центре",
+    context: "Визит в buurthuis (общественный центр) для записи на курс — например, кулинарию или рукоделие",
+    minutes: 5,
+    openerContext: "informeel",
+    brief: [
+      "Спросят, какой курс интересует и есть ли уже опыт в этой теме.",
+      "Расскажут расписание и стоимость — часто со скидкой для местных жителей.",
+      "Могут спросить, нужен ли материал с собой или всё предоставляется.",
+      "В конце запишут вас и дадут расписание на бумаге.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil me aanmelden voor de kookcursus.",
+        ru: "Я хочу записаться на курс кулинарии.",
+      },
+      {
+        nl: "Ik heb hier geen ervaring mee.",
+        ru: "У меня в этом нет опыта.",
+      },
+      {
+        nl: "Moet ik zelf ingrediënten meenemen?",
+        ru: "Мне нужно самому приносить ингредиенты?",
+      },
+      {
+        nl: "Is er korting voor buurtbewoners?",
+        ru: "Есть скидка для местных жителей?",
+      },
+    ],
+    replyBank: [
+      { nl: "Heeft u al ervaring met koken?", ru: "У вас уже есть опыт готовки?", key: "ervaring", register: "informeel" },
+      { nl: "Alle ingrediënten worden door ons geregeld.", ru: "Все ингредиенты мы организуем сами.", key: "geregeld", register: "informeel" },
+      { nl: "Buurtbewoners krijgen tien procent korting.", ru: "Местным жителям скидка десять процентов.", key: "korting", register: "informeel" },
+      { nl: "De cursus start volgende week dinsdag.", ru: "Курс начинается в следующий вторник.", key: "volgende week", register: "neutraal" },
+      { nl: "Hier is het rooster op papier.", ru: "Вот расписание на бумаге.", key: "rooster", register: "informeel" },
+      { nl: "Kunt u dat nog een keer opschrijven?", ru: "Можете записать это ещё раз?", key: "opschrijven", register: "informeel" },
+      { nl: "I'm happy to explain this in English too.", ru: "С радостью объясню это и по-английски.", register: "switch" },
+    ],
+    repairIds: ["opschrijven", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik heb geen ervaring hier mee.",
+        right: "Ik heb hier geen ervaring mee.",
+        why: "«hier … mee» — застывшее сочетание с er/hier в начале и предлогом в конце, между ними встаёт дополнение geen ervaring.",
+      },
+      {
+        wrong: "de cursus, het korting",
+        right: "de cursus, de korting",
+        why: "Оба de: de cursus, de korting.",
+      },
+    ],
+    gate: [
+      {
+        word: "buurtbewoners",
+        focus: "составное слово",
+        tip: "БЮРТ-бə-во:-нерс. buurt + bewoners — жители района.",
+      },
+      {
+        word: "ingrediënten",
+        focus: "трема надë",
+        tip: "ин-хре-ди-ЕН-тен. Ингредиенты — трема показывает раздельное произношение i и e.",
+      },
+    ],
+  },
+  {
+    id: "cadeaubon-inwisselen",
+    domain: "dagelijks",
+    level: "A2",
+    title: "Использовать подарочный сертификат",
+    context: "Визит в магазин — использование подарочного сертификата (cadeaubon) и вопрос про условия",
+    minutes: 4,
+    openerContext: "winkel",
+    brief: [
+      "На кассе спросят номинал сертификата и что именно вы выбрали.",
+      "Могут уточнить срок действия, если сертификат старый.",
+      "Объяснят, что делать, если сумма покупки меньше номинала сертификата.",
+      "В конце проведут оплату и, если нужно, выдадут остаток на новом сертификате.",
+    ],
+    lines: [
+      {
+        nl: "Ik wil deze cadeaubon graag inwisselen.",
+        ru: "Я хотел бы использовать этот подарочный сертификат.",
+      },
+      {
+        nl: "Is deze bon nog geldig?",
+        ru: "Этот сертификат ещё действителен?",
+      },
+      {
+        nl: "Wat gebeurt er met het resterende bedrag?",
+        ru: "Что будет с оставшейся суммой?",
+      },
+      {
+        nl: "Kan ik het verschil bijbetalen met pin?",
+        ru: "Могу я доплатить разницу картой?",
+      },
+    ],
+    replyBank: [
+      { nl: "Deze bon is nog een jaar geldig.", ru: "Этот сертификат действителен ещё год.", key: "een jaar geldig", register: "neutraal" },
+      { nl: "Het restbedrag zetten we op een nieuwe bon.", ru: "Остаток мы поместим на новый сертификат.", key: "restbedrag", register: "neutraal" },
+      { nl: "Bijbetalen met pin is geen probleem.", ru: "Доплатить картой не проблема.", key: "bijbetalen", register: "informeel" },
+      { nl: "Deze bon is helaas al verlopen.", ru: "Этот сертификат, к сожалению, уже просрочен.", key: "verlopen", register: "neutraal" },
+      { nl: "Zal ik de bon voor u scannen?", ru: "Отсканировать сертификат для вас?", key: "scannen", register: "informeel" },
+      { nl: "Kunt u dat nog een keer herhalen?", ru: "Повторите ещё раз?", key: "herhalen", register: "informeel" },
+      { nl: "I'm happy to sort this out in English too.", ru: "С радостью разберусь с этим и по-английски.", register: "switch" },
+    ],
+    repairIds: ["herhalen", "cijfers"],
+    traps: [
+      {
+        wrong: "Ik wil inwisselen deze cadeaubon.",
+        right: "Ik wil deze cadeaubon graag inwisselen.",
+        why: "Дополнение перед инфинитивом отделяемого глагола, не после него.",
+      },
+      {
+        wrong: "de cadeaubon, het bedrag",
+        right: "de cadeaubon, het bedrag",
+        why: "de cadeaubon, het bedrag — заучивать целиком.",
+      },
+    ],
+    gate: [
+      {
+        word: "cadeaubon",
+        focus: "составное слово, заимствование из французского",
+        tip: "ка-ДО:-бон. cadeau + bon — подарочный сертификат.",
+      },
+      {
+        word: "verlopen",
+        focus: "ударение на -LO-",
+        tip: "вер-ЛО:-пен. Просроченный — уже знакомое слово из других сценариев.",
+      },
+    ],
+  },
 ];
 
 export const scenarioById = (id: string): Scenario | undefined =>
