@@ -21,9 +21,9 @@ service worker, GitHub Pages via Actions.
 root and on a `/<repo>/` subpath. ✅
 
 ## A1 — Content ✅
-24 scenarios across the six `_SCHEMA.md` domains, 4 each (A1 10 / A2 8 / B1 6).
+36 scenarios across the six `_SCHEMA.md` domains, 6 each (A1 14 / A2 12 / B1 10).
 104 article-attached nouns, 8 repair moves, 7 openers and recovery moves, 12
-grammar notes, 8 course lessons, 27 CEFR can-do statements, tester survey.
+grammar notes, 8 course lessons, 39 CEFR can-do statements, tester survey.
 
 **Done when:** every scenario has 4–8 lines, 6+ reply-bank items, 2+ traps, 2+
 gate items, and **exactly one `register: "switch"` reply**. Every cross-file id
@@ -88,10 +88,9 @@ explains the storage position and wipes everything with one button.
 
 Ordered by value. None of it blocks the others.
 
-1. **More scenarios.** Twenty-four now, four per domain. Target 30–40 across
-   gemeente · huisarts/apotheek/ziekenhuis · school en kinderen · wonen en
-   verhuurder · werk · winkels en buren. Grow the list from what testers bring
-   back, not from invented situations.
+1. **More scenarios.** Thirty-six now, six per domain — inside the M12 target of
+   30–40. Further growth should come from what testers bring back from real
+   conversations, not from invented situations.
 2. **Word-order builder** (SPEC §2.3). Drag-and-drop for V2, inversion,
    verb-final, bracket and separable particles. Currently covered only by
    multiple-choice exercises.

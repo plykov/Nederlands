@@ -68,10 +68,11 @@ src/views/         16 views (14 ported + ArticleTrainer + Opener)
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
 
-Content volume: **24 scenarios** (4 per domain — A1 10, A2 8, B1 6 — each with
+Content volume: **36 scenarios** (6 per domain — A1 14, A2 12, B1 10 — each with
 exactly one `register: "switch"` reply), 104 nouns, 8 repair moves, 7
-openers/recovery moves, 12 grammar notes, 8 course lessons, 27 CEFR can-do
-statements. The second batch of twelve landed in PR #3.
+openers/recovery moves, 12 grammar notes, 8 course lessons, 39 CEFR can-do
+statements. The second batch of twelve landed in PR #3; the third in this PR,
+bringing the total to the M12 target range of 30–40.
 
 Three modules have no Italiano equivalent and were written from the spec:
 
@@ -113,23 +114,24 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 Ordered by value, and none of it is blocking:
 
-1. **More scenarios.** Twenty-four covers each domain four ways; `BUILD_PLAN.md`
-   M12 wants 30–40. The remaining gap should be filled from what testers bring
-   back from real conversations, not from invented situations — that is the
-   whole point of the debrief and the Phase 0 survey.
-2. **Word-order builder** (SPEC §2.3) — drag-and-drop for V2, inversion,
+1. **Word-order builder** (SPEC §2.3) — drag-and-drop for V2, inversion,
    verb-final and the sentence bracket. Currently covered by course lessons and
    grammar notes only, with no constructor.
-3. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
+2. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
    note covering all functions at once, where the spec wants each stage gated
    on the previous.
-4. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
+3. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
    Nothing that advises on a case.
-5. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
+4. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
    Russian. Ship only items with sound etymology; стул, галстук and рюкзак are
    German or Low German and must not appear.
-6. **Audio for the reply bank.** Web Speech quality varies by platform;
+5. **Audio for the reply bank.** Web Speech quality varies by platform;
    pre-recorded native audio would improve the listening trainers most.
+
+Scenario count is no longer on this list: thirty-six scenarios, six per domain,
+land inside `BUILD_PLAN.md` M12's 30–40 target. Further growth should still
+come from what testers bring back from real conversations, not invented
+situations.
 
 ## Operational note
 
