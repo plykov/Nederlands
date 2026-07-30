@@ -21,9 +21,9 @@ service worker, GitHub Pages via Actions.
 root and on a `/<repo>/` subpath. ✅
 
 ## A1 — Content ✅
-12 scenarios across the six `_SCHEMA.md` domains, 2 each. 63 article-attached
-nouns, 8 repair moves, 7 openers and recovery moves, 12 grammar notes, 8 course
-lessons, 16 CEFR can-do statements, tester survey.
+24 scenarios across the six `_SCHEMA.md` domains, 4 each (A1 10 / A2 8 / B1 6).
+104 article-attached nouns, 8 repair moves, 7 openers and recovery moves, 12
+grammar notes, 8 course lessons, 27 CEFR can-do statements, tester survey.
 
 **Done when:** every scenario has 4–8 lines, 6+ reply-bank items, 2+ traps, 2+
 gate items, and **exactly one `register: "switch"` reply**. Every cross-file id
@@ -49,7 +49,7 @@ transcriber and is Phase 2. Onset detection is an RMS threshold, not speech
 recognition — documented as such in the UI, the README and the code.
 
 ## A4 — de/het trainer ✅
-Two-whole-forms drill over 63 nouns; the noun is never rendered bare. Misses
+Two-whole-forms drill over 104 nouns; the noun is never rendered bare. Misses
 feed an `article` card source.
 
 **Done when:** no rule is stated anywhere in the app, and no course lesson
@@ -88,7 +88,7 @@ explains the storage position and wipes everything with one button.
 
 Ordered by value. None of it blocks the others.
 
-1. **More scenarios.** Twelve is a working minimum. Target 30–40 across
+1. **More scenarios.** Twenty-four now, four per domain. Target 30–40 across
    gemeente · huisarts/apotheek/ziekenhuis · school en kinderen · wonen en
    verhuurder · werk · winkels en buren. Grow the list from what testers bring
    back, not from invented situations.
