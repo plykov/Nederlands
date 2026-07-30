@@ -82,6 +82,15 @@ diminutives). 8 lessons with 5 exercises each. No de/het lesson.
 Phase 0 survey generating copy-paste text; no backend to send it to. Settings
 explains the storage position and wipes everything with one button.
 
+## A10 — Word-order builder ✅
+SPEC §2.3. Tap-to-place constructor over 20 puzzles, 5 each for V2, inversion,
+verb-final and the sentence bracket. Reachable from Home, from `Разбор`, and
+directly at `#/wordorder/:structure`. Misses go to the review deck.
+
+**Done when:** a puzzle can be assembled and scored on a 375px viewport; where
+two orders are both correct, both pass; no chunk is stored capitalised. ✅ —
+the last two are enforced by `npm test`.
+
 ---
 
 ## Phase 1 — what remains
@@ -92,18 +101,20 @@ Ordered by value. None of it blocks the others.
    gemeente · huisarts/apotheek/ziekenhuis · school en kinderen · wonen en
    verhuurder · werk · winkels en buren. Grow the list from what testers bring
    back, not from invented situations.
-2. **Word-order builder** (SPEC §2.3). Drag-and-drop for V2, inversion,
-   verb-final, bracket and separable particles. Currently covered only by
-   multiple-choice exercises.
-3. **Stage the `er` module** (SPEC §2.4). Currently one lesson covering all five
-   functions at once; the spec wants each gated on the previous.
-4. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
-5. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
-6. **Native audio** for the reply bank. Web Speech quality varies by platform
+2. **Stage the `er` module** (SPEC §2.4). Currently one lesson and one grammar
+   note covering all five functions at once; the spec wants each gated on the
+   previous. The word-order builder now drills `er` incidentally in two
+   puzzles, which is not the same as staging it.
+3. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
+4. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
+5. **Native audio** for the reply bank. Web Speech quality varies by platform
    and this is the single biggest quality lever on the listening trainers.
-7. **A test setup.** There is currently none. `npm run build` type-checks and
-   that is all. Do not claim `npm test` works until it does.
-8. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95.
+6. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
+   word-order chips are `<button>`s and keyboard-reachable, but the whole app
+   has not had a proper pass.
+
+The "no test setup" item that stood here is done: `npm test` runs
+`scripts/check-content.mjs`. It should have been struck when that landed.
 
 ---
 

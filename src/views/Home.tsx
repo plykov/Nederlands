@@ -243,6 +243,15 @@ export default function Home() {
         </p>
       </div>
 
+      <div className="card tappable" onClick={() => (location.hash = "#/wordorder")}>
+        <span className="pill amber">конструктор</span>
+        <p className="lead">Порядок слов</p>
+        <p className="ru">
+          Глагол вторым, инверсия, придаточное, рамка. Собирайте фразу руками —
+          в русском порядок свободный, и перестановка сама не появится.
+        </p>
+      </div>
+
       <div className="card tappable" onClick={() => (location.hash = "#/listening")}>
         <span className="pill red">тренажёр</span>
         <p className="lead">Слушание под давлением</p>

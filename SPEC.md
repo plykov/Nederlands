@@ -38,16 +38,20 @@ The highest-value module.
 ### 2.2 de/het trainer — §P1, built
 Nouns are stored, rendered, and drilled **only with their article**. There is no rule view. The drill presents two whole forms — `de huurcontract` vs `het huurcontract` — so the noun never appears bare, and the answer is a phrase rather than a principle. Errors feed a dedicated `article` card source in the review deck. 104 nouns, all harvested from scenario content.
 
-### 2.3 Word-order builder — §P2, not built
-Drag-and-drop constructor for the four structures that break Russian speakers:
+### 2.3 Word-order builder — §P1, built
+Constructor for the four structures that break Russian speakers:
 1. **V2** in main clauses
 2. **Inversion** after a fronted element (`Morgen ga ik...`)
 3. **Verb-final** in subordinate clauses (`...omdat ik het niet begrijp`)
 4. **Sentence bracket / tangconstructie** and **separable-verb particle placement** (`ik schrijf me in` / `om me in te schrijven`)
 
-Scored on correct placement, with the Russian free-word-order contrast shown in the `Разбор` drawer.
+Scored on correct placement, with the Russian free-word-order contrast stated per puzzle and in the `Разбор` drawer. 20 puzzles, 5 per structure, most drawn from sentences that already appear in the scenarios.
 
-**Phase 1 covers the same four structures** through course lessons (`v2`, `verb-final`, `separable`, `bracket`) and grammar notes, but with multiple-choice and fill exercises rather than a constructor.
+**Assembly is by tapping, not dragging.** HTML5 drag-and-drop is unreliable on touch and this app is mobile-first; a tap places a chunk, a second tap takes it back, and the same gesture works with a mouse. Chunks are multi-word, so this is a word-*order* exercise, not a word-by-word one.
+
+**Chunks are stored lowercase** and the view capitalises on render — a capitalised chunk would give away which one starts the sentence. `npm test` enforces this.
+
+**Where two orders are both correct, both are accepted** (`accept` on the puzzle) — e.g. `ik heb het document gisteren opgestuurd` and `ik heb gisteren het document opgestuurd`. A drill that marks a correct answer wrong destroys trust, which is the same reason §2.5 ships no automated pronunciation score. `npm test` verifies every `accept` variant is actually reachable by rearranging that puzzle's chunks, so a typo there cannot silently become an unreachable "correct" answer.
 
 ### 2.4 "er" module — §P1 partial
 Taught in this sequence, not all at once: existential/presentative → locative → pronominal (`erover`, `ermee`) → quantitative → placeholder subject. Each stage gated on the previous.

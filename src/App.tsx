@@ -15,6 +15,7 @@ import Feedback from "./views/Feedback";
 import Settings from "./views/Settings";
 import OpenerDrill from "./views/Opener";
 import ArticleTrainer from "./views/ArticleTrainer";
+import WordOrder from "./views/WordOrder";
 import { dueCards } from "./lib/srs";
 
 /**
@@ -34,6 +35,7 @@ const HOME_SECTIONS = [
   "roleplay",
   "opener",
   "articles",
+  "wordorder",
   "grammar",
   "repair",
   "listening",
@@ -71,6 +73,9 @@ export default function App() {
       break;
     case "articles":
       view = <ArticleTrainer key={route[1] ?? "all"} scenarioId={route[1]} />;
+      break;
+    case "wordorder":
+      view = <WordOrder key={route[1] ?? "menu"} structure={route[1]} />;
       break;
     case "review":
       view = <Review />;
