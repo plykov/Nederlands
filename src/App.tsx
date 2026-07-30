@@ -17,6 +17,7 @@ import OpenerDrill from "./views/Opener";
 import ArticleTrainer from "./views/ArticleTrainer";
 import WordOrder from "./views/WordOrder";
 import Inburgering from "./views/Inburgering";
+import Loanwords from "./views/Loanwords";
 import { dueCards } from "./lib/srs";
 
 /**
@@ -41,6 +42,7 @@ const HOME_SECTIONS = [
   "repair",
   "listening",
   "course",
+  "loanwords",
 ];
 
 export default function App() {
@@ -107,6 +109,9 @@ export default function App() {
       break;
     case "inburgering":
       view = <Inburgering />;
+      break;
+    case "loanwords":
+      view = <Loanwords />;
       break;
     default:
       view = <Home />;

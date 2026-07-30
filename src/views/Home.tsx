@@ -1,8 +1,19 @@
 import { useState } from "react";
 import { DOMAINS, SCENARIOS, scenarioById, domainById } from "../data/scenarios";
+import { LOANWORDS } from "../data/loanwords";
 import { storage, uid } from "../lib/storage";
 import { dueCards } from "../lib/srs";
 import type { Appointment } from "../types";
+
+/** Три случайных слова для первого впечатления — не всегда одни и те же. */
+function sampleLoanwords<T>(arr: T[], n: number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
 
 function fmtDate(iso: string): string {
   const d = new Date(iso);
@@ -30,6 +41,7 @@ export default function Home() {
   const [newScenario, setNewScenario] = useState(SCENARIOS[0].id);
   const [newDate, setNewDate] = useState("");
   const [newNote, setNewNote] = useState("");
+  const [hookSample] = useState(() => sampleLoanwords(LOANWORDS, 3));
 
   const due = dueCards().length;
   const now = Date.now();
@@ -69,6 +81,22 @@ export default function Home() {
       <p className="muted">
         Репетиция → дело → разбор. Семь минут до, пять минут после.
       </p>
+
+      {!onboarded && (
+        <div className="card tappable" onClick={() => (location.hash = "#/loanwords")}>
+          <span className="pill amber">сюрприз</span>
+          <p className="lead">Вы уже говорите по-нидерландски</p>
+          <p className="ru">
+            {hookSample.map((w) => w.ru).join(", ")} — все эти слова
+            нидерландские по происхождению. Вошли в русский при Петре I, в
+            основном через флот.
+          </p>
+          <p className="small muted">
+            Ещё {LOANWORDS.length - hookSample.length} слов и три забавных
+            мифа →
+          </p>
+        </div>
+      )}
 
       {!onboarded && (
         <div className="card">
@@ -276,6 +304,15 @@ export default function Home() {
         <p className="ru">
           Восемь крепких приёмов работают лучше пятисот слов. Повторяйте до
           автоматизма.
+        </p>
+      </div>
+
+      <div className="card tappable" onClick={() => (location.hash = "#/loanwords")}>
+        <span className="pill amber">сюрприз</span>
+        <p className="lead">Вы уже знаете кусочек нидерландского</p>
+        <p className="ru">
+          {LOANWORDS.length} слов, которые вошли в русский из нидерландского —
+          и три похожих, но ложных следа.
         </p>
       </div>
 

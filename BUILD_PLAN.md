@@ -120,22 +120,39 @@ advice-boundary sentence appears on every visit; wiping data clears the
 profile too. ✅ — `npm test` verifies every status and route is present with
 non-empty content.
 
+## A13 — Loanword hook ✅
+SPEC §2.6. `#/loanwords`: 10 tap-to-reveal cards of Dutch loanwords in
+Russian, plus a "similar but not Dutch" myth-busting section for стул,
+галстук and рюкзак. Surfaced two ways: a randomised 3-word teaser in the
+first-run onboarding card on Home (the actual hook, shown before the
+anti-switch explanation), and a permanent card below the other trainers for
+return visits.
+
+`Loanword.source` is typed `vasmer | van_der_sijs` only — no `disputed`
+value exists on that type, so a disputed item cannot type-check into
+`LOANWORDS` at all. The three CLAUDE.md names as false Dutch etymologies live
+in a separate `LOANWORD_MYTHS` array instead.
+
+**Done when:** 8–10 items ship, none disputed; стул/галстук/рюкзак appear
+only as myths, never as loanwords. ✅ — `npm test` enforces both: the
+`LOANWORDS` length bound and source enum, and that all three named words are
+excluded from `LOANWORDS` and present in `LOANWORD_MYTHS`.
+
 ---
 
 ## Phase 1 — what remains
 
 Ordered by value. None of it blocks the others.
 
-1. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
-2. **Native audio** for the reply bank. Web Speech quality varies by platform
+1. **Native audio** for the reply bank. Web Speech quality varies by platform
    and this is the single biggest quality lever on the listening trainers.
-3. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
+2. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
    word-order chips are `<button>`s and keyboard-reachable, but the whole app
    has not had a proper pass.
 
 Scenarios (36, six per domain, inside the M12 target of 30–40), the word-order
-builder (A10), the staged `er` module (A11) and the inburgering tracker (A12,
-above) are all done and no
+builder (A10), the staged `er` module (A11), the inburgering tracker (A12)
+and the loanword hook (A13, above) are all done and no
 longer on this list.
 
 The "no test setup" item that stood here is done: `npm test` runs

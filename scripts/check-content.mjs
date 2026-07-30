@@ -45,6 +45,7 @@ try {
     export { GRAMMAR_NOTES } from "${root}/src/data/grammar";
     export { PUZZLES, STRUCTURES } from "${root}/src/data/wordorder";
     export { STATUSES, ROUTES } from "${root}/src/data/inburgering";
+    export { LOANWORDS, LOANWORD_MYTHS } from "${root}/src/data/loanwords";
     `
   );
   const bundle = join(tmp, "data.mjs");
@@ -70,6 +71,8 @@ const {
   STRUCTURES,
   STATUSES,
   ROUTES,
+  LOANWORDS,
+  LOANWORD_MYTHS,
 } = data;
 
 const problems = [];
@@ -213,6 +216,31 @@ for (const r of ROUTES)
   if (r.requirements.length < 2)
     problems.push(`inburgering route ${r.id}: ${r.requirements.length} requirements (want 2+)`);
 
+// ── loanword hook: 8–10 cleared items, never a disputed one among them ──
+if (LOANWORDS.length < 8 || LOANWORDS.length > 10)
+  problems.push(`loanwords: ${LOANWORDS.length} items (want 8–10)`);
+for (const w of LOANWORDS) {
+  const at = (msg) => problems.push(`loanword ${w.id}: ${msg}`);
+  if (!["vasmer", "van_der_sijs"].includes(w.source))
+    at(`source "${w.source}" is not a cleared authority — CONTENT_SOURCES.md forbids shipping a disputed item`);
+  if (!w.nl || !w.meaning || !w.note) at("missing nl, meaning or note");
+}
+if (dup(LOANWORDS.map((w) => w.ru)).length)
+  problems.push(`duplicate loanword ru forms: ${dup(LOANWORDS.map((w) => w.ru)).join(", ")}`);
+
+// The three words CLAUDE.md explicitly calls out as false Dutch etymologies
+// must stay excluded from LOANWORDS and documented as myths, not silently
+// dropped by a future edit.
+const mustBeMyths = ["стул", "галстук", "рюкзак"];
+for (const ru of mustBeMyths) {
+  if (LOANWORDS.some((w) => w.ru === ru))
+    problems.push(`loanwords: "${ru}" has disputed/German etymology and must not ship as a loanword`);
+  if (!LOANWORD_MYTHS.some((m) => m.ru === ru))
+    problems.push(`loanword myths: missing "${ru}"`);
+}
+for (const m of LOANWORD_MYTHS)
+  if (!m.actualOrigin || !m.note) problems.push(`loanword myth ${m.id}: missing actualOrigin or note`);
+
 // ── course exercises are answerable ──
 for (const l of LESSONS)
   l.exercises.forEach((ex, i) => {
@@ -242,7 +270,8 @@ const summary =
   `scenarios ${SCENARIOS.length} · nouns ${NOUNS.length} · ` +
   `can-do ${CAN_DOS.length} · repair ${REPAIR_MOVES.length} · ` +
   `openers ${OPENERS.length} · lessons ${LESSONS.length} · ` +
-  `puzzles ${PUZZLES.length} · routes ${ROUTES.length}`;
+  `puzzles ${PUZZLES.length} · routes ${ROUTES.length} · ` +
+  `loanwords ${LOANWORDS.length}`;
 
 if (problems.length) {
   console.error(`✗ content check failed — ${summary}\n`);
