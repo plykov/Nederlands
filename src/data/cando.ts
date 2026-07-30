@@ -307,6 +307,78 @@ export const CAN_DOS: CanDo[] = [
     text: "Описать неисправность мастеру и понять предложенное решение и цену",
     scenarios: ["fietsenmaker-reparatie"],
   },
+
+  // ── добавлено вместе с четвёртой партией сценариев (A1) ──
+  {
+    id: "a1-loket-telefonisch",
+    level: "A1",
+    domain: "bureaucratie",
+    text: "Записаться на приём по телефону и продиктовать свои данные",
+    scenarios: ["afspraak-gemeente-telefonisch", "adresverandering-doorgeven"],
+  },
+  {
+    id: "a1-loket-documenten",
+    level: "A1",
+    domain: "bureaucratie",
+    text: "Заказать документ на приёме и понять условия получения",
+    scenarios: ["uittreksel-brp-aanvragen", "rijbewijs-omwisselen"],
+  },
+  {
+    id: "a1-medisch-telefoon",
+    level: "A1",
+    domain: "gezondheid",
+    text: "Описать несложную жалобу по телефону и понять совет в ответ",
+    scenarios: ["huisarts-telefonisch-consult", "recept-herhalen"],
+  },
+  {
+    id: "a1-medisch-prikpost",
+    level: "A1",
+    domain: "gezondheid",
+    text: "Пройти несложную медицинскую процедуру по направлению",
+    scenarios: ["bloedprikken-afspraak"],
+  },
+  {
+    id: "a1-school-bytovoe",
+    level: "A1",
+    domain: "school",
+    text: "Обсудить со школой бытовой вопрос и дать чёткий ответ",
+    scenarios: ["schoolfoto-toestemming", "verjaardag-trakteren"],
+  },
+  {
+    id: "a1-school-uchastie",
+    level: "A1",
+    domain: "school",
+    text: "Ответить на приглашение поучаствовать и договориться о деталях",
+    scenarios: ["oudercommissie-uitnodiging", "schoolzwemmen-aanmelding"],
+  },
+  {
+    id: "a1-wonen-dienst",
+    level: "A1",
+    domain: "wonen",
+    text: "Передать данные или задать бытовой вопрос про жильё по телефону",
+    scenarios: ["energie-meterstand-doorgeven", "huisvuil-ophalen-vraag"],
+  },
+  {
+    id: "a1-wonen-sosedi",
+    level: "A1",
+    domain: "wonen",
+    text: "Договориться с соседом об услуге и сообщить о мелком ущербе страховой",
+    scenarios: ["buren-sleutel-vragen", "verzekering-schade-melden"],
+  },
+  {
+    id: "a1-werk-bytovoe",
+    level: "A1",
+    domain: "werk",
+    text: "Обсудить с коллегами бытовой рабочий вопрос — отпуск, обед, мероприятие",
+    scenarios: ["verlof-aanvragen", "kantine-bestellen", "teamuitje-planning"],
+  },
+  {
+    id: "a1-dagelijks-poruchenia",
+    level: "A1",
+    domain: "dagelijks",
+    text: "Выполнить бытовое поручение вне дома: забрать вещи, записаться, отправить",
+    scenarios: ["stomerij-afhalen", "bibliotheek-inschrijven", "postkantoor-pakket-versturen"],
+  },
 ];
 
 export const LEVEL_NOTE: Record<CefrLevel, string> = {

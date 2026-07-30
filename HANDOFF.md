@@ -7,8 +7,11 @@ below). This file is the source of truth for what actually exists.
 
 **Status: shipped and live at https://plykov.github.io/Nederlands/.** PRs #1
 (the build), #2 (doc reconciliation), #3 (scenarios 13–24), #5 (`npm test`),
-#6 (word-order builder) and #7 (scenarios 25–36) are merged. The sections
-below record what was decided, what shipped, and what is deliberately left.
+#6 (word-order builder), #7 (scenarios 25–36), #8 (staged `er`), #9
+(inburgering tracker), #10 (loanword hook), #11 (accessibility pass), #12
+(the native-audio decision) and #13 (scenarios 37–57) are merged. The
+sections below record what was decided, what shipped, and what is
+deliberately left.
 
 ## Where this came from
 
@@ -71,12 +74,13 @@ scripts/           check-content.mjs — what `npm test` runs
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
 
-Content volume: **36 scenarios** (6 per domain — A1 14, A2 12, B1 10 — each with
-exactly one `register: "switch"` reply), 104 nouns, 8 repair moves, 7
-openers/recovery moves, 12 grammar notes, 12 course lessons (the `er` module is
-now five gated stages instead of one), 39 CEFR can-do statements. The second
-scenario batch of twelve landed in PR #3, the third in PR #7, bringing the
-total to the M12 target range of 30–40.
+Content volume: **57 scenarios** (A1 35, A2 12, B1 10 — each with exactly one
+`register: "switch"` reply), 104 nouns, 8 repair moves, 7 openers/recovery
+moves, 12 grammar notes, 12 course lessons (the `er` module is now five gated
+stages instead of one), 49 CEFR can-do statements. The second scenario batch
+of twelve landed in PR #3, the third (twelve more) in PR #7, and the fourth
+(21 more, all A1, added by explicit request in place of native audio) in
+PR #13 — past the original M12 target range of 30–40, deliberately.
 
 Three modules have no Italiano equivalent and were written from the spec:
 
@@ -187,8 +191,9 @@ ever gets built.
 Word-order builder, scenario count, the staged
 `er` module, the inburgering tracker, the loanword hook and the accessibility
 pass are all off this list: the constructor shipped (SPEC §2.3,
-`#/wordorder`), thirty-six scenarios land inside `BUILD_PLAN.md` M12's 30–40
-target, `er` is now five gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in
+`#/wordorder`), the scenario library is now 57 — past `BUILD_PLAN.md` M12's
+30–40 target by explicit request (`BUILD_PLAN.md` A15) — `er` is now five
+gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in
 `Грамматический зал` instead of one ungated lesson (`BUILD_PLAN.md` A11), the
 inburgering tracker at `#/inburgering` shows a real countdown and route
 requirements instead of only static copy in Settings and Progress
