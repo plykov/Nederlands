@@ -64,9 +64,9 @@ public/            manifest.webmanifest · sw.js · icon.svg (Dutch tricolour)
 src/lib/           storage.ts · srs.ts · speech.ts · noise.ts
 src/data/          scenarios.ts · repair.ts · openers.ts · nouns.ts
                    grammar.ts · course.ts · cando.ts · survey.ts · wordorder.ts
-                   inburgering.ts
-src/views/         18 views (14 ported + ArticleTrainer + Opener + WordOrder
-                   + Inburgering)
+                   inburgering.ts · loanwords.ts
+src/views/         19 views (14 ported + ArticleTrainer + Opener + WordOrder
+                   + Inburgering + Loanwords)
 scripts/           check-content.mjs — what `npm test` runs
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
@@ -107,6 +107,17 @@ Three modules have no Italiano equivalent and were written from the spec:
   none is invented. Route requirements (KNM, MAP, PVT plus the route-specific
   exam or diploma path) are shown for B1 / Onderwijs / Z. Stored in
   `nv.inburgering.v1`, wiped by the existing "delete everything" button.
+- **Loanword hook** (`src/views/Loanwords.tsx`, `src/data/loanwords.ts`) —
+  SPEC §2.6, `#/loanwords`. 10 tap-to-reveal cards of Dutch loanwords in
+  Russian from the Petrine maritime era, surfaced two ways: a randomised
+  3-word teaser inside the first-run onboarding card on Home (the literal
+  hook, shown before the anti-switch explanation), and a permanent card for
+  return visits. `Loanword.source` is typed `vasmer | van_der_sijs` only —
+  no `disputed` value exists on the type, so a disputed item cannot
+  type-check into `LOANWORDS` at all. The three words CLAUDE.md names as
+  false Dutch etymologies (стул, галстук, рюкзак) live in a separate
+  `LOANWORD_MYTHS` array with their real origin instead, shown as a
+  myth-busting aside on the same screen, never as drillable items.
 
 ### Deviations from a pure Italiano port, and why
 
@@ -133,24 +144,22 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 Ordered by value, and none of it is blocking:
 
-1. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
-   Russian. Ship only items with sound etymology; стул, галстук and рюкзак are
-   German or Low German and must not appear.
-2. **Audio for the reply bank.** Web Speech quality varies by platform;
+1. **Audio for the reply bank.** Web Speech quality varies by platform;
    pre-recorded native audio would improve the listening trainers most.
-3. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
+2. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
    and keyboard-reachable, but the whole app has not had a proper pass.
 
-Word-order builder, scenario count, the staged `er` module and the
-inburgering tracker are no longer on this list: the constructor shipped
-(SPEC §2.3, `#/wordorder`), thirty-six scenarios land inside `BUILD_PLAN.md`
-M12's 30–40 target, `er` is now five
+Word-order builder, scenario count, the staged `er` module, the inburgering
+tracker and the loanword hook are no longer on this list: the constructor
+shipped (SPEC §2.3, `#/wordorder`), thirty-six scenarios land inside
+`BUILD_PLAN.md` M12's 30–40 target, `er` is now five
 gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in `Грамматический зал`
 instead of one ungated lesson (`BUILD_PLAN.md` A11), and the inburgering
 tracker at `#/inburgering` shows a real countdown and route requirements
-instead of only static copy in Settings and Progress (`BUILD_PLAN.md` A12).
-Further scenario growth should still come from what testers bring back from
-real conversations, not invented situations.
+instead of only static copy in Settings and Progress (`BUILD_PLAN.md` A12),
+and `#/loanwords` ships the 10-word reveal plus the three named myths
+(`BUILD_PLAN.md` A13). Further scenario growth should still come from what
+testers bring back from real conversations, not invented situations.
 
 ## Operational note
 

@@ -72,10 +72,12 @@ Narrow by design. Only the sounds that damage **intelligibility** (and therefore
 
 Three gate items per scenario, drawn from that scenario's own vocabulary. Record-and-self-compare against a TTS model; **no automated score** — see §6.
 
-### 2.6 Loanword hook — §P2, not built
-~500 Dutch loanwords exist in Russian from Peter the Great's maritime era. Onboarding would reveal 8–10: матрос/matroos, флаг/vlag, каюта/kajuit, брюки/broek, апельсин/appelsien, гавань/haven, шкипер/schipper.
+### 2.6 Loanword hook — §P1, built
+~500 Dutch loanwords exist in Russian from Peter the Great's maritime era. Onboarding reveals 10: матрос/matroos, штурман/stuurman, шкипер/schipper, флаг/vlag, каюта/kajuit, гавань/haven, руль/roer, брюки/broek, апельсин/appelsien, зонт(ик)/zonnedek.
 
-Each item must carry a `source` field (`vasmer` | `van_der_sijs` | `disputed`). **Never ship a word marked `disputed`** — стул, галстук, рюкзак are German or Low German, not Dutch.
+**Phase 1** ships this as `#/loanwords` (`src/views/Loanwords.tsx`, `src/data/loanwords.ts`), tap-to-reveal cards reachable from Home — both a randomised 3-word teaser shown only in the first-run onboarding card (the literal "hook", before the anti-switch explanation), and a permanent card for return visits.
+
+**Adaptation from the original `source` design:** rather than a `vasmer | van_der_sijs | disputed` enum with runtime filtering, `Loanword.source` is typed `vasmer | van_der_sijs` only — a disputed item cannot type-check into `LOANWORDS` at all, so "never ship a disputed word" is enforced by the type system, not by author discipline. The three words CLAUDE.md names as false Dutch etymologies — стул, галстук, рюкзак — live in a separate `LOANWORD_MYTHS` array with their real origin (Slavic, and German `Halstuch`/`Rucksack` respectively) and are shown on the same screen as a "similar but not Dutch" myth-busting aside, never as drillable items. `npm test` verifies all three stay out of `LOANWORDS` and stay documented in `LOANWORD_MYTHS`.
 
 ### 2.7 Inburgering tracker — §P1, built
 Sets `legal_status` and, if applicable, an obligation start date, then surfaces the deadline (3 years from that date) and route (B1 / Onderwijs / Z) with KNM, MAP, PVT and the relevant exam. **Displays deadlines and requirements only — never advises on a case.**
