@@ -1,10 +1,12 @@
 name: Deploy to GitHub Pages
 
+# Только main: у Pages один живой сайт на репозиторий, и деплой с ветки
+# затирал бы то, что опубликовано с main. Ветку можно выкатить вручную
+# через workflow_dispatch, когда это действительно нужно.
 on:
   push:
     branches:
       - main
-      - claude/handoff-md-review-faf8f7
   workflow_dispatch:
 
 permissions:
