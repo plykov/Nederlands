@@ -53,10 +53,10 @@ Scored on correct placement, with the Russian free-word-order contrast stated pe
 
 **Where two orders are both correct, both are accepted** (`accept` on the puzzle) — e.g. `ik heb het document gisteren opgestuurd` and `ik heb gisteren het document opgestuurd`. A drill that marks a correct answer wrong destroys trust, which is the same reason §2.5 ships no automated pronunciation score. `npm test` verifies every `accept` variant is actually reachable by rearranging that puzzle's chunks, so a typo there cannot silently become an unreachable "correct" answer.
 
-### 2.4 "er" module — §P1 partial
+### 2.4 "er" module — §P1, built
 Taught in this sequence, not all at once: existential/presentative → locative → pronominal (`erover`, `ermee`) → quantitative → placeholder subject. Each stage gated on the previous.
 
-**Phase 1 ships one B1 lesson and one grammar note covering all five functions at once, ungated.** Staging them is outstanding work.
+**Phase 1 ships five gated `Грамматический зал` lessons** (`er-1-bestaan` … `er-5-onderwerp`), each requiring 80%+ on the previous via the `Lesson.requires` field — enforced in `Course.tsx` (locked lessons render dimmed and non-tappable, and a direct deep link to a locked lesson shows a redirect to the prerequisite instead of the exercises) and validated by `npm test` (every `requires` reference must resolve and point to an earlier lesson, not a later or circular one). The `Разбор` note covers the same five functions as a single on-demand reference, since that surface is deliberately not sequential.
 
 ### 2.5 Phoneme gate — §P1, built
 Narrow by design. Only the sounds that damage **intelligibility** (and therefore trigger the English switch), not accent markers:

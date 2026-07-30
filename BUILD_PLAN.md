@@ -91,26 +91,37 @@ directly at `#/wordorder/:structure`. Misses go to the review deck.
 two orders are both correct, both pass; no chunk is stored capitalised. ✅ —
 the last two are enforced by `npm test`.
 
+## A11 — Staged `er` module ✅
+SPEC §2.4. The single `er` lesson is now five (`er-1-bestaan` … `er-5-onderwerp`,
+existential/presentative → locative → pronominal → quantitative → placeholder
+subject), each gated on 80%+ on the previous via `Lesson.requires`. A locked
+lesson renders dimmed and non-tappable in `Грамматический зал`, and a direct
+deep link to one shows a redirect to the prerequisite instead of the exercises.
+The `Разбор` note keeps all five as a single on-demand reference — that surface
+is deliberately not sequential.
+
+**Done when:** the five stages unlock in order and not out of order, on a
+375px viewport; a locked lesson cannot be reached by direct link either. ✅ —
+`npm test` also verifies every `requires` reference resolves and points to an
+earlier lesson, not a later or circular one.
+
 ---
 
 ## Phase 1 — what remains
 
 Ordered by value. None of it blocks the others.
 
-1. **Stage the `er` module** (SPEC §2.4). Currently one lesson and one grammar
-   note covering all five functions at once; the spec wants each gated on the
-   previous. The word-order builder now drills `er` incidentally in two
-   puzzles, which is not the same as staging it.
-2. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
-3. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
-4. **Native audio** for the reply bank. Web Speech quality varies by platform
+1. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
+2. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
+3. **Native audio** for the reply bank. Web Speech quality varies by platform
    and this is the single biggest quality lever on the listening trainers.
-5. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
+4. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
    word-order chips are `<button>`s and keyboard-reachable, but the whole app
    has not had a proper pass.
 
-Scenarios (36, six per domain, inside the M12 target of 30–40) and the
-word-order builder (A10, above) are both done and no longer on this list.
+Scenarios (36, six per domain, inside the M12 target of 30–40), the word-order
+builder (A10) and the staged `er` module (A11, above) are all done and no
+longer on this list.
 
 The "no test setup" item that stood here is done: `npm test` runs
 `scripts/check-content.mjs`. It should have been struck when that landed.

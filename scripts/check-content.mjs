@@ -207,6 +207,16 @@ for (const l of LESSONS)
     }
   });
 
+// ── staged lessons (`requires`) must resolve and point strictly backward ──
+const lessonIds = new Map(LESSONS.map((l, i) => [l.id, i]));
+for (const [i, l] of LESSONS.entries()) {
+  if (!l.requires) continue;
+  const at = (msg) => problems.push(`lesson ${l.id}: ${msg}`);
+  if (!lessonIds.has(l.requires)) at(`requires unknown lesson "${l.requires}"`);
+  else if (lessonIds.get(l.requires) >= i)
+    at(`requires "${l.requires}", which does not come before it in LESSONS`);
+}
+
 // ── report ──
 const summary =
   `scenarios ${SCENARIOS.length} · nouns ${NOUNS.length} · ` +
