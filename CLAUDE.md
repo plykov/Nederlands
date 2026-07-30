@@ -44,7 +44,7 @@ These are architecture-independent. They hold in Phase 1 and in Phase 2 alike.
 - **Vite 5 + React 18 + TypeScript strict.** No framework beyond that.
 - **No backend.** No database, no auth, no API keys, no network calls at runtime.
 - **State**: `localStorage` under the `nv.*` namespace, via `src/lib/storage.ts`.
-- **Styling**: hand-written CSS in `src/styles.css` (~210 lines). No Tailwind, no CSS framework, no dark mode.
+- **Styling**: hand-written CSS in `src/styles.css` (~280 lines). No Tailwind, no CSS framework, no dark mode.
 - **Routing**: hash-based, hand-rolled in `src/App.tsx`. No router library.
 - **SRS**: `ts-fsrs`. Do not implement a scheduler by hand.
 - **TTS**: browser Web Speech API, `nl-NL`.
@@ -69,7 +69,8 @@ src/
   lib/                 storage.ts · srs.ts · speech.ts · noise.ts
   data/                scenarios.ts · repair.ts · openers.ts · nouns.ts
                        grammar.ts · course.ts · cando.ts · survey.ts
-  views/               16 views
+                       wordorder.ts
+  views/               17 views
 gemeente-inschrijving.json   worked content example, in the _SCHEMA.md JSON shape
 HANDOFF.md · SPEC.md · BUILD_PLAN.md · CONTENT_SOURCES.md · _SCHEMA.md
 ```
@@ -86,7 +87,7 @@ npm run preview
 npm test           # content integrity: ids resolve, _SCHEMA.md shape rules hold
 ```
 
-`npm test` runs `scripts/check-content.mjs`: every cross-file id must resolve, every scenario must satisfy the `_SCHEMA.md` shape rules (including exactly one `register: "switch"` reply), every scenario must appear in the CEFR map, and course exercises must be answerable. **Run it after any change to `src/data/`** — it exists precisely because nothing else enforces those invariants. There is still no linter and no unit-test runner; type-checking is `tsc -b` inside `build`.
+`npm test` runs `scripts/check-content.mjs`: every cross-file id must resolve, every scenario must satisfy the `_SCHEMA.md` shape rules (including exactly one `register: "switch"` reply), every scenario must appear in the CEFR map, course exercises must be answerable, and word-order puzzles must be solvable — chunks stored lowercase, and every `accept` variant actually reachable by rearranging that puzzle's own chunks. **Run it after any change to `src/data/`** — it exists precisely because nothing else enforces those invariants. There is still no linter and no unit-test runner; type-checking is `tsc -b` inside `build`.
 
 ## Phase 1 conventions
 
@@ -104,7 +105,7 @@ npm test           # content integrity: ids resolve, _SCHEMA.md shape rules hold
 
 ## Definition of done — Phase 1
 
-A change is done when: `npm run build` passes (this runs `tsc -b`), it works on a 375px viewport with no horizontal overflow, all new Russian strings are formal and ungendered, no new personal data leaves the device, and the affected screens have been opened in a browser rather than merely compiled.
+A change is done when: `npm run build` passes (this runs `tsc -b`), `npm test` passes, it works on a 375px viewport with no horizontal overflow, all new Russian strings are formal and ungendered, no new personal data leaves the device, and the affected screens have been opened in a browser rather than merely compiled.
 
 ---
 

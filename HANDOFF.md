@@ -63,8 +63,9 @@ public/            manifest.webmanifest · sw.js · icon.svg (Dutch tricolour)
 .github/workflows/ deploy.yml  — Pages, triggers on main + workflow_dispatch
 src/lib/           storage.ts · srs.ts · speech.ts · noise.ts
 src/data/          scenarios.ts · repair.ts · openers.ts · nouns.ts
-                   grammar.ts · course.ts · cando.ts · survey.ts
-src/views/         16 views (14 ported + ArticleTrainer + Opener)
+                   grammar.ts · course.ts · cando.ts · survey.ts · wordorder.ts
+src/views/         17 views (14 ported + ArticleTrainer + Opener + WordOrder)
+scripts/           check-content.mjs — what `npm test` runs
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
 
@@ -87,6 +88,12 @@ Three modules have no Italiano equivalent and were written from the spec:
   a dedicated `article` card source.
 - **Recovery moves** (`src/data/openers.ts`) — what to say once they have
   already switched to English.
+- **Word-order builder** (`src/views/WordOrder.tsx`, `src/data/wordorder.ts`) —
+  SPEC §2.3. Tap-to-place, not drag-and-drop: HTML5 DnD is unreliable on touch
+  and this app is phone-first. Chunks are stored lowercase so a capital letter
+  cannot leak which one goes first; the view capitalises on render. Puzzles
+  where two orders are both correct accept both, and `npm test` verifies each
+  such variant is actually reachable by rearranging that puzzle's chunks.
 
 ### Deviations from a pure Italiano port, and why
 
@@ -117,10 +124,7 @@ Ordered by value, and none of it is blocking:
    M12 wants 30–40. The remaining gap should be filled from what testers bring
    back from real conversations, not from invented situations — that is the
    whole point of the debrief and the Phase 0 survey.
-2. **Word-order builder** (SPEC §2.3) — drag-and-drop for V2, inversion,
-   verb-final and the sentence bracket. Currently covered by course lessons and
-   grammar notes only, with no constructor.
-3. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
+2. **`er` in five staged steps** (SPEC §2.4) — currently one lesson and one
    note covering all functions at once, where the spec wants each stage gated
    on the previous.
 4. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
