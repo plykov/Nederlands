@@ -105,22 +105,37 @@ is deliberately not sequential.
 `npm test` also verifies every `requires` reference resolves and points to an
 earlier lesson, not a later or circular one.
 
+## A12 — Inburgering tracker ✅
+SPEC §2.7. `#/inburgering`, reachable from Settings. Sets one of the four
+`legal_status` values from the `CLAUDE.md` table; only `obligated` collects an
+obligation start date and computes a 3-year countdown, mirroring the
+appointment-countdown pattern already on Home. The other three statuses show
+their hook and deadline as static text — no invented countdown where there is
+no fixed date. Route requirements (KNM, MAP, PVT, plus the route-specific
+exam or diploma path) are shown for B1 / Onderwijs / Z. Stored in
+`nv.inburgering.v1`, cleared by the existing "delete everything" button.
+
+**Done when:** a countdown renders only where a real date exists; the
+advice-boundary sentence appears on every visit; wiping data clears the
+profile too. ✅ — `npm test` verifies every status and route is present with
+non-empty content.
+
 ---
 
 ## Phase 1 — what remains
 
 Ordered by value. None of it blocks the others.
 
-1. **Inburgering tracker** (SPEC §2.7). Deadlines and requirements only.
-2. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
-3. **Native audio** for the reply bank. Web Speech quality varies by platform
+1. **Loanword hook** (SPEC §2.6). 8–10 items, `disputed` excluded.
+2. **Native audio** for the reply bank. Web Speech quality varies by platform
    and this is the single biggest quality lever on the listening trainers.
-4. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
+3. **Accessibility pass** to WCAG 2.2 AA; Lighthouse a11y ≥ 95. Note the
    word-order chips are `<button>`s and keyboard-reachable, but the whole app
    has not had a proper pass.
 
 Scenarios (36, six per domain, inside the M12 target of 30–40), the word-order
-builder (A10) and the staged `er` module (A11, above) are all done and no
+builder (A10), the staged `er` module (A11) and the inburgering tracker (A12,
+above) are all done and no
 longer on this list.
 
 The "no test setup" item that stood here is done: `npm test` runs

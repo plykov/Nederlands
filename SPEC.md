@@ -77,10 +77,10 @@ Three gate items per scenario, drawn from that scenario's own vocabulary. Record
 
 Each item must carry a `source` field (`vasmer` | `van_der_sijs` | `disputed`). **Never ship a word marked `disputed`** — стул, галстук, рюкзак are German or Low German, not Dutch.
 
-### 2.7 Inburgering tracker — §P2, not built
-Would set `legal_status` and, if applicable, `inburgering_deadline` (3 years from obligation start), then surface route (B1 / Onderwijs / Z), KNM, MAP, PVT, and Staatsexamen NT2 Programma I (B1) / II (B2). **Would display deadlines and requirements only — never advise on a case.**
+### 2.7 Inburgering tracker — §P1, built
+Sets `legal_status` and, if applicable, an obligation start date, then surfaces the deadline (3 years from that date) and route (B1 / Onderwijs / Z) with KNM, MAP, PVT and the relevant exam. **Displays deadlines and requirements only — never advises on a case.**
 
-**Phase 1 states the thresholds as static reference copy** in Settings and Progress, with the advice boundary spelled out. The tester survey asks whether an obligation exists, for urgency signal only.
+**Phase 1** ships this as `#/inburgering` (`src/views/Inburgering.tsx`, `src/data/inburgering.ts`), reachable from Settings. All four `legal_status` values from the `CLAUDE.md` table are covered; only `obligated` collects a start date and computes a countdown (`nv.inburgering.v1`, wiped by the same "delete everything" button as the rest of `localStorage`). The other three statuses show their hook and deadline text as static reference, with no date arithmetic — there is nothing to count down to. `npm test` verifies every status and every route is present and non-empty. The advice-boundary sentence from rule 7 is shown on every visit to the tracker, not only in Settings and Progress as before.
 
 ## 3. Data model — §P1
 

@@ -16,6 +16,7 @@ import Settings from "./views/Settings";
 import OpenerDrill from "./views/Opener";
 import ArticleTrainer from "./views/ArticleTrainer";
 import WordOrder from "./views/WordOrder";
+import Inburgering from "./views/Inburgering";
 import { dueCards } from "./lib/srs";
 
 /**
@@ -103,6 +104,9 @@ export default function App() {
       break;
     case "settings":
       view = <Settings />;
+      break;
+    case "inburgering":
+      view = <Inburgering />;
       break;
     default:
       view = <Home />;

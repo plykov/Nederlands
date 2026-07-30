@@ -64,7 +64,9 @@ public/            manifest.webmanifest · sw.js · icon.svg (Dutch tricolour)
 src/lib/           storage.ts · srs.ts · speech.ts · noise.ts
 src/data/          scenarios.ts · repair.ts · openers.ts · nouns.ts
                    grammar.ts · course.ts · cando.ts · survey.ts · wordorder.ts
-src/views/         17 views (14 ported + ArticleTrainer + Opener + WordOrder)
+                   inburgering.ts
+src/views/         18 views (14 ported + ArticleTrainer + Opener + WordOrder
+                   + Inburgering)
 scripts/           check-content.mjs — what `npm test` runs
 src/               App.tsx · main.tsx · types.ts · styles.css
 ```
@@ -96,6 +98,15 @@ Three modules have no Italiano equivalent and were written from the spec:
   cannot leak which one goes first; the view capitalises on render. Puzzles
   where two orders are both correct accept both, and `npm test` verifies each
   such variant is actually reachable by rearranging that puzzle's chunks.
+- **Inburgering tracker** (`src/views/Inburgering.tsx`,
+  `src/data/inburgering.ts`) — SPEC §2.7, `#/inburgering`, reachable from
+  Settings. Sets a `legal_status`; only `obligated` collects an obligation
+  start date and computes a 3-year countdown, reusing the same
+  countdown-styling as appointments on Home. The other three statuses show
+  static hook/deadline text — there is no date to count down to for them, so
+  none is invented. Route requirements (KNM, MAP, PVT plus the route-specific
+  exam or diploma path) are shown for B1 / Onderwijs / Z. Stored in
+  `nv.inburgering.v1`, wiped by the existing "delete everything" button.
 
 ### Deviations from a pure Italiano port, and why
 
@@ -122,23 +133,24 @@ verifies every cross-file id resolves and every scenario satisfies the
 
 Ordered by value, and none of it is blocking:
 
-1. **Inburgering tracker** (SPEC §2.7) — deadlines and requirements only.
-   Nothing that advises on a case.
-2. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
+1. **Loanword hook** (SPEC §2.6) — onboarding reveal of 8–10 Dutch loanwords in
    Russian. Ship only items with sound etymology; стул, галстук and рюкзак are
    German or Low German and must not appear.
-3. **Audio for the reply bank.** Web Speech quality varies by platform;
+2. **Audio for the reply bank.** Web Speech quality varies by platform;
    pre-recorded native audio would improve the listening trainers most.
-4. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
+3. **Accessibility pass** to WCAG 2.2 AA. The word-order chips are `<button>`s
    and keyboard-reachable, but the whole app has not had a proper pass.
 
-Word-order builder, scenario count and the staged `er` module are no longer on
-this list: the constructor shipped (SPEC §2.3, `#/wordorder`), thirty-six
-scenarios land inside `BUILD_PLAN.md` M12's 30–40 target, and `er` is now five
+Word-order builder, scenario count, the staged `er` module and the
+inburgering tracker are no longer on this list: the constructor shipped
+(SPEC §2.3, `#/wordorder`), thirty-six scenarios land inside `BUILD_PLAN.md`
+M12's 30–40 target, `er` is now five
 gated lessons (`er-1-bestaan` … `er-5-onderwerp`) in `Грамматический зал`
-instead of one ungated lesson — see `BUILD_PLAN.md` A11. Further scenario
-growth should still come from what testers bring back from real conversations,
-not invented situations.
+instead of one ungated lesson (`BUILD_PLAN.md` A11), and the inburgering
+tracker at `#/inburgering` shows a real countdown and route requirements
+instead of only static copy in Settings and Progress (`BUILD_PLAN.md` A12).
+Further scenario growth should still come from what testers bring back from
+real conversations, not invented situations.
 
 ## Operational note
 
