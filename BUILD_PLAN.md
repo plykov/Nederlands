@@ -23,7 +23,7 @@ root and on a `/<repo>/` subpath. ✅
 ## A1 — Content ✅
 137 scenarios across the six `_SCHEMA.md` domains (A1 35 / A2 62 / B1 40).
 104 article-attached nouns, 8 repair moves, 7 openers and recovery moves, 12
-grammar notes, 8 course lessons, 39 CEFR can-do statements, tester survey.
+grammar notes, 12 course lessons, 88 CEFR can-do statements, tester survey.
 
 **Done when:** every scenario has 4–8 lines, 6+ reply-bank items, 2+ traps, 2+
 gate items, and **exactly one `register: "switch"` reply**. Every cross-file id
