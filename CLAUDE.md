@@ -66,11 +66,11 @@ public/                manifest.webmanifest · sw.js · icon.svg
 src/
   App.tsx              hash router + tab bar
   main.tsx · types.ts · styles.css
-  lib/                 storage.ts · srs.ts · speech.ts · noise.ts
+  lib/                 storage.ts · srs.ts · speech.ts · noise.ts · a11y.ts
   data/                scenarios.ts · repair.ts · openers.ts · nouns.ts
                        grammar.ts · course.ts · cando.ts · survey.ts
-                       wordorder.ts
-  views/               17 views
+                       wordorder.ts · inburgering.ts · loanwords.ts
+  views/               19 views
 gemeente-inschrijving.json   worked content example, in the _SCHEMA.md JSON shape
 HANDOFF.md · SPEC.md · BUILD_PLAN.md · CONTENT_SOURCES.md · _SCHEMA.md
 ```
